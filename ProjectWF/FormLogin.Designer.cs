@@ -1,7 +1,7 @@
 ﻿
 namespace ProjectWF
 {
-    partial class Form1
+    partial class FormLogin
     {
         /// <summary>
         /// Required designer variable.
@@ -29,10 +29,17 @@ namespace ProjectWF
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.SuspendLayout();
+            // 
+            // FormLogin
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(523, 297);
+            this.Name = "FormLogin";
+            this.Text = "Đăng Nhập";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
