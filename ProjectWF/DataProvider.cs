@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace ProjectWF
 {
@@ -74,7 +70,6 @@ namespace ProjectWF
             return dataTable;
 
         }
-
 
         public void Update(DataTable dataTable)
         {

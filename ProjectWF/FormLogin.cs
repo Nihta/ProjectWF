@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace ProjectWF
@@ -16,7 +17,15 @@ namespace ProjectWF
 
         private void FormLogin_Load(object sender, EventArgs e)
         {
-            dataProvider = new DataProvider();
+            try
+            {
+                dataProvider = new DataProvider();
+            }
+            catch (SqlException ex)
+            {
+                MyMessageBox.Error(ex.Message);
+                Application.Exit();
+            }
         }
 
         private void HandleLogin(string userName, string passWord)
