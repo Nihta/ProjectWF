@@ -4,3 +4,7 @@
 AS
     SELECT FullName FROM TableUsers WHERE UserName = @userName and Password = @passWord
 go
+
+
+select *
+from TableUsers
