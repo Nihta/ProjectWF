@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
 namespace ProjectWF
@@ -44,20 +45,68 @@ namespace ProjectWF
             }
         }
 
+        private bool isUserNameValid(string userName)
+        {
+            if (MyValidation.IsEmpty(userName))
+            {
+                MyMessageBox.Warning("Tên đăng nhập không được để trống!");
+                return false;
+            }
+            if (userName.Length < 5)
+            {
+                MyMessageBox.Warning("Tên đăng nhập quá ngắn!");
+                return false;
+            }
+            if (userName.Length > 30)
+            {
+                MyMessageBox.Warning("Tên đăng nhập quá dài!");
+                return false;
+            }
+            if (!Regex.IsMatch(userName, @"^[a-z][a-z0-9]*$"))
+            {
+                MyMessageBox.Warning("Tên đăng nhập không hợp lệ!");
+                return false;
+            }
+            return true;
+        }
+
+        private bool isPassWordValid(string passWord)
+        {
+            if (MyValidation.IsEmpty(passWord))
+            {
+                MyMessageBox.Warning("Mật khẩu không được để trống!");
+                return false;
+            }
+            if (passWord.Length < 3)
+            {
+                MyMessageBox.Warning("Mật khẩu quá ngắn!");
+                return false;
+            }
+            if (passWord.Length > 30)
+            {
+                MyMessageBox.Warning("Mật khẩu quá dài!");
+                return false;
+            }
+            if (!Regex.IsMatch(passWord, @"^[a-z0-9]*$"))
+            {
+                MyMessageBox.Warning("Mật khẩu không hợp lệ!");
+                return false;
+            }
+            return true;
+        }
+
         private void buttonLogin_Click(object sender, EventArgs e)
         {
-            string userName = textBoxUserName.Text.Trim();
+            string userName = textBoxUserName.Text;
             string passWord = textBoxPassWord.Text;
 
-            if (userName.Length == 0)
+            if (!isUserNameValid(userName))
             {
                 textBoxUserName.Focus();
-                MyMessageBox.Warning("Tên đăng nhập không được để trống!");
             }
-            else if (passWord.Length == 0)
+            else if (!isPassWordValid(passWord))
             {
                 textBoxPassWord.Focus();
-                MyMessageBox.Warning("Mật khẩu không được bỏ trống!");
             }
             else
             {
