@@ -41,7 +41,10 @@ namespace ProjectWF
             }
             else
             {
-                MyMessageBox.Information("Đăng nhập thành công!");
+                FormMain formMain = new FormMain();
+                this.Hide();
+                formMain.ShowDialog();
+                //this.Show();
             }
         }
 
