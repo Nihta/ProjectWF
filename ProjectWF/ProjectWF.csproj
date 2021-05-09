@@ -77,10 +77,10 @@
     <Compile Include="MyMessageBox.cs" />
     <Compile Include="MyUtils.cs" />
     <Compile Include="MyValidation.cs" />
-    <Compile Include="SqlHelper\UserHelpers.cs" />
+    <Compile Include="Helpers\UserHelpers.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="SqlHelper.cs" />
+    <Compile Include="Helpers\SqlHelper.cs" />
     <EmbeddedResource Include="FormAccountProfile.resx">
       <DependentUpon>FormAccountProfile.cs</DependentUpon>
     </EmbeddedResource>
