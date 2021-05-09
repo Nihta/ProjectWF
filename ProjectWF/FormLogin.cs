@@ -1,5 +1,5 @@
-﻿using System;
-using System.Data;
+﻿using ProjectWF.Parameter;
+using System;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
@@ -31,20 +31,16 @@ namespace ProjectWF
 
         private void HandleLogin(string userName, string passWord)
         {
-            string queryString = $"EXEC dbo.Login @userName = '{userName}', @passWord = '{MyUtils.MD5Hash(passWord)}'";
-
-            DataTable dataTable = dataProvider.ExecuteQuery(queryString);
-
-            if (dataTable.Rows.Count == 0)
-            {
-                MyMessageBox.Warning("Tên đăng nhập hoặc mật khẩu không chính xác!");
-            }
-            else
+            if (UsersHelpers.Login(userName, passWord))
             {
                 FormMain formMain = new FormMain();
                 this.Hide();
                 formMain.ShowDialog();
-                //this.Show();
+                this.Show();
+            }
+            else
+            {
+                MyMessageBox.Warning("Tên đăng nhập hoặc mật khẩu không chính xác!");
             }
         }
 

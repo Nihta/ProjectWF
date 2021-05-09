@@ -70,7 +70,7 @@ namespace ProjectWF
             // 
             this.thôngTinToolStripMenuItem.Name = "thôngTinToolStripMenuItem";
             this.thôngTinToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.thôngTinToolStripMenuItem.Text = "Thông tin";
+            this.thôngTinToolStripMenuItem.Text = "Thông tin cá nhân";
             this.thôngTinToolStripMenuItem.Click += new System.EventHandler(this.thôngTinToolStripMenuItem_Click);
             // 
             // logoutToolStripMenuItem
@@ -101,6 +101,7 @@ namespace ProjectWF
             this.ClientSize = new System.Drawing.Size(800, 377);
             this.Controls.Add(this.menuStrip1);
             this.Name = "FormMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "FormMain";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
