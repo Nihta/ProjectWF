@@ -88,6 +88,7 @@ namespace ProjectWF
             this.txtNewPassWord.Size = new System.Drawing.Size(192, 20);
             this.txtNewPassWord.TabIndex = 7;
             this.txtNewPassWord.UseSystemPasswordChar = true;
+            this.txtNewPassWord.TextChanged += new System.EventHandler(this.txtNewPassWord_TextChanged);
             // 
             // label3
             // 
