@@ -29,8 +29,10 @@ namespace ProjectWF
             {
                 FormMain formMain = new FormMain(curUserID);
                 this.Hide();
+                textBoxPassWord.Text = "";
                 formMain.ShowDialog();
                 this.Show();
+                textBoxPassWord.Focus();
             }
         }
 
