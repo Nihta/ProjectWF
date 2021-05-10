@@ -39,4 +39,4 @@ from TableUsers
 go
 
 
-SELECT * FROM TableUsers WHERE UserName = 'Nihta'
+SELECT * FROM TableUsers WHERE UserName = 'Nihta' AND UserID != 1
