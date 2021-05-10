@@ -1,5 +1,4 @@
-﻿using System;
-using System.Data;
+﻿using System.Data;
 using System.Data.SqlClient;
 
 
@@ -10,7 +9,10 @@ namespace ProjectWF
     {
         public static string defaultConnStr = Properties.Settings.Default.dbProjectConnectionString;
 
-        public static int ExecuteNonQuery(String connectionString, String commandText, CommandType commandType, params SqlParameter[] parameters)
+        private SqlDataAdapter dataAdapter;
+        private SqlCommandBuilder commandBuilder;
+
+        public static int ExecuteNonQuery(string connectionString, string commandText, CommandType commandType, params SqlParameter[] parameters)
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -28,7 +30,7 @@ namespace ProjectWF
             }
         }
 
-        public static object ExecuteScalar(String connectionString, String commandText, CommandType commandType, params SqlParameter[] parameters)
+        public static object ExecuteScalar(string connectionString, string commandText, CommandType commandType, params SqlParameter[] parameters)
         {
             using (SqlConnection conn = new SqlConnection(connectionString))
             {
@@ -46,7 +48,7 @@ namespace ProjectWF
             }
         }
 
-        public static SqlDataReader ExecuteReader(String connectionString, String commandText, CommandType commandType, params SqlParameter[] parameters)
+        public static SqlDataReader ExecuteReader(string connectionString, string commandText, CommandType commandType, params SqlParameter[] parameters)
         {
             SqlConnection conn = new SqlConnection(connectionString);
 
@@ -60,6 +62,34 @@ namespace ProjectWF
 
                 return reader;
             }
+        }
+
+        public DataTable ExecuteQuery(string connectionString, string commandText, CommandType commandType, params SqlParameter[] parameters)
+        {
+            SqlConnection conn = new SqlConnection(connectionString);
+
+            using (SqlCommand cmd = new SqlCommand(commandText, conn))
+            {
+                cmd.CommandType = commandType;
+                cmd.Parameters.AddRange(parameters);
+
+                DataTable dataTable = new DataTable();
+
+                dataAdapter = new SqlDataAdapter();
+                dataAdapter.SelectCommand = cmd;
+
+                commandBuilder = new SqlCommandBuilder(dataAdapter);
+
+                dataAdapter.Fill(dataTable);
+
+                return dataTable;
+            }
+        }
+
+        public void Update(DataTable dataTable)
+        {
+            commandBuilder.GetUpdateCommand();
+            dataAdapter.Update(dataTable);
         }
     }
 }

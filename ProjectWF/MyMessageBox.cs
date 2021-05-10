@@ -19,5 +19,12 @@ namespace ProjectWF
         {
             MessageBox.Show(message, "Lỗi", MessageBoxButtons.OK, MessageBoxIcon.Error);
         }
+
+        public static bool Question(string message)
+        {
+            DialogResult dialogResult = MessageBox.Show(message, "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            return dialogResult == DialogResult.Yes;
+        }
     }
 }

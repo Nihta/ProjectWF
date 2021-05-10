@@ -60,6 +60,10 @@ namespace ProjectWF
                 tb.Enabled = isEnable;
             }
         }
+        public ControlMode GetMode()
+        {
+            return mode;
+        }
 
         /// <summary>
         /// 

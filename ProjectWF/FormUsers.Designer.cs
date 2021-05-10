@@ -38,7 +38,7 @@ namespace ProjectWF
             this.txtFullName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvUser = new System.Windows.Forms.DataGridView();
             this.panelControl = new System.Windows.Forms.Panel();
             this.btnExit = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
@@ -48,7 +48,7 @@ namespace ProjectWF
             this.btnAdd = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUser)).BeginInit();
             this.panelControl.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -116,25 +116,26 @@ namespace ProjectWF
             this.label1.Size = new System.Drawing.Size(70, 13);
             this.label1.TabIndex = 0;
             this.label1.Text = "Họ và tên (*):";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.dataGridView1);
+            this.panel2.Controls.Add(this.dgvUser);
             this.panel2.Location = new System.Drawing.Point(381, 12);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(389, 418);
+            this.panel2.Size = new System.Drawing.Size(478, 418);
             this.panel2.TabIndex = 1;
-            this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint_1);
             // 
-            // dataGridView1
+            // dgvUser
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataGridView1.Location = new System.Drawing.Point(0, 0);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(389, 418);
-            this.dataGridView1.TabIndex = 0;
+            this.dgvUser.AllowUserToAddRows = false;
+            this.dgvUser.AllowUserToDeleteRows = false;
+            this.dgvUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvUser.Location = new System.Drawing.Point(3, 22);
+            this.dgvUser.Name = "dgvUser";
+            this.dgvUser.ReadOnly = true;
+            this.dgvUser.Size = new System.Drawing.Size(446, 379);
+            this.dgvUser.TabIndex = 0;
+            this.dgvUser.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUser_RowEnter);
             // 
             // panelControl
             // 
@@ -213,7 +214,7 @@ namespace ProjectWF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(782, 446);
+            this.ClientSize = new System.Drawing.Size(875, 446);
             this.Controls.Add(this.panelControl);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -224,7 +225,7 @@ namespace ProjectWF
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvUser)).EndInit();
             this.panelControl.ResumeLayout(false);
             this.ResumeLayout(false);
 
@@ -247,6 +248,6 @@ namespace ProjectWF
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txtUserName;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvUser;
     }
 }
