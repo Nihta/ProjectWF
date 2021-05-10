@@ -43,7 +43,17 @@ namespace ProjectWF
         private void tàiKhoảnToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             FormUsers f = new FormUsers();
+            this.Hide();
             f.ShowDialog();
+            this.Show();
+        }
+
+        private void nhàCungCấpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormSuppliers f = new FormSuppliers();
+            this.Hide();
+            f.ShowDialog();
+            this.Show();
         }
     }
 }
