@@ -39,5 +39,11 @@ namespace ProjectWF
             FormAccountProfile f = new FormAccountProfile(curUserId);
             f.ShowDialog();
         }
+
+        private void tàiKhoảnToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FormUsers f = new FormUsers();
+            f.ShowDialog();
+        }
     }
 }
