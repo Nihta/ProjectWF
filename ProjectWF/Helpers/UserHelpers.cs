@@ -3,7 +3,7 @@ using System.Data.SqlClient;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace ProjectWF.Parameter
+namespace ProjectWF.Helpers
 {
     class UsersHelpers
     {
@@ -222,6 +222,27 @@ namespace ProjectWF.Parameter
                 PassWordParam(MyUtils.MD5Hash(passWord))
                 );
             return res == 1;
+        }
+
+        /// <summary>
+        /// Kiểm tra tên đăng nhập đã được sử dụng hay chưa
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns>
+        /// Return true nếu đã được sử dụng
+        /// </returns>
+        public static bool CheckUserNameExist(string userName, int ignoreUserId = -1)
+        {
+            // Trong cơ sở dữ liệu luôn UserID >= 1 
+            string query = "SELECT * FROM TableUsers WHERE UserName = @UserName AND UserID != @UserID";
+            SqlDataReader reader = SqlHelper.ExecuteReader(
+                SqlHelper.defaultConnStr,
+                query,
+                CommandType.Text,
+                UserNameParam(userName, "UserName"),
+                UserIDParam(ignoreUserId, "UserID")
+                );
+            return reader.HasRows;
         }
     }
 }

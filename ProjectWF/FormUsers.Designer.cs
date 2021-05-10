@@ -1,4 +1,4 @@
-﻿using ProjectWF.Parameter;
+﻿using ProjectWF.Helpers;
 
 namespace ProjectWF
 {
@@ -46,6 +46,9 @@ namespace ProjectWF
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
+            this.UserID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.FullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUser)).BeginInit();
@@ -122,18 +125,24 @@ namespace ProjectWF
             this.panel2.Controls.Add(this.dgvUser);
             this.panel2.Location = new System.Drawing.Point(381, 12);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(478, 418);
+            this.panel2.Size = new System.Drawing.Size(498, 418);
             this.panel2.TabIndex = 1;
             // 
             // dgvUser
             // 
             this.dgvUser.AllowUserToAddRows = false;
             this.dgvUser.AllowUserToDeleteRows = false;
+            this.dgvUser.AllowUserToResizeRows = false;
             this.dgvUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvUser.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.UserID,
+            this.FullName,
+            this.UserName});
             this.dgvUser.Location = new System.Drawing.Point(3, 22);
+            this.dgvUser.MultiSelect = false;
             this.dgvUser.Name = "dgvUser";
             this.dgvUser.ReadOnly = true;
-            this.dgvUser.Size = new System.Drawing.Size(446, 379);
+            this.dgvUser.Size = new System.Drawing.Size(473, 379);
             this.dgvUser.TabIndex = 0;
             this.dgvUser.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvUser_RowEnter);
             // 
@@ -210,11 +219,35 @@ namespace ProjectWF
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
+            // UserID
+            // 
+            this.UserID.DataPropertyName = "UserID";
+            this.UserID.HeaderText = "ID";
+            this.UserID.Name = "UserID";
+            this.UserID.ReadOnly = true;
+            this.UserID.Width = 30;
+            // 
+            // FullName
+            // 
+            this.FullName.DataPropertyName = "FullName";
+            this.FullName.HeaderText = "Họ và tên";
+            this.FullName.Name = "FullName";
+            this.FullName.ReadOnly = true;
+            this.FullName.Width = 200;
+            // 
+            // UserName
+            // 
+            this.UserName.DataPropertyName = "UserName";
+            this.UserName.HeaderText = "Tên đăng nhập";
+            this.UserName.Name = "UserName";
+            this.UserName.ReadOnly = true;
+            this.UserName.Width = 200;
+            // 
             // FormUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(875, 446);
+            this.ClientSize = new System.Drawing.Size(890, 446);
             this.Controls.Add(this.panelControl);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -249,5 +282,8 @@ namespace ProjectWF
         private System.Windows.Forms.TextBox txtUserName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dgvUser;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UserID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn FullName;
+        private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
     }
 }

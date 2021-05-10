@@ -60,6 +60,15 @@ namespace ProjectWF
                 tb.Enabled = isEnable;
             }
         }
+
+        public void ClearTextBox()
+        {
+            foreach (TextBox tb in textBoxes)
+            {
+                tb.Text = "";
+            }
+        }
+
         public ControlMode GetMode()
         {
             return mode;

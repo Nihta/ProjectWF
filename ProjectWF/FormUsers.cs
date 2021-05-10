@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
+using ProjectWF.Helpers;
 
 namespace ProjectWF
 {
@@ -62,12 +63,14 @@ namespace ProjectWF
             // Mode mặc định
             control.SwitchMode(ControlHelper.ControlMode.None);
             // Lấy thông tin các user và hiển thị lên dataGridView
+            dgvUser.AutoGenerateColumns = false;
             GetUsers();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             control.SwitchMode(ControlHelper.ControlMode.Add);
+            control.ClearTextBox();
             txtFullName.Focus();
         }
 
@@ -91,18 +94,45 @@ namespace ProjectWF
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            switch (control.GetMode())
+            // Validation
+            if (!UsersHelpers.IsFullNameInvalid(txtFullName.Text))
             {
-                case ControlHelper.ControlMode.Add:
-                    AddUser();
-                    break;
-                case ControlHelper.ControlMode.Edit:
-                    EditUser();
-                    break;
+                txtFullName.Focus();
             }
+            else if (!UsersHelpers.isUserNameInvalid(txtUserName.Text))
+            {
+                txtUserName.Focus();
+            }
+            else if (!UsersHelpers.IsPassWordInvalid(txtPassWord.Text))
+            {
+                txtPassWord.Focus();
+            }
+            else
+            {
+                // Cập nhật data
+                switch (control.GetMode())
+                {
+                    case ControlHelper.ControlMode.Add:
+                        {
+                            if (UsersHelpers.CheckUserNameExist(txtUserName.Text))
+                            {
+                                MyMessageBox.Warning("Tên đăng nhập đã được sử dụng!");
+                                return;
 
-            // Sau khi lưu
-            control.SwitchMode(ControlHelper.ControlMode.None);
+                            }
+                            AddUser();
+                        }
+                        break;
+                    case ControlHelper.ControlMode.Edit:
+                        {
+                            EditUser();
+                        }
+                        break;
+                }
+
+                // Sau khi lưu
+                control.SwitchMode(ControlHelper.ControlMode.None);
+            }
         }
 
         private void btnCancel_Click(object sender, EventArgs e)

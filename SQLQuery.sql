@@ -38,3 +38,5 @@ Select UserID, UserName, [PassWord], FullName
 from TableUsers
 go
 
+
+SELECT * FROM TableUsers WHERE UserName = 'Nihta'

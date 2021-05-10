@@ -64,8 +64,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ControlHelper.cs" />
-    <Compile Include="DataProvider.cs" />
+    <Compile Include="Helpers\ControlHelper.cs" />
     <Compile Include="FormAccountProfile.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -84,12 +83,6 @@
     <Compile Include="FormMain.Designer.cs">
       <DependentUpon>FormMain.cs</DependentUpon>
     </Compile>
-    <Compile Include="FormTest.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="FormTest.Designer.cs">
-      <DependentUpon>FormTest.cs</DependentUpon>
-    </Compile>
     <Compile Include="FormUsers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -99,7 +92,7 @@
     <Compile Include="MyMessageBox.cs" />
     <Compile Include="MyUtils.cs" />
     <Compile Include="MyValidation.cs" />
-    <Compile Include="UserHelpers.cs" />
+    <Compile Include="Helpers\UserHelpers.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SqlHelper.cs" />
@@ -111,9 +104,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormMain.resx">
       <DependentUpon>FormMain.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="FormTest.resx">
-      <DependentUpon>FormTest.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormUsers.resx">
       <DependentUpon>FormUsers.cs</DependentUpon>
@@ -153,8 +143,6 @@
       <Install>false</Install>
     </BootstrapperPackage>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Helpers\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

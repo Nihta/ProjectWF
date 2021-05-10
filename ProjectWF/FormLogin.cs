@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
-using ProjectWF.Parameter;
+using ProjectWF.Helpers;
 
 namespace ProjectWF
 {
