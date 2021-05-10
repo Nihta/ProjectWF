@@ -36,23 +36,23 @@ namespace ProjectWF
             this.btnAdd = new System.Windows.Forms.Button();
             this.panelControl = new System.Windows.Forms.Panel();
             this.btnEdit = new System.Windows.Forms.Button();
-            this.txtPassWord = new System.Windows.Forms.TextBox();
+            this.txtSupPhone = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.txtUserName = new System.Windows.Forms.TextBox();
+            this.txtSupAddress = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtFullName = new System.Windows.Forms.TextBox();
+            this.txtSupName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.dgvUser = new System.Windows.Forms.DataGridView();
+            this.dgvSupplier = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
             this.UserID = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.FullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtSupEmail = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panelControl.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvUser)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSupplier)).BeginInit();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -64,6 +64,7 @@ namespace ProjectWF
             this.btnExit.TabIndex = 5;
             this.btnExit.Text = "Thoát";
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnCancel
             // 
@@ -73,6 +74,7 @@ namespace ProjectWF
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Huỷ bỏ";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
@@ -82,6 +84,7 @@ namespace ProjectWF
             this.btnSave.TabIndex = 3;
             this.btnSave.Text = "Lưu";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnDelete
             // 
@@ -91,6 +94,7 @@ namespace ProjectWF
             this.btnDelete.TabIndex = 2;
             this.btnDelete.Text = "Xoá";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnAdd
             // 
@@ -100,6 +104,7 @@ namespace ProjectWF
             this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "Thêm";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // panelControl
             // 
@@ -122,15 +127,15 @@ namespace ProjectWF
             this.btnEdit.TabIndex = 1;
             this.btnEdit.Text = "Sửa";
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
-            // txtPassWord
+            // txtSupPhone
             // 
-            this.txtPassWord.Location = new System.Drawing.Point(139, 94);
-            this.txtPassWord.MaxLength = 11;
-            this.txtPassWord.Name = "txtPassWord";
-            this.txtPassWord.Size = new System.Drawing.Size(196, 20);
-            this.txtPassWord.TabIndex = 5;
-            this.txtPassWord.UseSystemPasswordChar = true;
+            this.txtSupPhone.Location = new System.Drawing.Point(139, 94);
+            this.txtSupPhone.MaxLength = 11;
+            this.txtSupPhone.Name = "txtSupPhone";
+            this.txtSupPhone.Size = new System.Drawing.Size(196, 20);
+            this.txtSupPhone.TabIndex = 5;
             // 
             // label3
             // 
@@ -141,13 +146,13 @@ namespace ProjectWF
             this.label3.TabIndex = 4;
             this.label3.Text = "Số điện thoại (*):";
             // 
-            // txtUserName
+            // txtSupAddress
             // 
-            this.txtUserName.Location = new System.Drawing.Point(139, 58);
-            this.txtUserName.MaxLength = 50;
-            this.txtUserName.Name = "txtUserName";
-            this.txtUserName.Size = new System.Drawing.Size(196, 20);
-            this.txtUserName.TabIndex = 3;
+            this.txtSupAddress.Location = new System.Drawing.Point(139, 58);
+            this.txtSupAddress.MaxLength = 50;
+            this.txtSupAddress.Name = "txtSupAddress";
+            this.txtSupAddress.Size = new System.Drawing.Size(196, 20);
+            this.txtSupAddress.TabIndex = 3;
             // 
             // label2
             // 
@@ -158,13 +163,13 @@ namespace ProjectWF
             this.label2.TabIndex = 2;
             this.label2.Text = "Địa chỉ (*):";
             // 
-            // txtFullName
+            // txtSupName
             // 
-            this.txtFullName.Location = new System.Drawing.Point(139, 22);
-            this.txtFullName.MaxLength = 50;
-            this.txtFullName.Name = "txtFullName";
-            this.txtFullName.Size = new System.Drawing.Size(196, 20);
-            this.txtFullName.TabIndex = 1;
+            this.txtSupName.Location = new System.Drawing.Point(139, 22);
+            this.txtSupName.MaxLength = 50;
+            this.txtSupName.Name = "txtSupName";
+            this.txtSupName.Size = new System.Drawing.Size(196, 20);
+            this.txtSupName.TabIndex = 1;
             // 
             // label1
             // 
@@ -177,38 +182,39 @@ namespace ProjectWF
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.dgvUser);
+            this.panel2.Controls.Add(this.dgvSupplier);
             this.panel2.Location = new System.Drawing.Point(381, 12);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(498, 418);
             this.panel2.TabIndex = 0;
             // 
-            // dgvUser
+            // dgvSupplier
             // 
-            this.dgvUser.AllowUserToAddRows = false;
-            this.dgvUser.AllowUserToDeleteRows = false;
-            this.dgvUser.AllowUserToResizeRows = false;
-            this.dgvUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvUser.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.dgvSupplier.AllowUserToAddRows = false;
+            this.dgvSupplier.AllowUserToDeleteRows = false;
+            this.dgvSupplier.AllowUserToResizeRows = false;
+            this.dgvSupplier.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvSupplier.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.UserID,
             this.FullName,
             this.UserName});
-            this.dgvUser.Location = new System.Drawing.Point(3, 22);
-            this.dgvUser.MultiSelect = false;
-            this.dgvUser.Name = "dgvUser";
-            this.dgvUser.ReadOnly = true;
-            this.dgvUser.Size = new System.Drawing.Size(473, 379);
-            this.dgvUser.TabIndex = 0;
+            this.dgvSupplier.Location = new System.Drawing.Point(3, 22);
+            this.dgvSupplier.MultiSelect = false;
+            this.dgvSupplier.Name = "dgvSupplier";
+            this.dgvSupplier.ReadOnly = true;
+            this.dgvSupplier.Size = new System.Drawing.Size(473, 379);
+            this.dgvSupplier.TabIndex = 0;
+            this.dgvSupplier.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSupplier_RowEnter);
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.txtSupEmail);
             this.panel1.Controls.Add(this.label4);
-            this.panel1.Controls.Add(this.txtPassWord);
+            this.panel1.Controls.Add(this.txtSupPhone);
             this.panel1.Controls.Add(this.label3);
-            this.panel1.Controls.Add(this.txtUserName);
+            this.panel1.Controls.Add(this.txtSupAddress);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Controls.Add(this.txtFullName);
+            this.panel1.Controls.Add(this.txtSupName);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
@@ -239,14 +245,13 @@ namespace ProjectWF
             this.UserName.ReadOnly = true;
             this.UserName.Width = 200;
             // 
-            // textBox1
+            // txtSupEmail
             // 
-            this.textBox1.Location = new System.Drawing.Point(139, 130);
-            this.textBox1.MaxLength = 30;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(196, 20);
-            this.textBox1.TabIndex = 7;
-            this.textBox1.UseSystemPasswordChar = true;
+            this.txtSupEmail.Location = new System.Drawing.Point(139, 130);
+            this.txtSupEmail.MaxLength = 30;
+            this.txtSupEmail.Name = "txtSupEmail";
+            this.txtSupEmail.Size = new System.Drawing.Size(196, 20);
+            this.txtSupEmail.TabIndex = 7;
             // 
             // label4
             // 
@@ -267,9 +272,10 @@ namespace ProjectWF
             this.Controls.Add(this.panel1);
             this.Name = "FormSuppliers";
             this.Text = "FormSuppliers";
+            this.Load += new System.EventHandler(this.FormSuppliers_Load);
             this.panelControl.ResumeLayout(false);
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvUser)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvSupplier)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
@@ -285,19 +291,19 @@ namespace ProjectWF
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Panel panelControl;
         private System.Windows.Forms.Button btnEdit;
-        private System.Windows.Forms.TextBox txtPassWord;
+        private System.Windows.Forms.TextBox txtSupPhone;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txtUserName;
+        private System.Windows.Forms.TextBox txtSupAddress;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox txtFullName;
+        private System.Windows.Forms.TextBox txtSupName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.DataGridView dgvUser;
+        private System.Windows.Forms.DataGridView dgvSupplier;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.DataGridViewTextBoxColumn UserID;
         private System.Windows.Forms.DataGridViewTextBoxColumn FullName;
         private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtSupEmail;
         private System.Windows.Forms.Label label4;
     }
 }

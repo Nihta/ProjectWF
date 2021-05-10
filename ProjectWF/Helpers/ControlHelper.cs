@@ -99,5 +99,23 @@ namespace ProjectWF
             }
             this.mode = mode;
         }
+
+        #region HandleEvents
+        public void HandledAddClick()
+        {
+            SwitchMode(ControlMode.Add);
+            ClearTextBox();
+        }
+
+        public void HandledEditClick()
+        {
+            SwitchMode(ControlMode.Edit);
+        }
+
+        public void HandleCancelClick()
+        {
+            SwitchMode(ControlMode.None);
+        }
+        #endregion
     }
 }
