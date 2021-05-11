@@ -1,5 +1,6 @@
 ﻿using System.Security.Cryptography;
 using System.Text;
+using System.Windows.Forms;
 
 namespace ProjectWF
 {
@@ -15,6 +16,27 @@ namespace ProjectWF
                 hash.Append(bytes[i].ToString("x2"));
             }
             return hash.ToString();
+        }
+
+        public static DataGridViewColumn CreateCol(int width, string name, string headerText = "", string dataPropertyName = "")
+        {
+            if (dataPropertyName == "")
+            {
+                dataPropertyName = name;
+            }
+
+            if (headerText == "")
+            {
+                headerText = name;
+            }
+
+            DataGridViewColumn col = new DataGridViewTextBoxColumn();
+            col.DataPropertyName = dataPropertyName;
+            col.Name = name;
+            col.HeaderText = headerText;
+            col.Width = width;
+
+            return col;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
+using ProjectWF.Helpers;
 
 namespace ProjectWF
 {
@@ -52,12 +53,49 @@ namespace ProjectWF
 
             sqlHelper.Update(dataTable);
         }
+
+        public bool IsInvalid()
+        {
+            if (!SupplierHelpers.IsSupplierNameInvalid(txtSupName.Text))
+            {
+                txtSupName.Focus();
+                return false;
+            }
+
+            if (!SupplierHelpers.IsAddressInvalid(txtSupAddress.Text))
+            {
+                txtSupAddress.Focus();
+                return false;
+            }
+
+            if (!SupplierHelpers.IsPhoneInvalid(txtSupPhone.Text))
+            {
+                txtSupPhone.Focus();
+                return false;
+            }
+
+            if (!SupplierHelpers.IsEmailInvalid(txtSupEmail.Text))
+            {
+                txtSupEmail.Focus();
+                return false;
+            }
+
+            return true;
+        }
         #endregion
 
 
         #region Events
         private void FormSuppliers_Load(object sender, EventArgs e)
         {
+            // Config dataGridView
+            dgvSupplier.AutoGenerateColumns = false;
+            dgvSupplier.Columns.Add(MyUtils.CreateCol(30, "SupplierID", "ID"));
+            dgvSupplier.Columns.Add(MyUtils.CreateCol(200, "SupplierName", "Tên nhà cung cấp"));
+            dgvSupplier.Columns.Add(MyUtils.CreateCol(200, "Address", "Địa chỉ"));
+            dgvSupplier.Columns.Add(MyUtils.CreateCol(110, "Phone", "Số điện thoại"));
+            dgvSupplier.Columns.Add(MyUtils.CreateCol(200, "Email"));
+
             // Khởi tạo control helper
             control = new ControlHelper();
             control.AddBtnControls(btnAdd, btnEdit, btnDelete, btnSave, btnCancel);
@@ -96,20 +134,7 @@ namespace ProjectWF
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            // Validation
-            //if (!UsersHelpers.IsFullNameInvalid(txtFullName.Text))
-            //{
-            //    txtFullName.Focus();
-            //}
-            //else if (!UsersHelpers.isUserNameInvalid(txtUserName.Text))
-            //{
-            //    txtUserName.Focus();
-            //}
-            //else if (!UsersHelpers.IsPassWordInvalid(txtPassWord.Text))
-            //{
-            //    txtPassWord.Focus();
-            //}
-            //else
+            if (IsInvalid())
             {
                 // Cập nhật data
                 switch (control.GetMode())

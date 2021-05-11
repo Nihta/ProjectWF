@@ -1,5 +1,6 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
+using System.Text.RegularExpressions;
 
 namespace ProjectWF.Helpers
 {
@@ -48,5 +49,71 @@ namespace ProjectWF.Helpers
         }
         #endregion
 
+        #region Validation
+        public static bool IsSupplierNameInvalid(string text)
+        {
+            string name = "Tên nhà cung cấp";
+            if (MyValidation.IsEmpty(text, name))
+            {
+                return false;
+            }
+            else if (!MyValidation.IsInRange(text, 5, sizeSupplierName, name))
+            {
+                return false;
+            }
+
+            return true;
+        }
+
+        public static bool IsAddressInvalid(string text)
+        {
+            string name = "Địa chỉ";
+            if (MyValidation.IsEmpty(text, name))
+            {
+                return false;
+            }
+            else if (!MyValidation.IsInRange(text, 5, sizeAddress, name))
+            {
+                return false;
+            }
+            return true;
+        }
+
+
+        public static bool IsPhoneInvalid(string text)
+        {
+            string name = "Số điện thoại";
+            if (MyValidation.IsEmpty(text, name))
+            {
+                return false;
+            }
+            else if (!MyValidation.IsInRange(text, 9, sizePhone, name))
+            {
+                return false;
+            }
+            else if (!Regex.IsMatch(text, @"^[0-9]*$"))
+            {
+                MyMessageBox.Warning($"{name} không hợp lệ!\n{name} chỉ bao gồm các số 0->9");
+                return false;
+            }
+            return true;
+        }
+
+
+        public static bool IsEmailInvalid(string text)
+        {
+            string name = "Email";
+            if (MyValidation.IsEmpty(text, name))
+            {
+                return false;
+            }
+            else if (!Regex.IsMatch(text, @"^\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b$"))
+            {
+                MyMessageBox.Warning($"{name} không hợp lệ!");
+                return false;
+            }
+            return true;
+        }
+        #endregion
     }
 }

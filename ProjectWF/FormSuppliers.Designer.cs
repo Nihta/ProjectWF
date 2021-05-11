@@ -45,9 +45,6 @@ namespace ProjectWF
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgvSupplier = new System.Windows.Forms.DataGridView();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.UserID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.txtSupEmail = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panelControl.SuspendLayout();
@@ -185,7 +182,7 @@ namespace ProjectWF
             this.panel2.Controls.Add(this.dgvSupplier);
             this.panel2.Location = new System.Drawing.Point(381, 12);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(498, 418);
+            this.panel2.Size = new System.Drawing.Size(738, 418);
             this.panel2.TabIndex = 0;
             // 
             // dgvSupplier
@@ -194,15 +191,11 @@ namespace ProjectWF
             this.dgvSupplier.AllowUserToDeleteRows = false;
             this.dgvSupplier.AllowUserToResizeRows = false;
             this.dgvSupplier.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvSupplier.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.UserID,
-            this.FullName,
-            this.UserName});
             this.dgvSupplier.Location = new System.Drawing.Point(3, 22);
             this.dgvSupplier.MultiSelect = false;
             this.dgvSupplier.Name = "dgvSupplier";
             this.dgvSupplier.ReadOnly = true;
-            this.dgvSupplier.Size = new System.Drawing.Size(473, 379);
+            this.dgvSupplier.Size = new System.Drawing.Size(708, 379);
             this.dgvSupplier.TabIndex = 0;
             this.dgvSupplier.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSupplier_RowEnter);
             // 
@@ -220,30 +213,6 @@ namespace ProjectWF
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(363, 320);
             this.panel1.TabIndex = 1;
-            // 
-            // UserID
-            // 
-            this.UserID.DataPropertyName = "UserID";
-            this.UserID.HeaderText = "ID";
-            this.UserID.Name = "UserID";
-            this.UserID.ReadOnly = true;
-            this.UserID.Width = 30;
-            // 
-            // FullName
-            // 
-            this.FullName.DataPropertyName = "FullName";
-            this.FullName.HeaderText = "Tên nhà cung cấp";
-            this.FullName.Name = "FullName";
-            this.FullName.ReadOnly = true;
-            this.FullName.Width = 200;
-            // 
-            // UserName
-            // 
-            this.UserName.DataPropertyName = "UserName";
-            this.UserName.HeaderText = "Địa chỉ";
-            this.UserName.Name = "UserName";
-            this.UserName.ReadOnly = true;
-            this.UserName.Width = 200;
             // 
             // txtSupEmail
             // 
@@ -266,7 +235,7 @@ namespace ProjectWF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(894, 443);
+            this.ClientSize = new System.Drawing.Size(1131, 443);
             this.Controls.Add(this.panelControl);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
@@ -300,9 +269,6 @@ namespace ProjectWF
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView dgvSupplier;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UserID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FullName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
         private System.Windows.Forms.TextBox txtSupEmail;
         private System.Windows.Forms.Label label4;
     }
