@@ -12,6 +12,16 @@ namespace ProjectWF
         private SqlDataAdapter dataAdapter;
         private SqlCommandBuilder commandBuilder;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="connectionString"></param>
+        /// <param name="commandText"></param>
+        /// <param name="commandType"></param>
+        /// <param name="parameters"></param>
+        /// <returns>
+        /// The number of rows affected.
+        /// </returns>
         public static int ExecuteNonQuery(string connectionString, string commandText, CommandType commandType, params SqlParameter[] parameters)
         {
             using (SqlConnection conn = new SqlConnection(connectionString))

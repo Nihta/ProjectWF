@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
+using ProjectWF.Helpers;
 
 namespace ProjectWF
 {
@@ -51,33 +52,57 @@ namespace ProjectWF
 
         private void AddProduct()
         {
-            DataRow newRow = dataTable.NewRow();
+            string cmd = $"INSERT dbo.TableProducts (ProductName, Price, Description, CategoryID, SupplierID) VALUES(N'{txtName.Text}', {Convert.ToInt32(txtPrice.Text)}, N'{txtDesc.Text}', {Convert.ToInt32(cbCate.SelectedValue.ToString())}, {Convert.ToInt32(cbSup.SelectedValue.ToString())});";
+            int numOfRowsAffected = SqlHelper.ExecuteNonQuery(SqlHelper.defaultConnStr, cmd, CommandType.Text);
+            if (numOfRowsAffected == 1)
+            {
+                //DataRow newRow = dataTable.NewRow();
 
-            newRow["ProductName"] = txtName.Text;
-            newRow["Price"] = Convert.ToInt32(txtPrice.Text);
-            newRow["Description"] = txtDesc.Text;
-            newRow["CategoryID"] = Convert.ToInt32(cbCate.SelectedValue.ToString());
-            newRow["SupplierID"] = Convert.ToInt32(cbSup.SelectedValue.ToString());
+                //newRow["ProductName"] = txtName.Text;
+                //newRow["Price"] = Convert.ToInt32(txtPrice.Text);
+                //newRow["Description"] = txtDesc.Text;
+                //newRow["CategoryID"] = Convert.ToInt32(cbCate.SelectedValue.ToString());
+                //newRow["SupplierID"] = Convert.ToInt32(cbSup.SelectedValue.ToString());
 
-            dataTable.Rows.Add(newRow);
-            sqlHelper.Update(dataTable);
-            GetDataGridView();
+                //dataTable.Rows.Add(newRow);
+                //sqlHelper.Update(dataTable);
+                GetDataGridView();
+            }
+            else
+            {
+                MyMessageBox.Error("Thêm bản ghi thất bại!");
+            }
         }
 
         private void EditProduct()
         {
-            int curRowIdx = dgvProduct.CurrentRow.Index;
-            DataRow editRow = dataTable.Rows[curRowIdx];
+            int rowIdxNeedEdit = dgvProduct.CurrentRow.Index;
+            int productIDNeedEdit = Convert.ToInt32(dgvProduct.Rows[rowIdxNeedEdit].Cells["ProductID"].Value.ToString().Trim());
 
-            editRow["ProductName"] = txtName.Text;
-            editRow["Price"] = Convert.ToInt32(txtPrice.Text);
-            editRow["Description"] = txtDesc.Text;
-            editRow["CategoryID"] = Convert.ToInt32(cbCate.SelectedValue.ToString());
-            editRow["SupplierID"] = Convert.ToInt32(cbSup.SelectedValue.ToString());
+            bool isSuccess = ProductHelpers.EditProduct(
+                    productIDNeedEdit,
+                    txtName.Text,
+                    Convert.ToInt32(txtPrice.Text), txtDesc.Text,
+                    Convert.ToInt32(cbCate.SelectedValue.ToString()),
+                    Convert.ToInt32(cbSup.SelectedValue.ToString())
+                );
 
-            sqlHelper.Update(dataTable);
+            if (isSuccess)
+            {
+                DataRow editRow = dataTable.Rows[rowIdxNeedEdit];
+
+                editRow["ProductName"] = txtName.Text;
+                editRow["Price"] = Convert.ToInt32(txtPrice.Text);
+                editRow["Description"] = txtDesc.Text;
+                editRow["CategoryID"] = Convert.ToInt32(cbCate.SelectedValue.ToString());
+                editRow["SupplierID"] = Convert.ToInt32(cbSup.SelectedValue.ToString());
+            }
+            else
+            {
+                MyMessageBox.Error("Sửa bản ghi thất bại!");
+            }
         }
-        
+
         public bool IsInvalid()
         {
             if (!MyValidation.CommonValidation(txtName.Text, 1, 50, "Tên sản phẩm"))
@@ -135,11 +160,19 @@ namespace ProjectWF
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            int rowIdxNeedDel = dgvProduct.CurrentRow.Index;
+            int idNeedDel = Convert.ToInt32(dgvProduct.Rows[rowIdxNeedDel].Cells["ProductID"].Value.ToString());
+
             if (MyMessageBox.Question("Bạn có chắn xóa bản ghi đã chọn không?"))
             {
-                int curRowIdx = dgvProduct.CurrentRow.Index;
-                dataTable.Rows[curRowIdx].Delete();
-                sqlHelper.Update(dataTable);
+                if (ProductHelpers.Delete(idNeedDel))
+                {
+                    dataTable.Rows[rowIdxNeedDel].Delete();
+                }
+                else
+                {
+                    MyMessageBox.Error("Xoá bản ghi thất bại!");
+                }
             }
         }
 
@@ -172,7 +205,6 @@ namespace ProjectWF
         private void btnCancel_Click(object sender, EventArgs e)
         {
             control.HandleCancelClick();
-
         }
 
         private void btnExit_Click(object sender, EventArgs e)
