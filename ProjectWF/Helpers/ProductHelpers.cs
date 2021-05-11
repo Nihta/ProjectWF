@@ -1,9 +1,40 @@
 ﻿using System.Data;
+using System.Data.SqlClient;
 
 namespace ProjectWF.Helpers
 {
     class ProductHelpers
     {
+        public static DataTable GetDataTable()
+        {
+            string cmd = @"
+                            select TP.ProductID,
+                                   TP.ProductName,
+                                   TP.Price,
+                                   TP.Description,
+                                   TP.CategoryID,
+                                   TP.SupplierID,
+                                   TS.SupplierName,
+                                   TC.CategoryName
+                            from TableProducts TP
+                                     join TableCategorys TC on TC.CategoryID = TP.CategoryID
+                                     join TableSuppliers TS on TS.SupplierID = TP.SupplierID";
+            SqlDataReader dataReader = SqlHelper.ExecuteReader(SqlHelper.defaultConnStr, cmd, CommandType.Text);
+
+            DataTable dataTable = new DataTable();
+            dataTable.Load(dataReader);
+
+            return dataTable;
+        }
+
+        public static bool AddProduct(string ProductName, int Price, string Description, int CategoryID, int SupplierID)
+        {
+            string cmd = $"INSERT dbo.TableProducts (ProductName, Price, Description, CategoryID, SupplierID) VALUES(N'{ProductName}', {Price}, N'{Description}', {CategoryID}, {SupplierID});";
+
+            int numOfRowsAffected = SqlHelper.ExecuteNonQuery(SqlHelper.defaultConnStr, cmd, CommandType.Text);
+
+            return numOfRowsAffected == 1;
+        }
 
         /// <summary>
         /// 
@@ -19,9 +50,9 @@ namespace ProjectWF.Helpers
         /// <returns>
         /// Return true nếu sửa thành công
         /// </returns>
-        public static bool EditProduct(int productIDNeedEdit, string ProductName, int Price, string Description, int CategoryID, int ProductID)
+        public static bool EditProduct(int productIDNeedEdit, string ProductName, int Price, string Description, int CategoryID, int SupplierID)
         {
-            string cmd = $"UPDATE dbo.TableProducts SET ProductName = N'{ProductName}', Price = {Price}, Description = N'{Description}', CategoryID = {CategoryID}, SupplierID = {CategoryID} WHERE ProductID = {productIDNeedEdit}";
+            string cmd = $"UPDATE dbo.TableProducts SET ProductName = N'{ProductName}', Price = {Price}, Description = N'{Description}', CategoryID = {CategoryID}, SupplierID = {SupplierID} WHERE ProductID = {productIDNeedEdit}";
 
             int numOfRowsAffected = SqlHelper.ExecuteNonQuery(SqlHelper.defaultConnStr, cmd, CommandType.Text);
 

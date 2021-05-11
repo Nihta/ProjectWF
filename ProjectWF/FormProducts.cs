@@ -9,15 +9,13 @@ namespace ProjectWF
     {
         private ControlHelper control;
         DataTable dataTable;
-        SqlHelper sqlHelper;
 
         public FormProducts()
         {
             InitializeComponent();
 
-            ConfigDataGridView();
-            sqlHelper = new SqlHelper();
             control = new ControlHelper();
+            ConfigDataGridView();
         }
 
         #region Methods
@@ -28,16 +26,18 @@ namespace ProjectWF
             dgvProduct.Columns.Add(MyUtils.CreateCol(100, "ProductName", "Tên sản phẩm"));
             dgvProduct.Columns.Add(MyUtils.CreateCol(100, "Price", "Giá"));
             dgvProduct.Columns.Add(MyUtils.CreateCol(160, "Description", "Mô tả"));
-            dgvProduct.Columns.Add(MyUtils.CreateCol(100, "CategoryID", "Danh mục"));
-            dgvProduct.Columns.Add(MyUtils.CreateCol(160, "SupplierID", "Nhà cung cấp"));
+            dgvProduct.Columns.Add(MyUtils.CreateCol(100, "CategoryName", "Danh mục"));
+            dgvProduct.Columns.Add(MyUtils.CreateCol(100, "SupplierName", "Nhà cung cấp"));
 
-            //dgvProduct.Columns["SupplierID"].Visible = false;
+            dgvProduct.Columns.Add(MyUtils.CreateCol(100, "CategoryID", "Danh mục"));
+            dgvProduct.Columns["CategoryID"].Visible = false;
+            dgvProduct.Columns.Add(MyUtils.CreateCol(100, "SupplierID", "Nhà cung cấp"));
+            dgvProduct.Columns["SupplierID"].Visible = false;
         }
 
         private void GetDataGridView()
         {
-            string query = "select p.ProductID, p.ProductName, p.Price, p.Description, p.CategoryID, p.SupplierID from TableProducts p";
-            dataTable = sqlHelper.ExecuteQuery(SqlHelper.defaultConnStr, query, CommandType.Text);
+            dataTable = ProductHelpers.GetDataTable();
             dgvProduct.DataSource = dataTable;
         }
 
@@ -52,20 +52,21 @@ namespace ProjectWF
 
         private void AddProduct()
         {
-            string cmd = $"INSERT dbo.TableProducts (ProductName, Price, Description, CategoryID, SupplierID) VALUES(N'{txtName.Text}', {Convert.ToInt32(txtPrice.Text)}, N'{txtDesc.Text}', {Convert.ToInt32(cbCate.SelectedValue.ToString())}, {Convert.ToInt32(cbSup.SelectedValue.ToString())});";
-            int numOfRowsAffected = SqlHelper.ExecuteNonQuery(SqlHelper.defaultConnStr, cmd, CommandType.Text);
-            if (numOfRowsAffected == 1)
+            int categoryID = Convert.ToInt32(cbCate.SelectedValue.ToString());
+            int supplierID = Convert.ToInt32(cbSup.SelectedValue.ToString());
+            int price = Convert.ToInt32(txtPrice.Text);
+
+            bool isSuccess = ProductHelpers.AddProduct(
+                txtName.Text,
+                price,
+                txtDesc.Text,
+                categoryID,
+                supplierID
+            );
+
+            if (isSuccess)
             {
-                //DataRow newRow = dataTable.NewRow();
-
-                //newRow["ProductName"] = txtName.Text;
-                //newRow["Price"] = Convert.ToInt32(txtPrice.Text);
-                //newRow["Description"] = txtDesc.Text;
-                //newRow["CategoryID"] = Convert.ToInt32(cbCate.SelectedValue.ToString());
-                //newRow["SupplierID"] = Convert.ToInt32(cbSup.SelectedValue.ToString());
-
-                //dataTable.Rows.Add(newRow);
-                //sqlHelper.Update(dataTable);
+                // TODO: Cập nhập lại dataGripView mà không cần GetDataGridView() lại
                 GetDataGridView();
             }
             else
@@ -79,23 +80,29 @@ namespace ProjectWF
             int rowIdxNeedEdit = dgvProduct.CurrentRow.Index;
             int productIDNeedEdit = Convert.ToInt32(dgvProduct.Rows[rowIdxNeedEdit].Cells["ProductID"].Value.ToString().Trim());
 
+            int categoryID = Convert.ToInt32(cbCate.SelectedValue.ToString());
+            int supplierID = Convert.ToInt32(cbSup.SelectedValue.ToString());
+            int price = Convert.ToInt32(txtPrice.Text);
+
             bool isSuccess = ProductHelpers.EditProduct(
                     productIDNeedEdit,
                     txtName.Text,
-                    Convert.ToInt32(txtPrice.Text), txtDesc.Text,
-                    Convert.ToInt32(cbCate.SelectedValue.ToString()),
-                    Convert.ToInt32(cbSup.SelectedValue.ToString())
+                    price,
+                    txtDesc.Text,
+                    categoryID,
+                    supplierID
                 );
 
             if (isSuccess)
             {
                 DataRow editRow = dataTable.Rows[rowIdxNeedEdit];
-
                 editRow["ProductName"] = txtName.Text;
-                editRow["Price"] = Convert.ToInt32(txtPrice.Text);
+                editRow["Price"] = price;
                 editRow["Description"] = txtDesc.Text;
-                editRow["CategoryID"] = Convert.ToInt32(cbCate.SelectedValue.ToString());
-                editRow["SupplierID"] = Convert.ToInt32(cbSup.SelectedValue.ToString());
+                editRow["CategoryID"] = categoryID;
+                editRow["SupplierID"] = supplierID;
+                editRow["CategoryName"] = cbCate.Text;
+                editRow["SupplierName"] = cbSup.Text;
             }
             else
             {
@@ -165,7 +172,8 @@ namespace ProjectWF
 
             if (MyMessageBox.Question("Bạn có chắn xóa bản ghi đã chọn không?"))
             {
-                if (ProductHelpers.Delete(idNeedDel))
+                bool isSuccess = ProductHelpers.Delete(idNeedDel);
+                if (isSuccess)
                 {
                     dataTable.Rows[rowIdxNeedDel].Delete();
                 }
@@ -196,7 +204,6 @@ namespace ProjectWF
                         }
                         break;
                 }
-
                 // Sau khi cập nhật dữ liệu thành công
                 control.SwitchMode(ControlHelper.ControlMode.None);
             }
