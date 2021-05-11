@@ -182,7 +182,7 @@ namespace ProjectWF
             this.panel2.Controls.Add(this.dgvSupplier);
             this.panel2.Location = new System.Drawing.Point(381, 12);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(738, 418);
+            this.panel2.Size = new System.Drawing.Size(763, 418);
             this.panel2.TabIndex = 0;
             // 
             // dgvSupplier
@@ -195,7 +195,7 @@ namespace ProjectWF
             this.dgvSupplier.MultiSelect = false;
             this.dgvSupplier.Name = "dgvSupplier";
             this.dgvSupplier.ReadOnly = true;
-            this.dgvSupplier.Size = new System.Drawing.Size(708, 379);
+            this.dgvSupplier.Size = new System.Drawing.Size(733, 379);
             this.dgvSupplier.TabIndex = 0;
             this.dgvSupplier.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSupplier_RowEnter);
             // 
@@ -235,7 +235,7 @@ namespace ProjectWF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1131, 443);
+            this.ClientSize = new System.Drawing.Size(1156, 443);
             this.Controls.Add(this.panelControl);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);

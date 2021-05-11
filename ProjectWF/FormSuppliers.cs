@@ -17,6 +17,16 @@ namespace ProjectWF
         }
 
         #region Methods
+        private void ConfigDataGridView()
+        {
+            dgvSupplier.AutoGenerateColumns = false;
+            dgvSupplier.Columns.Add(MyUtils.CreateCol(30, "SupplierID", "ID"));
+            dgvSupplier.Columns.Add(MyUtils.CreateCol(200, "SupplierName", "Tên nhà cung cấp"));
+            dgvSupplier.Columns.Add(MyUtils.CreateCol(200, "Address", "Địa chỉ"));
+            dgvSupplier.Columns.Add(MyUtils.CreateCol(110, "Phone", "Số điện thoại"));
+            dgvSupplier.Columns.Add(MyUtils.CreateCol(150, "Email"));
+        }
+
         private void GetSuppliers()
         {
             string query = "select SupplierID, SupplierName, Address, Phone, Email from TableSuppliers";
@@ -89,12 +99,7 @@ namespace ProjectWF
         private void FormSuppliers_Load(object sender, EventArgs e)
         {
             // Config dataGridView
-            dgvSupplier.AutoGenerateColumns = false;
-            dgvSupplier.Columns.Add(MyUtils.CreateCol(30, "SupplierID", "ID"));
-            dgvSupplier.Columns.Add(MyUtils.CreateCol(200, "SupplierName", "Tên nhà cung cấp"));
-            dgvSupplier.Columns.Add(MyUtils.CreateCol(200, "Address", "Địa chỉ"));
-            dgvSupplier.Columns.Add(MyUtils.CreateCol(110, "Phone", "Số điện thoại"));
-            dgvSupplier.Columns.Add(MyUtils.CreateCol(200, "Email"));
+            ConfigDataGridView();
 
             // Khởi tạo control helper
             control = new ControlHelper();
