@@ -33,5 +33,18 @@ namespace ProjectWF
             }
             return true;
         }
+
+        public static bool CommonValidation(string text, int min, int max, string name)
+        {
+            if (IsEmpty(text, name))
+            {
+                return false;
+            }
+            else if (!IsInRange(text, min, max, name))
+            {
+                return false;
+            }
+            return true;
+        }
     }
 }
