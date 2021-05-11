@@ -195,11 +195,25 @@ namespace ProjectWF
                 {
                     case ControlHelper.ControlMode.Add:
                         {
+                            // TODO: Trường hợp một sản phẩm thể có 2 nhà cung cấp
+                            if (ProductHelpers.CheckProductNameExist(txtName.Text))
+                            {
+                                MyMessageBox.Warning("Tên sản phẩm đã được sử dụng!");
+                                txtName.Focus();
+                                return;
+                            }
                             AddProduct();
                         }
                         break;
                     case ControlHelper.ControlMode.Edit:
                         {
+                            int curProductID = Convert.ToInt32(dgvProduct.Rows[dgvProduct.CurrentRow.Index].Cells["ProductID"].Value.ToString().Trim());
+                            if (ProductHelpers.CheckProductNameExist(txtName.Text, curProductID))
+                            {
+                                MyMessageBox.Warning("Trùng tên sản phẩm!");
+                                txtName.Focus();
+                                return;
+                            }
                             EditProduct();
                         }
                         break;

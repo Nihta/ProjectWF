@@ -76,5 +76,24 @@ namespace ProjectWF.Helpers
 
             return numOfRowsAffected == 1;
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="productName"></param>
+        /// <param name="ignoreProductID"></param>
+        /// <returns>
+        /// Return true nếu đã được sử dụng
+        /// </returns>
+        public static bool CheckProductNameExist(string productName, int ignoreProductID = -1)
+        {
+            string query = $"SELECT * FROM dbo.TableProducts WHERE ProductName = N'{productName}' AND ProductID != {ignoreProductID}";
+            SqlDataReader reader = SqlHelper.ExecuteReader(
+                SqlHelper.defaultConnStr,
+                query,
+                CommandType.Text
+            );
+            return reader.HasRows;
+        }
     }
 }
