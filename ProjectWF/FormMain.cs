@@ -71,5 +71,13 @@ namespace ProjectWF
             f.ShowDialog();
             this.Show();
         }
+
+        private void sảnPhẩmToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormProducts f = new FormProducts();
+            this.Hide();
+            f.ShowDialog();
+            this.Show();
+        }
     }
 }
