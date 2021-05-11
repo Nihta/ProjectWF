@@ -55,5 +55,13 @@ namespace ProjectWF
             f.ShowDialog();
             this.Show();
         }
+
+        private void danhMụcToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormCategory f = new FormCategory();
+            this.Hide();
+            f.ShowDialog();
+            this.Show();
+        }
     }
 }
