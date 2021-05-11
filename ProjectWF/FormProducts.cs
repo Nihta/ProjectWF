@@ -29,6 +29,8 @@ namespace ProjectWF
             dgvProduct.Columns.Add(MyUtils.CreateCol(160, "Description", "Mô tả"));
             dgvProduct.Columns.Add(MyUtils.CreateCol(100, "CategoryID", "Danh mục"));
             dgvProduct.Columns.Add(MyUtils.CreateCol(160, "SupplierID", "Nhà cung cấp"));
+
+            //dgvProduct.Columns["SupplierID"].Visible = false;
         }
 
         private void GetDataGridView()
