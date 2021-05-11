@@ -14,9 +14,14 @@ namespace ProjectWF
             return text.Length == 0;
         }
 
-        public static bool IsNumeric(string text)
+        public static bool IsNumeric(string text, string name)
         {
-            return Regex.IsMatch(text, @"^\d+$");
+            if (!Regex.IsMatch(text, @"^\d+$"))
+            {
+                MyMessageBox.Warning($"{name} không phải là số hợp lệ!");
+                return false;
+            }
+            return true;
         }
 
         public static bool IsInRange(string text, int min, int max, string name)

@@ -29,6 +29,7 @@ namespace ProjectWF
         private Button btnCancel;
 
         private TextBox[] textBoxes;
+        private ComboBox[] comboBoxes = null;
 
         public void AddBtnControls(Button btnAdd, Button btnEdit, Button btnDelete, Button btnSave, Button btnCancel)
         {
@@ -42,6 +43,11 @@ namespace ProjectWF
         public void AddTextBoxs(params TextBox[] textBoxes)
         {
             this.textBoxes = textBoxes;
+        }
+
+        public void AddComboBoxs(params ComboBox[] comboBoxes)
+        {
+            this.comboBoxes = comboBoxes;
         }
 
         public void EnableControl(bool isEnable)
@@ -65,7 +71,18 @@ namespace ProjectWF
         {
             foreach (TextBox tb in textBoxes)
             {
-                tb.Text = "";
+                tb.Clear();
+            }
+        }
+
+        private void EnableComboBox(bool isEnable)
+        {
+            if (comboBoxes != null && comboBoxes.Length != 0)
+            {
+                foreach (ComboBox cb in comboBoxes)
+                {
+                    cb.Enabled = isEnable;
+                }
             }
         }
 
@@ -86,14 +103,17 @@ namespace ProjectWF
             {
                 case ControlMode.None:
                     EnableTextBox(false);
+                    EnableComboBox(false);
                     EnableControl(true);
                     break;
                 case ControlMode.Add:
                     EnableTextBox(true);
+                    EnableComboBox(true);
                     EnableControl(false);
                     break;
                 case ControlMode.Edit:
                     EnableTextBox(true);
+                    EnableComboBox(true);
                     EnableControl(false);
                     break;
             }

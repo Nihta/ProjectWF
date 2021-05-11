@@ -57,8 +57,9 @@ namespace ProjectWF
             // 
             // cbSup
             // 
+            this.cbSup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbSup.FormattingEnabled = true;
-            this.cbSup.Location = new System.Drawing.Point(139, 164);
+            this.cbSup.Location = new System.Drawing.Point(139, 220);
             this.cbSup.Name = "cbSup";
             this.cbSup.Size = new System.Drawing.Size(196, 21);
             this.cbSup.TabIndex = 10;
@@ -66,7 +67,7 @@ namespace ProjectWF
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(25, 167);
+            this.label5.Location = new System.Drawing.Point(25, 223);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(91, 13);
             this.label5.TabIndex = 8;
@@ -75,7 +76,7 @@ namespace ProjectWF
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(25, 131);
+            this.label4.Location = new System.Drawing.Point(25, 187);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(43, 13);
             this.label4.TabIndex = 6;
@@ -84,9 +85,10 @@ namespace ProjectWF
             // txtDesc
             // 
             this.txtDesc.Location = new System.Drawing.Point(139, 92);
-            this.txtDesc.MaxLength = 20;
+            this.txtDesc.MaxLength = 100;
+            this.txtDesc.Multiline = true;
             this.txtDesc.Name = "txtDesc";
-            this.txtDesc.Size = new System.Drawing.Size(196, 20);
+            this.txtDesc.Size = new System.Drawing.Size(196, 77);
             this.txtDesc.TabIndex = 5;
             // 
             // label3
@@ -101,7 +103,7 @@ namespace ProjectWF
             // txtPrice
             // 
             this.txtPrice.Location = new System.Drawing.Point(139, 57);
-            this.txtPrice.MaxLength = 20;
+            this.txtPrice.MaxLength = 10;
             this.txtPrice.Name = "txtPrice";
             this.txtPrice.Size = new System.Drawing.Size(196, 20);
             this.txtPrice.TabIndex = 3;
@@ -129,17 +131,19 @@ namespace ProjectWF
             this.dgvProduct.AllowUserToDeleteRows = false;
             this.dgvProduct.AllowUserToResizeRows = false;
             this.dgvProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProduct.Location = new System.Drawing.Point(3, 22);
+            this.dgvProduct.Location = new System.Drawing.Point(0, 22);
             this.dgvProduct.MultiSelect = false;
             this.dgvProduct.Name = "dgvProduct";
             this.dgvProduct.ReadOnly = true;
             this.dgvProduct.Size = new System.Drawing.Size(582, 383);
             this.dgvProduct.TabIndex = 0;
+            this.dgvProduct.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProduct_RowEnter);
             // 
             // cbCate
             // 
+            this.cbCate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbCate.FormattingEnabled = true;
-            this.cbCate.Location = new System.Drawing.Point(139, 128);
+            this.cbCate.Location = new System.Drawing.Point(139, 184);
             this.cbCate.Name = "cbCate";
             this.cbCate.Size = new System.Drawing.Size(196, 21);
             this.cbCate.TabIndex = 9;
@@ -147,7 +151,7 @@ namespace ProjectWF
             // txtName
             // 
             this.txtName.Location = new System.Drawing.Point(139, 22);
-            this.txtName.MaxLength = 20;
+            this.txtName.MaxLength = 50;
             this.txtName.Name = "txtName";
             this.txtName.Size = new System.Drawing.Size(196, 20);
             this.txtName.TabIndex = 1;
@@ -169,6 +173,7 @@ namespace ProjectWF
             this.btnExit.TabIndex = 5;
             this.btnExit.Text = "Thoát";
             this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnCancel
             // 
@@ -178,6 +183,7 @@ namespace ProjectWF
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Huỷ bỏ";
             this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
@@ -187,6 +193,7 @@ namespace ProjectWF
             this.btnSave.TabIndex = 3;
             this.btnSave.Text = "Lưu";
             this.btnSave.UseVisualStyleBackColor = true;
+            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnDelete
             // 
@@ -196,6 +203,7 @@ namespace ProjectWF
             this.btnDelete.TabIndex = 2;
             this.btnDelete.Text = "Xoá";
             this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
@@ -205,6 +213,7 @@ namespace ProjectWF
             this.btnEdit.TabIndex = 1;
             this.btnEdit.Text = "Sửa";
             this.btnEdit.UseVisualStyleBackColor = true;
+            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnAdd
             // 
@@ -214,6 +223,7 @@ namespace ProjectWF
             this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "Thêm";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // panelControl
             // 
@@ -255,6 +265,7 @@ namespace ProjectWF
             this.Controls.Add(this.panel1);
             this.Name = "FormProducts";
             this.Text = "FormProducts";
+            this.Load += new System.EventHandler(this.FormProducts_Load);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProduct)).EndInit();
             this.panelControl.ResumeLayout(false);

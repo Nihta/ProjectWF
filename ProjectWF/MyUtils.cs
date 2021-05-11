@@ -1,4 +1,6 @@
-﻿using System.Security.Cryptography;
+﻿using System.Data;
+using System.Data.SqlClient;
+using System.Security.Cryptography;
 using System.Text;
 using System.Windows.Forms;
 
@@ -37,6 +39,38 @@ namespace ProjectWF
             col.Width = width;
 
             return col;
+        }
+
+        public static DataTable FillComboBoxWithDataCategory(ComboBox comboBoxCategory)
+        {
+            DataTable dataTable = new DataTable();
+
+            string query = "select CategoryID, CategoryName from TableCategorys";
+            SqlDataReader reader = SqlHelper.ExecuteReader(SqlHelper.defaultConnStr, query, CommandType.Text);
+
+            dataTable.Load(reader);
+
+            comboBoxCategory.DataSource = dataTable;
+            comboBoxCategory.DisplayMember = "CategoryName";
+            comboBoxCategory.ValueMember = "CategoryID";
+
+            return dataTable;
+        }
+
+        public static DataTable FillComboBoxWithDataSupplier(ComboBox comboBoxSupplier)
+        {
+            DataTable dataTable = new DataTable();
+
+            string query = "select s.SupplierID, s.SupplierName from TableSuppliers s";
+            SqlDataReader reader = SqlHelper.ExecuteReader(SqlHelper.defaultConnStr, query, CommandType.Text);
+
+            dataTable.Load(reader);
+
+            comboBoxSupplier.DataSource = dataTable;
+            comboBoxSupplier.DisplayMember = "SupplierName";
+            comboBoxSupplier.ValueMember = "SupplierID";
+
+            return dataTable;
         }
     }
 }
