@@ -1,7 +1,7 @@
 ﻿
 namespace ProjectWF
 {
-    partial class FormCategory
+    partial class FormCustomer
     {
         /// <summary>
         /// Required designer variable.
@@ -37,12 +37,12 @@ namespace ProjectWF
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
-            this.txtCateDesc = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.txtCateName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgvCate = new System.Windows.Forms.DataGridView();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.panelControl.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -60,7 +60,7 @@ namespace ProjectWF
             this.panelControl.Location = new System.Drawing.Point(12, 338);
             this.panelControl.Name = "panelControl";
             this.panelControl.Size = new System.Drawing.Size(363, 92);
-            this.panelControl.TabIndex = 1;
+            this.panelControl.TabIndex = 6;
             // 
             // btnExit
             // 
@@ -70,7 +70,6 @@ namespace ProjectWF
             this.btnExit.TabIndex = 5;
             this.btnExit.Text = "Thoát";
             this.btnExit.UseVisualStyleBackColor = true;
-            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
             // 
             // btnCancel
             // 
@@ -80,7 +79,6 @@ namespace ProjectWF
             this.btnCancel.TabIndex = 4;
             this.btnCancel.Text = "Huỷ bỏ";
             this.btnCancel.UseVisualStyleBackColor = true;
-            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // btnSave
             // 
@@ -90,7 +88,6 @@ namespace ProjectWF
             this.btnSave.TabIndex = 3;
             this.btnSave.Text = "Lưu";
             this.btnSave.UseVisualStyleBackColor = true;
-            this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
             // btnDelete
             // 
@@ -100,7 +97,6 @@ namespace ProjectWF
             this.btnDelete.TabIndex = 2;
             this.btnDelete.Text = "Xoá";
             this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
             // btnEdit
             // 
@@ -110,7 +106,6 @@ namespace ProjectWF
             this.btnEdit.TabIndex = 1;
             this.btnEdit.Text = "Sửa";
             this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
             // btnAdd
             // 
@@ -120,27 +115,17 @@ namespace ProjectWF
             this.btnAdd.TabIndex = 0;
             this.btnAdd.Text = "Thêm";
             this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.txtCateDesc);
+            this.panel1.Controls.Add(this.textBox1);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.txtCateName);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(363, 320);
-            this.panel1.TabIndex = 0;
-            // 
-            // txtCateDesc
-            // 
-            this.txtCateDesc.Location = new System.Drawing.Point(139, 58);
-            this.txtCateDesc.MaxLength = 100;
-            this.txtCateDesc.Multiline = true;
-            this.txtCateDesc.Name = "txtCateDesc";
-            this.txtCateDesc.Size = new System.Drawing.Size(196, 96);
-            this.txtCateDesc.TabIndex = 3;
+            this.panel1.TabIndex = 5;
             // 
             // label2
             // 
@@ -174,7 +159,7 @@ namespace ProjectWF
             this.panel2.Location = new System.Drawing.Point(381, 12);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(612, 418);
-            this.panel2.TabIndex = 2;
+            this.panel2.TabIndex = 7;
             // 
             // dgvCate
             // 
@@ -186,21 +171,27 @@ namespace ProjectWF
             this.dgvCate.MultiSelect = false;
             this.dgvCate.Name = "dgvCate";
             this.dgvCate.ReadOnly = true;
-            this.dgvCate.Size = new System.Drawing.Size(575, 383);
+            this.dgvCate.Size = new System.Drawing.Size(582, 383);
             this.dgvCate.TabIndex = 0;
-            this.dgvCate.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCate_RowEnter);
             // 
-            // FormCategory
+            // textBox1
+            // 
+            this.textBox1.Location = new System.Drawing.Point(139, 61);
+            this.textBox1.MaxLength = 50;
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(196, 20);
+            this.textBox1.TabIndex = 3;
+            // 
+            // FormCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1005, 445);
+            this.ClientSize = new System.Drawing.Size(1007, 450);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panelControl);
             this.Controls.Add(this.panel1);
-            this.Name = "FormCategory";
-            this.Text = "Danh mục";
-            this.Load += new System.EventHandler(this.FormCategory_Load);
+            this.Name = "FormCustomer";
+            this.Text = "FormCustomer";
             this.panelControl.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
@@ -220,10 +211,10 @@ namespace ProjectWF
         private System.Windows.Forms.Button btnEdit;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.TextBox txtCateDesc;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txtCateName;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.DataGridView dgvCate;
     }
