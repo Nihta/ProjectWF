@@ -46,5 +46,26 @@ namespace ProjectWF
             }
             return true;
         }
+
+        public static bool IsPhoneInvalid(string text)
+        {
+            string name = "Số điện thoại";
+            if (!Regex.IsMatch(text, @"^[0-9]*$"))
+            {
+                MyMessageBox.Warning($"Số điện thoại không hợp lệ!\n{name} chỉ bao gồm các số 0->9");
+                return false;
+            }
+            return true;
+        }
+
+        public static bool IsEmailInvalid(string text)
+        {
+            if (!Regex.IsMatch(text, @"^\b[\w\.-]+@[\w\.-]+\.\w{2,4}\b$"))
+            {
+                MyMessageBox.Warning($"Email không hợp lệ!");
+                return false;
+            }
+            return true;
+        }
     }
 }

@@ -74,8 +74,6 @@ namespace ProjectWF
         }
         //#endregion
 
-
-
         #region Events
         private void FormCategory_Load(object sender, EventArgs e)
         {

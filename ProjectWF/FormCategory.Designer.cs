@@ -173,7 +173,7 @@ namespace ProjectWF
             this.panel2.Controls.Add(this.dgvCate);
             this.panel2.Location = new System.Drawing.Point(381, 12);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(612, 418);
+            this.panel2.Size = new System.Drawing.Size(779, 418);
             this.panel2.TabIndex = 2;
             // 
             // dgvCate
@@ -186,7 +186,7 @@ namespace ProjectWF
             this.dgvCate.MultiSelect = false;
             this.dgvCate.Name = "dgvCate";
             this.dgvCate.ReadOnly = true;
-            this.dgvCate.Size = new System.Drawing.Size(575, 383);
+            this.dgvCate.Size = new System.Drawing.Size(746, 383);
             this.dgvCate.TabIndex = 0;
             this.dgvCate.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCate_RowEnter);
             // 
@@ -194,7 +194,7 @@ namespace ProjectWF
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1005, 445);
+            this.ClientSize = new System.Drawing.Size(1172, 445);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panelControl);
             this.Controls.Add(this.panel1);

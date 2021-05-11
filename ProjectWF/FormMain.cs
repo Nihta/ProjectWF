@@ -63,5 +63,13 @@ namespace ProjectWF
             f.ShowDialog();
             this.Show();
         }
+
+        private void kháchHàngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormCustomer f = new FormCustomer();
+            this.Hide();
+            f.ShowDialog();
+            this.Show();
+        }
     }
 }
