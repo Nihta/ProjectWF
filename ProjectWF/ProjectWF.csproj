@@ -113,6 +113,9 @@
     <Compile Include="FormUsers.Designer.cs">
       <DependentUpon>FormUsers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Helpers\DataTableHelpers.cs" />
+    <Compile Include="Helpers\OrderDetailHelpers.cs" />
+    <Compile Include="Helpers\OrderHelpers.cs" />
     <Compile Include="Helpers\ProductHelpers.cs" />
     <Compile Include="Helpers\SupplierHelpers.cs" />
     <Compile Include="MyMessageBox.cs" />

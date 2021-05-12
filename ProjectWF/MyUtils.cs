@@ -72,5 +72,38 @@ namespace ProjectWF
 
             return dataTable;
         }
+
+        public static DataTable FillComboBoxWithDataProduct(ComboBox comboBoxSupplier)
+        {
+            DataTable dataTable = new DataTable();
+
+            string query = "select ProductID, ProductName from TableProducts order by ProductName";
+            SqlDataReader reader = SqlHelper.ExecuteReader(SqlHelper.defaultConnStr, query, CommandType.Text);
+
+            dataTable.Load(reader);
+
+            comboBoxSupplier.DataSource = dataTable;
+            comboBoxSupplier.DisplayMember = "ProductName";
+            comboBoxSupplier.ValueMember = "ProductID";
+
+            return dataTable;
+        }
+
+
+        public static DataTable FillComboBoxWithDataCustomer(ComboBox comboBoxSupplier)
+        {
+            DataTable dataTable = new DataTable();
+
+            string query = "select  FirstName + ' ' + LastName + ' (' + Phone + ')' as UserInfo, CustomerID from TableCustomers";
+            SqlDataReader reader = SqlHelper.ExecuteReader(SqlHelper.defaultConnStr, query, CommandType.Text);
+
+            dataTable.Load(reader);
+
+            comboBoxSupplier.DataSource = dataTable;
+            comboBoxSupplier.DisplayMember = "UserInfo";
+            comboBoxSupplier.ValueMember = "CustomerID";
+
+            return dataTable;
+        }
     }
 }

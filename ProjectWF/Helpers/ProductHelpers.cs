@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 
 namespace ProjectWF.Helpers
@@ -79,6 +80,12 @@ namespace ProjectWF.Helpers
             dataReader.Close();
 
             return dataTable;
+        }
+
+        public static int GetPrice(int id)
+        {
+            string cmd = @"select Price from TableProducts where  ProductID = @ProductID";
+            return Convert.ToInt32(SqlHelper.ExecuteScalar(SqlHelper.defaultConnStr, cmd, CommandType.Text, CreateParam(Param.ProductID, id)).ToString());
         }
 
         public static bool AddProduct(string ProductName, int Price, string Description, int CategoryID, int SupplierID)
@@ -192,7 +199,8 @@ namespace ProjectWF.Helpers
                 );
 
                 return reader.HasRows;
-            } catch (SqlException ex)
+            }
+            catch (SqlException ex)
             {
                 MyMessageBox.Error(ex.Message);
             }

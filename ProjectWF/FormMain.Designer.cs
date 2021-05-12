@@ -45,23 +45,25 @@ namespace ProjectWF
             this.label2 = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dgvOrderDetail = new System.Windows.Forms.DataGridView();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.txtNote = new System.Windows.Forms.TextBox();
+            this.numericUpDownQuantity = new System.Windows.Forms.NumericUpDown();
+            this.txtTotalOrder = new System.Windows.Forms.TextBox();
+            this.dateTimePickerOrder = new System.Windows.Forms.DateTimePicker();
+            this.cbProduct = new System.Windows.Forms.ComboBox();
+            this.btnAddOrderItem = new System.Windows.Forms.Button();
+            this.btnDelOrderItem = new System.Windows.Forms.Button();
+            this.cbCustomers = new System.Windows.Forms.ComboBox();
+            this.btnAdd = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetail)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -72,7 +74,7 @@ namespace ProjectWF
             this.trợGiúpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(942, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1145, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -180,41 +182,48 @@ namespace ProjectWF
             // 
             // panel1
             // 
-            this.panel1.Controls.Add(this.dateTimePicker1);
-            this.panel1.Controls.Add(this.textBox5);
-            this.panel1.Controls.Add(this.textBox4);
-            this.panel1.Controls.Add(this.textBox3);
+            this.panel1.Controls.Add(this.btnAdd);
+            this.panel1.Controls.Add(this.cbCustomers);
+            this.panel1.Controls.Add(this.dateTimePickerOrder);
+            this.panel1.Controls.Add(this.txtTotalOrder);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.label1);
             this.panel1.Controls.Add(this.label2);
-            this.panel1.Location = new System.Drawing.Point(12, 38);
+            this.panel1.Location = new System.Drawing.Point(728, 33);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(338, 327);
+            this.panel1.Size = new System.Drawing.Size(405, 174);
             this.panel1.TabIndex = 3;
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.textBox2);
-            this.panel2.Controls.Add(this.numericUpDown1);
-            this.panel2.Controls.Add(this.textBox1);
+            this.panel2.Controls.Add(this.btnDelOrderItem);
+            this.panel2.Controls.Add(this.btnAddOrderItem);
+            this.panel2.Controls.Add(this.cbProduct);
+            this.panel2.Controls.Add(this.numericUpDownQuantity);
+            this.panel2.Controls.Add(this.txtNote);
             this.panel2.Controls.Add(this.label4);
             this.panel2.Controls.Add(this.label5);
             this.panel2.Controls.Add(this.label6);
-            this.panel2.Controls.Add(this.dataGridView1);
-            this.panel2.Location = new System.Drawing.Point(356, 38);
+            this.panel2.Controls.Add(this.dgvOrderDetail);
+            this.panel2.Location = new System.Drawing.Point(12, 33);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(574, 327);
+            this.panel2.Size = new System.Drawing.Size(710, 266);
             this.panel2.TabIndex = 0;
             this.panel2.Paint += new System.Windows.Forms.PaintEventHandler(this.panel2_Paint);
             // 
-            // dataGridView1
+            // dgvOrderDetail
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(289, 18);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(268, 170);
-            this.dataGridView1.TabIndex = 5;
-            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
+            this.dgvOrderDetail.AllowUserToAddRows = false;
+            this.dgvOrderDetail.AllowUserToDeleteRows = false;
+            this.dgvOrderDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvOrderDetail.Location = new System.Drawing.Point(286, 15);
+            this.dgvOrderDetail.MultiSelect = false;
+            this.dgvOrderDetail.Name = "dgvOrderDetail";
+            this.dgvOrderDetail.ReadOnly = true;
+            this.dgvOrderDetail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvOrderDetail.Size = new System.Drawing.Size(403, 232);
+            this.dgvOrderDetail.TabIndex = 5;
+            this.dgvOrderDetail.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // label3
             // 
@@ -228,7 +237,7 @@ namespace ProjectWF
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(26, 94);
+            this.label4.Location = new System.Drawing.Point(16, 94);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 13);
             this.label4.TabIndex = 8;
@@ -237,7 +246,7 @@ namespace ProjectWF
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(26, 18);
+            this.label5.Location = new System.Drawing.Point(16, 18);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(76, 13);
             this.label5.TabIndex = 6;
@@ -246,86 +255,131 @@ namespace ProjectWF
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(26, 52);
+            this.label6.Location = new System.Drawing.Point(16, 55);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(52, 13);
             this.label6.TabIndex = 7;
             this.label6.Text = "Số lượng:";
             // 
-            // textBox1
+            // txtNote
             // 
-            this.textBox1.Location = new System.Drawing.Point(110, 94);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(158, 94);
-            this.textBox1.TabIndex = 9;
+            this.txtNote.Location = new System.Drawing.Point(100, 94);
+            this.txtNote.MaxLength = 150;
+            this.txtNote.Multiline = true;
+            this.txtNote.Name = "txtNote";
+            this.txtNote.Size = new System.Drawing.Size(158, 54);
+            this.txtNote.TabIndex = 9;
             // 
-            // numericUpDown1
+            // numericUpDownQuantity
             // 
-            this.numericUpDown1.Location = new System.Drawing.Point(110, 52);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(158, 20);
-            this.numericUpDown1.TabIndex = 10;
+            this.numericUpDownQuantity.Location = new System.Drawing.Point(100, 55);
+            this.numericUpDownQuantity.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numericUpDownQuantity.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDownQuantity.Name = "numericUpDownQuantity";
+            this.numericUpDownQuantity.Size = new System.Drawing.Size(158, 20);
+            this.numericUpDownQuantity.TabIndex = 10;
+            this.numericUpDownQuantity.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
-            // textBox2
+            // txtTotalOrder
             // 
-            this.textBox2.Location = new System.Drawing.Point(108, 15);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(160, 20);
-            this.textBox2.TabIndex = 11;
+            this.txtTotalOrder.Enabled = false;
+            this.txtTotalOrder.Location = new System.Drawing.Point(125, 94);
+            this.txtTotalOrder.Name = "txtTotalOrder";
+            this.txtTotalOrder.Size = new System.Drawing.Size(260, 20);
+            this.txtTotalOrder.TabIndex = 12;
             // 
-            // textBox3
+            // dateTimePickerOrder
             // 
-            this.textBox3.Location = new System.Drawing.Point(125, 94);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(160, 20);
-            this.textBox3.TabIndex = 12;
+            this.dateTimePickerOrder.CustomFormat = "dd/MM/yyyy";
+            this.dateTimePickerOrder.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.dateTimePickerOrder.Location = new System.Drawing.Point(125, 55);
+            this.dateTimePickerOrder.MaxDate = new System.DateTime(2100, 1, 1, 0, 0, 0, 0);
+            this.dateTimePickerOrder.MinDate = new System.DateTime(2021, 1, 1, 0, 0, 0, 0);
+            this.dateTimePickerOrder.Name = "dateTimePickerOrder";
+            this.dateTimePickerOrder.Size = new System.Drawing.Size(260, 20);
+            this.dateTimePickerOrder.TabIndex = 15;
+            this.dateTimePickerOrder.Value = new System.DateTime(2021, 5, 12, 0, 0, 0, 0);
             // 
-            // textBox4
+            // cbProduct
             // 
-            this.textBox4.Location = new System.Drawing.Point(125, 52);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(160, 20);
-            this.textBox4.TabIndex = 13;
+            this.cbProduct.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbProduct.FormattingEnabled = true;
+            this.cbProduct.Location = new System.Drawing.Point(100, 15);
+            this.cbProduct.Name = "cbProduct";
+            this.cbProduct.Size = new System.Drawing.Size(158, 21);
+            this.cbProduct.TabIndex = 11;
             // 
-            // textBox5
+            // btnAddOrderItem
             // 
-            this.textBox5.Location = new System.Drawing.Point(125, 18);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(160, 20);
-            this.textBox5.TabIndex = 14;
+            this.btnAddOrderItem.Location = new System.Drawing.Point(19, 224);
+            this.btnAddOrderItem.Name = "btnAddOrderItem";
+            this.btnAddOrderItem.Size = new System.Drawing.Size(106, 23);
+            this.btnAddOrderItem.TabIndex = 12;
+            this.btnAddOrderItem.Text = "Thêm mặt hàng";
+            this.btnAddOrderItem.UseVisualStyleBackColor = true;
+            this.btnAddOrderItem.Click += new System.EventHandler(this.btnAddOrderItem_Click);
             // 
-            // dateTimePicker1
+            // btnDelOrderItem
             // 
-            this.dateTimePicker1.CustomFormat = "dd/MM/yyyy";
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(125, 133);
-            this.dateTimePicker1.MaxDate = new System.DateTime(2100, 1, 1, 0, 0, 0, 0);
-            this.dateTimePicker1.MinDate = new System.DateTime(2021, 1, 1, 0, 0, 0, 0);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(160, 20);
-            this.dateTimePicker1.TabIndex = 15;
-            this.dateTimePicker1.Value = new System.DateTime(2021, 5, 12, 0, 0, 0, 0);
+            this.btnDelOrderItem.Location = new System.Drawing.Point(152, 224);
+            this.btnDelOrderItem.Name = "btnDelOrderItem";
+            this.btnDelOrderItem.Size = new System.Drawing.Size(106, 23);
+            this.btnDelOrderItem.TabIndex = 13;
+            this.btnDelOrderItem.Text = "Xoá mặt hàng";
+            this.btnDelOrderItem.UseVisualStyleBackColor = true;
+            this.btnDelOrderItem.Click += new System.EventHandler(this.btnDelOrderItem_Click);
+            // 
+            // cbCustomers
+            // 
+            this.cbCustomers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbCustomers.FormattingEnabled = true;
+            this.cbCustomers.Location = new System.Drawing.Point(127, 15);
+            this.cbCustomers.Name = "cbCustomers";
+            this.cbCustomers.Size = new System.Drawing.Size(258, 21);
+            this.cbCustomers.TabIndex = 16;
+            // 
+            // btnAdd
+            // 
+            this.btnAdd.Location = new System.Drawing.Point(17, 135);
+            this.btnAdd.Name = "btnAdd";
+            this.btnAdd.Size = new System.Drawing.Size(368, 23);
+            this.btnAdd.TabIndex = 14;
+            this.btnAdd.Text = "Thêm";
+            this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(942, 431);
+            this.ClientSize = new System.Drawing.Size(1145, 461);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.Name = "FormMain";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "FormMain";
+            this.Text = "Quản lý bán hàng";
+            this.Load += new System.EventHandler(this.FormMain_Load);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetail)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -349,17 +403,19 @@ namespace ProjectWF
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dgvOrderDetail;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.DateTimePicker dateTimePickerOrder;
+        private System.Windows.Forms.TextBox txtTotalOrder;
+        private System.Windows.Forms.NumericUpDown numericUpDownQuantity;
+        private System.Windows.Forms.TextBox txtNote;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.ComboBox cbProduct;
+        private System.Windows.Forms.Button btnAddOrderItem;
+        private System.Windows.Forms.Button btnDelOrderItem;
+        private System.Windows.Forms.ComboBox cbCustomers;
+        private System.Windows.Forms.Button btnAdd;
     }
 }
