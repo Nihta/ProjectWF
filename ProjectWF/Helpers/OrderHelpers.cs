@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace ProjectWF.Helpers
 {
     class OrderHelpers
     {
         #region Params
-        public static readonly int sizeNoteParam = 150;
+        public static readonly int sizeOrderDateParam = 10;
         public enum Param
         {
             OrderID,
@@ -22,17 +23,14 @@ namespace ProjectWF.Helpers
 
             switch (param)
             {
-                case Param.OrderDetailID:
-                    parameter = new SqlParameter("@OrderDetailID", SqlDbType.Int);
-                    break;
-                case Param.Quantity:
-                    parameter = new SqlParameter("@Quantity", SqlDbType.Int);
-                    break;
-                case Param.ProductID:
-                    parameter = new SqlParameter("@ProductID", SqlDbType.Int);
-                    break;
                 case Param.OrderID:
                     parameter = new SqlParameter("@OrderID", SqlDbType.Int);
+                    break;
+                case Param.OrderDate:
+                    parameter = new SqlParameter("@OrderDate", SqlDbType.Int);
+                    break;
+                case Param.CustemerID:
+                    parameter = new SqlParameter("@CustemerID", SqlDbType.Int);
                     break;
             }
 
@@ -47,8 +45,8 @@ namespace ProjectWF.Helpers
 
             switch (param)
             {
-                case Param.Note:
-                    parameter = new SqlParameter("@Note", SqlDbType.NVarChar, sizeNoteParam);
+                case Param.OrderDate:
+                    parameter = new SqlParameter("@OrderDate", SqlDbType.NChar, sizeOrderDateParam);
                     break;
             }
 
@@ -58,23 +56,31 @@ namespace ProjectWF.Helpers
         #endregion
 
 
-        public static bool Add(string OrderDate, int TotalAmount, int CustemerID)
+        public static bool Add(string orderDate, int totalAmount, int custemerID)
         {
-            string cmd = $"insert into TableOrders (OrderDate, TotalAmount, CustemerID) values ('{OrderDate}', {TotalAmount}, {CustemerID})";
+            string cmd = @"
+                insert into TableOrders (OrderDate, TotalAmount, CustemerID)
+                values (@OrderDate, @TotalAmount, @CustemerID)";
 
             int numOfRowsAffected = SqlHelper.ExecuteNonQuery(
                 SqlHelper.defaultConnStr,
                 cmd,
-                CommandType.Text
+                CommandType.Text,
+                CreateParam(Param.OrderDate, orderDate),
+                CreateParam(Param.TotalAmount, totalAmount),
+                CreateParam(Param.CustemerID, custemerID)
             );
 
             return numOfRowsAffected == 1;
         }
 
-
-        public static int GetLastId()
+        /// <summary>
+        /// Lấy id của order mới nhất vừa được thêm
+        /// </summary>
+        /// <returns></returns>
+        public static int GetLastOrderID()
         {
-            string cmd = $"select top 1 OrderID from TableOrders order by  CustemerID desc";
+            string cmd = $"select top 1 OrderID from TableOrders order by CustemerID desc";
 
             var tmp = SqlHelper.ExecuteScalar(
                 SqlHelper.defaultConnStr,

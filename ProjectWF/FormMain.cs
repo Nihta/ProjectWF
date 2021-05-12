@@ -67,7 +67,7 @@ namespace ProjectWF
             {
                 OrderHelpers.Add(date, totalAmount, customerId);
                 // Lấy id của order vừa tạo
-                int OrderID = OrderHelpers.GetLastId();
+                int OrderID = OrderHelpers.GetLastOrderID();
 
                 foreach (DataRow dataRow in dataTableOrderDetail.Rows)
                 {
