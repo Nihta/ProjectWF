@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 
-namespace ProjectWF.Helpers
+namespace ProjectWF
 {
     class ProductHelpers
     {

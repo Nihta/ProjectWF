@@ -130,7 +130,7 @@
     <Compile Include="helpers\UserHelpers.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="helpers\SqlHelper.cs" />
+    <Compile Include="helpers\SqlHelpers.cs" />
     <EmbeddedResource Include="FormAccountProfile.resx">
       <DependentUpon>FormAccountProfile.cs</DependentUpon>
     </EmbeddedResource>

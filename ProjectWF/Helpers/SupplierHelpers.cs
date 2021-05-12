@@ -2,7 +2,7 @@
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
 
-namespace ProjectWF.Helpers
+namespace ProjectWF
 {
     class SupplierHelpers
     {
