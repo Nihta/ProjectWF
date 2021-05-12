@@ -22,7 +22,7 @@ namespace ProjectWF.Helpers
 
         public static int GetLastId()
         {
-            string cmd = $"select top 1 CustemerID from TableOrders order by  CustemerID desc";
+            string cmd = $"select top 1 OrderID from TableOrders order by  CustemerID desc";
 
             var tmp = SqlHelper.ExecuteScalar(
                 SqlHelper.defaultConnStr,

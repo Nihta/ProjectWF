@@ -133,7 +133,6 @@ namespace ProjectWF
         }
         #endregion
 
-
         #region Events
         private void FormMain_Load(object sender, EventArgs e)
         {
@@ -141,7 +140,6 @@ namespace ProjectWF
             MyUtils.FillComboBoxWithDataProduct(cbProduct);
         }
         #endregion
-
 
         #region StripMenu
         private void logoutToolStripMenuItem_Click(object sender, EventArgs e)
@@ -204,16 +202,10 @@ namespace ProjectWF
         }
         #endregion
 
-        private void panel2_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
-
-
     }
 }
