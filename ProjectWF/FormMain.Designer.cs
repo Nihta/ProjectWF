@@ -59,6 +59,7 @@ namespace ProjectWF
             this.btnAdd = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lịchSửĐặtHàngToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
@@ -85,7 +86,8 @@ namespace ProjectWF
             this.kháchHàngToolStripMenuItem,
             this.danhMụcToolStripMenuItem,
             this.tàiKhoảnToolStripMenuItem1,
-            this.nhàCungCấpToolStripMenuItem});
+            this.nhàCungCấpToolStripMenuItem,
+            this.lịchSửĐặtHàngToolStripMenuItem});
             this.quảnLýToolStripMenuItem.Name = "quảnLýToolStripMenuItem";
             this.quảnLýToolStripMenuItem.Size = new System.Drawing.Size(60, 20);
             this.quảnLýToolStripMenuItem.Text = "Quản lý";
@@ -363,6 +365,13 @@ namespace ProjectWF
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thanh toán";
             // 
+            // lịchSửĐặtHàngToolStripMenuItem
+            // 
+            this.lịchSửĐặtHàngToolStripMenuItem.Name = "lịchSửĐặtHàngToolStripMenuItem";
+            this.lịchSửĐặtHàngToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
+            this.lịchSửĐặtHàngToolStripMenuItem.Text = "Lịch sử đặt hàng";
+            this.lịchSửĐặtHàngToolStripMenuItem.Click += new System.EventHandler(this.lịchSửĐặtHàngToolStripMenuItem_Click);
+            // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -420,5 +429,6 @@ namespace ProjectWF
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.ToolStripMenuItem lịchSửĐặtHàngToolStripMenuItem;
     }
 }

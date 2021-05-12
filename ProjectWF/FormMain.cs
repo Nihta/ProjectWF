@@ -194,6 +194,14 @@ namespace ProjectWF
             f.ShowDialog();
             this.Show();
         }
+
+        private void lịchSửĐặtHàngToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormOrder f = new FormOrder();
+            this.Hide();
+            f.ShowDialog();
+            this.Show();
+        }
         #endregion
 
         private void panel2_Paint(object sender, PaintEventArgs e)
