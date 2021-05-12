@@ -3,7 +3,8 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
-namespace ProjectWF.Helpers
+namespace ProjectWF
+
 {
     public partial class FormOrder : Form
     {

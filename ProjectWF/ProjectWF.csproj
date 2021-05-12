@@ -114,10 +114,10 @@
       <DependentUpon>FormUsers.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\DataTableHelpers.cs" />
-    <Compile Include="Helpers\FormOrder.cs">
+    <Compile Include="FormOrder.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Helpers\FormOrder.Designer.cs">
+    <Compile Include="FormOrder.Designer.cs">
       <DependentUpon>FormOrder.cs</DependentUpon>
     </Compile>
     <Compile Include="Helpers\OrderDetailHelpers.cs" />
@@ -155,7 +155,7 @@
     <EmbeddedResource Include="FormUsers.resx">
       <DependentUpon>FormUsers.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Helpers\FormOrder.resx">
+    <EmbeddedResource Include="FormOrder.resx">
       <DependentUpon>FormOrder.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

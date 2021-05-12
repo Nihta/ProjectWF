@@ -1,5 +1,5 @@
 ﻿
-namespace ProjectWF.Helpers
+namespace ProjectWF
 {
     partial class FormOrder
     {
