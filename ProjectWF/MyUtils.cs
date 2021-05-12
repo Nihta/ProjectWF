@@ -94,7 +94,7 @@ namespace ProjectWF
         {
             DataTable dataTable = new DataTable();
 
-            string query = "select  FirstName + ' ' + LastName + ' (' + Phone + ')' as UserInfo, CustomerID from TableCustomers";
+            string query = "select FirstName + ' ' + LastName + ' (' + Phone + ')' as UserInfo, CustomerID from TableCustomers";
             SqlDataReader reader = SqlHelper.ExecuteReader(SqlHelper.defaultConnStr, query, CommandType.Text);
 
             dataTable.Load(reader);

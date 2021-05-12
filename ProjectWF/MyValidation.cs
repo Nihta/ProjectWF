@@ -21,6 +21,7 @@ namespace ProjectWF
                 MyMessageBox.Warning($"{name} không phải là số hợp lệ!");
                 return false;
             }
+
             return true;
         }
 
@@ -36,6 +37,7 @@ namespace ProjectWF
                 MyMessageBox.Warning($"{name} quá dài!");
                 return false;
             }
+
             return true;
         }
 
@@ -49,17 +51,20 @@ namespace ProjectWF
             {
                 return false;
             }
+
             return true;
         }
 
         public static bool IsPhoneInvalid(string text)
         {
             string name = "Số điện thoại";
+
             if (!Regex.IsMatch(text, @"^[0-9]*$"))
             {
                 MyMessageBox.Warning($"Số điện thoại không hợp lệ!\n{name} chỉ bao gồm các số 0->9");
                 return false;
             }
+
             return true;
         }
 
@@ -70,6 +75,7 @@ namespace ProjectWF
                 MyMessageBox.Warning($"Email không hợp lệ!");
                 return false;
             }
+
             return true;
         }
     }
