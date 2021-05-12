@@ -118,7 +118,7 @@ namespace ProjectWF
             control = new ControlHelper();
             control.AddBtnControls(btnAdd, btnEdit, btnDelete, btnSave, btnCancel);
             control.AddTextBoxs(txtFName, txtLName, txtAddress, txtPhone, txtEmail);
-
+            
             // Control mode
             control.SwitchMode(ControlHelper.ControlMode.None);
             txtFName.Focus();
