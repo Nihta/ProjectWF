@@ -6,44 +6,58 @@ namespace ProjectWF.Helpers
 {
     class SupplierHelpers
     {
-        // SupplierID SupplierName Address Phone Email
-        private static int sizeSupplierName = 50;
-        private static int sizeAddress = 50;
-        private static int sizePhone = 11;
-        private static int sizeEmail = 30;
+        #region Params
+        public static readonly int sizeSupplierName = 50;
+        public static readonly int sizeAddress = 50;
+        public static readonly int sizePhone = 11;
+        public static readonly int sizeEmail = 30;
 
-        #region SqlParameter
-        public static SqlParameter SupplierIDParam(int value, string paramName = "SupplierID")
+        public enum Param
         {
-            SqlParameter parameter = new SqlParameter($"@{paramName}", SqlDbType.Int);
+            SupplierID,
+            SupplierName,
+            Address,
+            Phone,
+            Email,
+        };
+
+        // Param type int
+        public static SqlParameter CreateParam(Param param, int value)
+        {
+            SqlParameter parameter = null;
+
+            switch (param)
+            {
+                case Param.SupplierID:
+                    parameter = new SqlParameter("@SupplierID", SqlDbType.Int);
+                    break;
+            }
+
             parameter.Value = value;
             return parameter;
         }
 
-        public static SqlParameter SupplierNameParam(int value, string paramName = "SupplierName")
+        // Param type string
+        public static SqlParameter CreateParam(Param param, string value)
         {
-            SqlParameter parameter = new SqlParameter($"@{paramName}", SqlDbType.NVarChar, sizeSupplierName);
-            parameter.Value = value;
-            return parameter;
-        }
+            SqlParameter parameter = null;
 
-        public static SqlParameter AddressParam(int value, string paramName = "Address")
-        {
-            SqlParameter parameter = new SqlParameter($"@{paramName}", SqlDbType.NVarChar, sizeAddress);
-            parameter.Value = value;
-            return parameter;
-        }
+            switch (param)
+            {
+                case Param.SupplierName:
+                    parameter = new SqlParameter("@SupplierName", SqlDbType.NVarChar, sizeSupplierName);
+                    break;
+                case Param.Address:
+                    parameter = new SqlParameter("@Address", SqlDbType.NVarChar, sizeAddress);
+                    break;
+                case Param.Phone:
+                    parameter = new SqlParameter("@Phone", SqlDbType.VarChar, sizePhone);
+                    break;
+                case Param.Email:
+                    parameter = new SqlParameter("@Email", SqlDbType.VarChar, sizeEmail);
+                    break;
+            }
 
-        public static SqlParameter PhoneParam(int value, string paramName = "Phone")
-        {
-            SqlParameter parameter = new SqlParameter($"@{paramName}", SqlDbType.VarChar, sizePhone);
-            parameter.Value = value;
-            return parameter;
-        }
-
-        public static SqlParameter EmailParam(int value, string paramName = "Email")
-        {
-            SqlParameter parameter = new SqlParameter($"@{paramName}", SqlDbType.VarChar, sizeEmail);
             parameter.Value = value;
             return parameter;
         }
@@ -79,7 +93,6 @@ namespace ProjectWF.Helpers
             return true;
         }
 
-
         public static bool IsPhoneInvalid(string text)
         {
             string name = "Số điện thoại";
@@ -98,7 +111,6 @@ namespace ProjectWF.Helpers
             }
             return true;
         }
-
 
         public static bool IsEmailInvalid(string text)
         {

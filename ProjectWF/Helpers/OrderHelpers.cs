@@ -55,7 +55,6 @@ namespace ProjectWF.Helpers
         }
         #endregion
 
-
         public static bool Add(string orderDate, int totalAmount, int custemerID)
         {
             string cmd = @"
@@ -75,9 +74,10 @@ namespace ProjectWF.Helpers
         }
 
         /// <summary>
-        /// Lấy id của order mới nhất vừa được thêm
         /// </summary>
-        /// <returns></returns>
+        /// <returns>
+        /// Return id của order mới nhất vừa được thêm
+        /// </returns>
         public static int GetLastOrderID()
         {
             string cmd = $"select top 1 OrderID from TableOrders order by CustemerID desc";

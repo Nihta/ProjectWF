@@ -8,9 +8,9 @@ namespace ProjectWF
 {
     class UsersHelpers
     {
-        public static readonly int sizeFullName = 30;
-        public static readonly int sizeUserName = 30;
-        public static readonly int sizePassWord = 32;
+        public static readonly int sizeFullNameParam = 30;
+        public static readonly int sizeUserNameParam = 30;
+        public static readonly int sizePassWordParam = 32;
 
         #region SqlParameter
         public static SqlParameter UserIDParam(int value, string paramName = "UserID")
@@ -22,21 +22,21 @@ namespace ProjectWF
 
         public static SqlParameter FullNameParam(string value, string paramName = "FullName")
         {
-            SqlParameter parameter = new SqlParameter($"@{paramName}", SqlDbType.NVarChar, sizeFullName);
+            SqlParameter parameter = new SqlParameter($"@{paramName}", SqlDbType.NVarChar, sizeFullNameParam);
             parameter.Value = value;
             return parameter;
         }
 
         public static SqlParameter UserNameParam(string value, string paramName = "UserName")
         {
-            SqlParameter parameter = new SqlParameter($"@{paramName}", SqlDbType.NChar, sizeUserName);
+            SqlParameter parameter = new SqlParameter($"@{paramName}", SqlDbType.NChar, sizeUserNameParam);
             parameter.Value = value;
             return parameter;
         }
 
         public static SqlParameter PassWordParam(string value, string paramName = "PassWord")
         {
-            SqlParameter parameter = new SqlParameter($"@{paramName}", SqlDbType.NChar, sizePassWord);
+            SqlParameter parameter = new SqlParameter($"@{paramName}", SqlDbType.NChar, sizePassWordParam);
             parameter.Value = value;
             return parameter;
         }
@@ -64,7 +64,7 @@ namespace ProjectWF
                 MyMessageBox.Warning($"{name} quá ngắn!");
                 return false;
             }
-            else if (passWord.Length > sizePassWord)
+            else if (passWord.Length > sizePassWordParam)
             {
                 MyMessageBox.Warning($"{name} quá dài!");
                 return false;
@@ -119,7 +119,7 @@ namespace ProjectWF
                 MyMessageBox.Warning($"Họ và tên quá ngắn!");
                 return false;
             }
-            else if (fullName.Length > sizeFullName)
+            else if (fullName.Length > sizeFullNameParam)
             {
                 MyMessageBox.Warning($"Họ và tên quá dài!");
                 return false;
@@ -146,7 +146,7 @@ namespace ProjectWF
                 MyMessageBox.Warning("Tên đăng nhập quá ngắn!");
                 return false;
             }
-            if (userName.Length > sizeUserName)
+            if (userName.Length > sizeUserNameParam)
             {
                 MyMessageBox.Warning("Tên đăng nhập quá dài!");
                 return false;
@@ -170,9 +170,11 @@ namespace ProjectWF
         /// </returns>
         public static int Login(string userName, string passWord)
         {
+            string cmd = "dbo.Login";
+
             SqlDataReader reader = SqlHelper.ExecuteReader(
                 SqlHelper.defaultConnStr,
-                "dbo.Login",
+                cmd,
                 CommandType.StoredProcedure,
                 UserNameParam(userName), PassWordParam(MyUtils.MD5Hash(passWord))
                 );
@@ -194,12 +196,14 @@ namespace ProjectWF
         public static SqlDataReader GetUserData(int userId)
         {
             string query = "select UserName, FullName from TableUsers where UserID = @UserID";
+
             SqlDataReader reader = SqlHelper.ExecuteReader(
                 SqlHelper.defaultConnStr,
                 query,
                 CommandType.Text,
                 UserIDParam(userId)
                 );
+
             return reader;
         }
 
@@ -214,14 +218,17 @@ namespace ProjectWF
         /// </returns>
         public static bool UpdateUser(int userID, string fullName, string passWord)
         {
+            string cmd = "dbo.UpdateUser";
+
             int res = SqlHelper.ExecuteNonQuery(
                 SqlHelper.defaultConnStr,
-                "dbo.UpdateUser",
+                cmd,
                 CommandType.StoredProcedure,
                 UserIDParam(userID),
                 FullNameParam(fullName),
                 PassWordParam(MyUtils.MD5Hash(passWord))
                 );
+
             return res == 1;
         }
 
@@ -236,6 +243,7 @@ namespace ProjectWF
         {
             // Trong cơ sở dữ liệu luôn UserID >= 1 
             string query = "SELECT * FROM TableUsers WHERE UserName = @UserName AND UserID != @UserID";
+
             SqlDataReader reader = SqlHelper.ExecuteReader(
                 SqlHelper.defaultConnStr,
                 query,
@@ -243,6 +251,7 @@ namespace ProjectWF
                 UserNameParam(userName, "UserName"),
                 UserIDParam(ignoreUserId, "UserID")
                 );
+
             return reader.HasRows;
         }
     }

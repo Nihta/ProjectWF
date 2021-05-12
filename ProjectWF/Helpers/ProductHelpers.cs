@@ -185,29 +185,20 @@ namespace ProjectWF.Helpers
         /// </returns>
         public static bool CheckProductNameExist(string productName, int ignoreProductID = -1)
         {
-            try
-            {
-                string cmd = @"
+            string cmd = @"
                 SELECT *
                 FROM dbo.TableProducts
                 WHERE ProductName = @ProductName AND ProductID != @ProductID";
 
-                SqlDataReader reader = SqlHelper.ExecuteReader(
-                    SqlHelper.defaultConnStr,
-                    cmd,
-                    CommandType.Text,
-                    CreateParam(Param.ProductName, productName),
-                    CreateParam(Param.ProductID, ignoreProductID)
-                );
+            SqlDataReader reader = SqlHelper.ExecuteReader(
+                SqlHelper.defaultConnStr,
+                cmd,
+                CommandType.Text,
+                CreateParam(Param.ProductName, productName),
+                CreateParam(Param.ProductID, ignoreProductID)
+            );
 
-                return reader.HasRows;
-            }
-            catch (SqlException ex)
-            {
-                MyMessageBox.Error(ex.Message);
-            }
-
-            return false;
+            return reader.HasRows;
         }
     }
 }
