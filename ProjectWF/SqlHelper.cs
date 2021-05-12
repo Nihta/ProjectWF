@@ -4,7 +4,6 @@ using System.Data.SqlClient;
 
 namespace ProjectWF
 {
-    // Read more: https://docs.microsoft.com/en-us/dotnet/api/system.data.sqlclient.sqlcommand?view=netframework-4.8
     class SqlHelper
     {
         public static string defaultConnStr = Properties.Settings.Default.dbProjectConnectionString;
@@ -20,7 +19,7 @@ namespace ProjectWF
         /// <param name="commandType"></param>
         /// <param name="parameters"></param>
         /// <returns>
-        /// The number of rows affected.
+        /// The number of rows affected
         /// </returns>
         public static int ExecuteNonQuery(string connectionString, string commandText, CommandType commandType, params SqlParameter[] parameters)
         {
