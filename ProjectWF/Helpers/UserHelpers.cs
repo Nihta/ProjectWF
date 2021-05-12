@@ -1,9 +1,10 @@
-﻿using System.Data;
+﻿using System;
+using System.Data;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
-namespace ProjectWF.Helpers
+namespace ProjectWF
 {
     class UsersHelpers
     {
@@ -179,7 +180,7 @@ namespace ProjectWF.Helpers
             if (reader.HasRows)
             {
                 reader.Read();
-                return int.Parse(reader["UserID"].ToString());
+                return Convert.ToInt32(reader["UserID"].ToString());
             }
 
             return -1;

@@ -1,16 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace ProjectWF.Helpers
+namespace ProjectWF
 {
     class DataTableHelpers
     {
         /// <summary>
-        /// 
+        /// Thêm cột vào dataTable
         /// </summary>
         /// <param name="dataTable"></param>
         /// <param name="colName"></param>
@@ -32,7 +28,5 @@ namespace ProjectWF.Helpers
 
             dataTable.Columns.Add(column);
         }
-
-
     }
 }
