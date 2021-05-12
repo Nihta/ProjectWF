@@ -193,7 +193,7 @@ namespace ProjectWF
             this.Show();
         }
 
-        private void lịchSửĐặtHàngToolStripMenuItem_Click(object sender, EventArgs e)
+        private void lịchSửĐặtHàngToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             FormOrder f = new FormOrder();
             this.Hide();
@@ -201,11 +201,5 @@ namespace ProjectWF
             this.Show();
         }
         #endregion
-
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
     }
 }

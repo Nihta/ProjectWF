@@ -50,7 +50,7 @@ namespace ProjectWF.Helpers
 
         private void FormOrder_Load(object sender, EventArgs e)
         {
-            MyUtils.FillComboBoxWithDataCustomer(cbCustomer);
+            //MyUtils.FillComboBoxWithDataCustomer(cbCustomer);
             GetCustommers();
         }
 
