@@ -6,6 +6,7 @@ namespace ProjectWF.Helpers
 {
     class ProductHelpers
     {
+        #region Params
         public enum Param
         {
             ProductID,
@@ -57,6 +58,7 @@ namespace ProjectWF.Helpers
             parameter.Value = value;
             return parameter;
         }
+        #endregion
 
         public static DataTable GetDataTable()
         {

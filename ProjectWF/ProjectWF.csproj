@@ -88,7 +88,7 @@
     <Compile Include="FormSuppliers.Designer.cs">
       <DependentUpon>FormSuppliers.cs</DependentUpon>
     </Compile>
-    <Compile Include="Helpers\ControlHelper.cs" />
+    <Compile Include="Helpers\ControlHelpers.cs" />
     <Compile Include="FormAccountProfile.cs">
       <SubType>Form</SubType>
     </Compile>
