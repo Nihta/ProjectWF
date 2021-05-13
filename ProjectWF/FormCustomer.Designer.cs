@@ -37,18 +37,18 @@ namespace ProjectWF
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.txtEmail = new System.Windows.Forms.TextBox();
+            this.label5 = new System.Windows.Forms.Label();
+            this.txtPhone = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.txtAddress = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtLName = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
             this.txtFName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dgvCustomer = new System.Windows.Forms.DataGridView();
-            this.label2 = new System.Windows.Forms.Label();
-            this.txtLName = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtAddress = new System.Windows.Forms.TextBox();
-            this.label4 = new System.Windows.Forms.Label();
-            this.txtPhone = new System.Windows.Forms.TextBox();
-            this.label5 = new System.Windows.Forms.Label();
-            this.txtEmail = new System.Windows.Forms.TextBox();
             this.panelControl.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -66,7 +66,7 @@ namespace ProjectWF
             this.panelControl.Location = new System.Drawing.Point(12, 338);
             this.panelControl.Name = "panelControl";
             this.panelControl.Size = new System.Drawing.Size(363, 92);
-            this.panelControl.TabIndex = 6;
+            this.panelControl.TabIndex = 1;
             // 
             // btnExit
             // 
@@ -143,7 +143,75 @@ namespace ProjectWF
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(363, 320);
-            this.panel1.TabIndex = 5;
+            this.panel1.TabIndex = 0;
+            // 
+            // txtEmail
+            // 
+            this.txtEmail.Location = new System.Drawing.Point(139, 175);
+            this.txtEmail.MaxLength = 30;
+            this.txtEmail.Name = "txtEmail";
+            this.txtEmail.Size = new System.Drawing.Size(196, 20);
+            this.txtEmail.TabIndex = 9;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(25, 175);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(48, 13);
+            this.label5.TabIndex = 8;
+            this.label5.Text = "Email (*):";
+            // 
+            // txtPhone
+            // 
+            this.txtPhone.Location = new System.Drawing.Point(139, 138);
+            this.txtPhone.MaxLength = 11;
+            this.txtPhone.Name = "txtPhone";
+            this.txtPhone.Size = new System.Drawing.Size(196, 20);
+            this.txtPhone.TabIndex = 7;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(25, 138);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(86, 13);
+            this.label4.TabIndex = 6;
+            this.label4.Text = "Số điện thoại (*):";
+            // 
+            // txtAddress
+            // 
+            this.txtAddress.Location = new System.Drawing.Point(139, 97);
+            this.txtAddress.MaxLength = 50;
+            this.txtAddress.Name = "txtAddress";
+            this.txtAddress.Size = new System.Drawing.Size(196, 20);
+            this.txtAddress.TabIndex = 5;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(25, 97);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(56, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Địa chỉ (*):";
+            // 
+            // txtLName
+            // 
+            this.txtLName.Location = new System.Drawing.Point(139, 61);
+            this.txtLName.MaxLength = 20;
+            this.txtLName.Name = "txtLName";
+            this.txtLName.Size = new System.Drawing.Size(196, 20);
+            this.txtLName.TabIndex = 3;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(25, 61);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(42, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Tên (*):";
             // 
             // txtFName
             // 
@@ -168,7 +236,7 @@ namespace ProjectWF
             this.panel2.Location = new System.Drawing.Point(381, 12);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(612, 418);
-            this.panel2.TabIndex = 7;
+            this.panel2.TabIndex = 2;
             // 
             // dgvCustomer
             // 
@@ -180,77 +248,10 @@ namespace ProjectWF
             this.dgvCustomer.MultiSelect = false;
             this.dgvCustomer.Name = "dgvCustomer";
             this.dgvCustomer.ReadOnly = true;
+            this.dgvCustomer.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCustomer.Size = new System.Drawing.Size(582, 383);
             this.dgvCustomer.TabIndex = 0;
             this.dgvCustomer.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCustomer_RowEnter);
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(25, 61);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Tên (*):";
-            // 
-            // txtLName
-            // 
-            this.txtLName.Location = new System.Drawing.Point(139, 61);
-            this.txtLName.MaxLength = 20;
-            this.txtLName.Name = "txtLName";
-            this.txtLName.Size = new System.Drawing.Size(196, 20);
-            this.txtLName.TabIndex = 3;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(25, 97);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(56, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "Địa chỉ (*):";
-            // 
-            // txtAddress
-            // 
-            this.txtAddress.Location = new System.Drawing.Point(139, 97);
-            this.txtAddress.MaxLength = 50;
-            this.txtAddress.Name = "txtAddress";
-            this.txtAddress.Size = new System.Drawing.Size(196, 20);
-            this.txtAddress.TabIndex = 5;
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(25, 138);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(86, 13);
-            this.label4.TabIndex = 6;
-            this.label4.Text = "Số điện thoại (*):";
-            // 
-            // txtPhone
-            // 
-            this.txtPhone.Location = new System.Drawing.Point(139, 138);
-            this.txtPhone.MaxLength = 11;
-            this.txtPhone.Name = "txtPhone";
-            this.txtPhone.Size = new System.Drawing.Size(196, 20);
-            this.txtPhone.TabIndex = 7;
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(25, 175);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(48, 13);
-            this.label5.TabIndex = 8;
-            this.label5.Text = "Email (*):";
-            // 
-            // txtEmail
-            // 
-            this.txtEmail.Location = new System.Drawing.Point(139, 175);
-            this.txtEmail.MaxLength = 30;
-            this.txtEmail.Name = "txtEmail";
-            this.txtEmail.Size = new System.Drawing.Size(196, 20);
-            this.txtEmail.TabIndex = 9;
             // 
             // FormCustomer
             // 
@@ -261,7 +262,7 @@ namespace ProjectWF
             this.Controls.Add(this.panelControl);
             this.Controls.Add(this.panel1);
             this.Name = "FormCustomer";
-            this.Text = "FormCustomer";
+            this.Text = "Khách hàng";
             this.Load += new System.EventHandler(this.FormCustomer_Load);
             this.panelControl.ResumeLayout(false);
             this.panel1.ResumeLayout(false);

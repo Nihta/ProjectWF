@@ -32,9 +32,7 @@ namespace ProjectWF
 
         private void GetDataGridView()
         {
-            string query = "select c.CustomerID, c.FirstName, c.LastName, c.Address, c.Phone, c.Email from TableCustomers c";
-            dataTable = sqlHelper.ExecuteQuery(SqlHelper.defaultConnStr, query, CommandType.Text);
-            dgvCustomer.DataSource = dataTable;
+            dataTable = CustomerHelpers.DataGridViewHelper(sqlHelper, dgvCustomer);
         }
 
         private void HandleRowEnter(int idx)
@@ -77,31 +75,31 @@ namespace ProjectWF
 
         public bool IsInvalid()
         {
-            if (!MyValidation.CommonValidation(txtFName.Text, 1, 20, "Họ"))
+            if (!NewValidation.IsTextInvalid(txtFName.Text, 1, CustomerHelpers.sizeFirstNameParam, "Họ"))
             {
                 txtFName.Focus();
                 return false;
             }
 
-            if (!MyValidation.CommonValidation(txtLName.Text, 1, 20, "Tên"))
+            if (!NewValidation.IsTextInvalid(txtLName.Text, 1, CustomerHelpers.sizeLastNameParam, "Tên"))
             {
                 txtLName.Focus();
                 return false;
             }
 
-            if (!MyValidation.CommonValidation(txtAddress.Text, 1, 50, "Địa chỉ"))
+            if (!NewValidation.IsTextInvalid(txtAddress.Text, 1, CustomerHelpers.sizeAddressParam, "Địa chỉ"))
             {
                 txtAddress.Focus();
                 return false;
             }
 
-            if (!MyValidation.CommonValidation(txtPhone.Text, 1, 11, "Số điện thoại") || !MyValidation.IsPhoneInvalid(txtPhone.Text))
+            if (!NewValidation.IsTextInvalid(txtPhone.Text, 1, CustomerHelpers.sizePhoneParam, "Số điện thoại") || !NewValidation.IsPhoneInvalid(txtPhone.Text))
             {
                 txtPhone.Focus();
                 return false;
             }
 
-            if (!MyValidation.CommonValidation(txtEmail.Text, 1, 30, "Email") || !MyValidation.IsEmailInvalid(txtEmail.Text))
+            if (!NewValidation.IsTextInvalid(txtEmail.Text, 1, CustomerHelpers.sizeEmailParam, "Email") || !NewValidation.IsEmailInvalid(txtEmail.Text))
             {
                 txtEmail.Focus();
                 return false;
@@ -118,6 +116,7 @@ namespace ProjectWF
             control = new ControlHelper();
             control.AddBtnControls(btnAdd, btnEdit, btnDelete, btnSave, btnCancel);
             control.AddTextBoxs(txtFName, txtLName, txtAddress, txtPhone, txtEmail);
+            control.AddDataGridView(dgvCustomer);
             
             // Control mode
             control.SwitchMode(ControlHelper.ControlMode.None);
@@ -141,11 +140,18 @@ namespace ProjectWF
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (MyMessageBox.Question("Bạn có chắn xóa bản ghi đã chọn không?"))
+            if (dgvCustomer.CurrentRow != null)
             {
-                int curRowIdx = dgvCustomer.CurrentRow.Index;
-                dataTable.Rows[curRowIdx].Delete();
-                sqlHelper.Update(dataTable);
+                if (MyMessageBox.Question("Bạn có chắn xóa bản ghi đã chọn không?"))
+                {
+                    int curRowIdx = dgvCustomer.CurrentRow.Index;
+                    int idNeedDel = Convert.ToInt32(dgvCustomer.Rows[curRowIdx].Cells["CustomerID"].Value.ToString());
+
+                    DataTableHelpers.RemoveRow(dataTable, "CustomerID", idNeedDel);
+
+                    dataTable.Rows[curRowIdx].Delete();
+                    sqlHelper.Update(dataTable);
+                }
             }
         }
 
