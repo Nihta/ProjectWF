@@ -31,6 +31,8 @@ namespace ProjectWF
         private TextBox[] textBoxes;
         private ComboBox[] comboBoxes = null;
 
+        private DataGridView dataGridView;
+
         public void AddBtnControls(Button btnAdd, Button btnEdit, Button btnDelete, Button btnSave, Button btnCancel)
         {
             this.btnAdd = btnAdd;
@@ -48,6 +50,11 @@ namespace ProjectWF
         public void AddComboBoxs(params ComboBox[] comboBoxes)
         {
             this.comboBoxes = comboBoxes;
+        }
+
+        public void AddDataGridView(DataGridView dataGridView)
+        {
+            this.dataGridView = dataGridView;
         }
 
         public void EnableControl(bool isEnable)
@@ -86,6 +93,14 @@ namespace ProjectWF
             }
         }
 
+        private void EnableDataGridView(bool isEnable)
+        {
+            if (dataGridView != null)
+            {
+                dataGridView.Enabled = isEnable;
+            }
+        }
+
         public ControlMode GetMode()
         {
             return mode;
@@ -105,16 +120,19 @@ namespace ProjectWF
                     EnableTextBox(false);
                     EnableComboBox(false);
                     EnableControl(true);
+                    EnableDataGridView(true);
                     break;
                 case ControlMode.Add:
                     EnableTextBox(true);
                     EnableComboBox(true);
                     EnableControl(false);
+                    EnableDataGridView(false);
                     break;
                 case ControlMode.Edit:
                     EnableTextBox(true);
                     EnableComboBox(true);
                     EnableControl(false);
+                    EnableDataGridView(false);
                     break;
             }
             this.mode = mode;

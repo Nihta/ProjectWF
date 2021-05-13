@@ -28,5 +28,19 @@ namespace ProjectWF
 
             dataTable.Columns.Add(column);
         }
+
+        public static void RemoveRow(DataTable dataTable, string rowIDName, int rowIDValue)
+        {
+            for (int i = dataTable.Rows.Count - 1; i >= 0; i--)
+            {
+                DataRow row = dataTable.Rows[i];
+                if (Convert.ToInt32(row[rowIDName].ToString()) == rowIDValue)
+                {
+                    row.Delete();
+                    Console.WriteLine($"Remove item have id: {rowIDValue}");
+                    return;
+                }
+            }
+        }
     }
 }

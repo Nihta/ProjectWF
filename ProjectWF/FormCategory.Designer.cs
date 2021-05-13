@@ -42,11 +42,11 @@ namespace ProjectWF
             this.txtCateName = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.dgvCate = new System.Windows.Forms.DataGridView();
+            this.dgvCategory = new System.Windows.Forms.DataGridView();
             this.panelControl.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCate)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCategory)).BeginInit();
             this.SuspendLayout();
             // 
             // panelControl
@@ -59,12 +59,12 @@ namespace ProjectWF
             this.panelControl.Controls.Add(this.btnAdd);
             this.panelControl.Location = new System.Drawing.Point(12, 338);
             this.panelControl.Name = "panelControl";
-            this.panelControl.Size = new System.Drawing.Size(363, 92);
+            this.panelControl.Size = new System.Drawing.Size(335, 103);
             this.panelControl.TabIndex = 1;
             // 
             // btnExit
             // 
-            this.btnExit.Location = new System.Drawing.Point(260, 56);
+            this.btnExit.Location = new System.Drawing.Point(237, 56);
             this.btnExit.Name = "btnExit";
             this.btnExit.Size = new System.Drawing.Size(75, 23);
             this.btnExit.TabIndex = 5;
@@ -74,7 +74,7 @@ namespace ProjectWF
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(146, 56);
+            this.btnCancel.Location = new System.Drawing.Point(127, 56);
             this.btnCancel.Name = "btnCancel";
             this.btnCancel.Size = new System.Drawing.Size(75, 23);
             this.btnCancel.TabIndex = 4;
@@ -84,7 +84,7 @@ namespace ProjectWF
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(28, 56);
+            this.btnSave.Location = new System.Drawing.Point(12, 56);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 3;
@@ -94,7 +94,7 @@ namespace ProjectWF
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(260, 18);
+            this.btnDelete.Location = new System.Drawing.Point(237, 18);
             this.btnDelete.Name = "btnDelete";
             this.btnDelete.Size = new System.Drawing.Size(75, 23);
             this.btnDelete.TabIndex = 2;
@@ -104,7 +104,7 @@ namespace ProjectWF
             // 
             // btnEdit
             // 
-            this.btnEdit.Location = new System.Drawing.Point(146, 18);
+            this.btnEdit.Location = new System.Drawing.Point(127, 18);
             this.btnEdit.Name = "btnEdit";
             this.btnEdit.Size = new System.Drawing.Size(75, 23);
             this.btnEdit.TabIndex = 1;
@@ -114,7 +114,7 @@ namespace ProjectWF
             // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(28, 18);
+            this.btnAdd.Location = new System.Drawing.Point(12, 18);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(75, 23);
             this.btnAdd.TabIndex = 0;
@@ -130,22 +130,22 @@ namespace ProjectWF
             this.panel1.Controls.Add(this.label1);
             this.panel1.Location = new System.Drawing.Point(12, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(363, 320);
+            this.panel1.Size = new System.Drawing.Size(335, 320);
             this.panel1.TabIndex = 0;
             // 
             // txtCateDesc
             // 
-            this.txtCateDesc.Location = new System.Drawing.Point(139, 58);
+            this.txtCateDesc.Location = new System.Drawing.Point(118, 39);
             this.txtCateDesc.MaxLength = 100;
             this.txtCateDesc.Multiline = true;
             this.txtCateDesc.Name = "txtCateDesc";
-            this.txtCateDesc.Size = new System.Drawing.Size(196, 96);
+            this.txtCateDesc.Size = new System.Drawing.Size(194, 96);
             this.txtCateDesc.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(25, 61);
+            this.label2.Location = new System.Drawing.Point(9, 42);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(50, 13);
             this.label2.TabIndex = 2;
@@ -153,16 +153,16 @@ namespace ProjectWF
             // 
             // txtCateName
             // 
-            this.txtCateName.Location = new System.Drawing.Point(139, 22);
+            this.txtCateName.Location = new System.Drawing.Point(118, 6);
             this.txtCateName.MaxLength = 50;
             this.txtCateName.Name = "txtCateName";
-            this.txtCateName.Size = new System.Drawing.Size(196, 20);
+            this.txtCateName.Size = new System.Drawing.Size(194, 20);
             this.txtCateName.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(25, 25);
+            this.label1.Location = new System.Drawing.Point(9, 6);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(92, 13);
             this.label1.TabIndex = 0;
@@ -170,31 +170,33 @@ namespace ProjectWF
             // 
             // panel2
             // 
-            this.panel2.Controls.Add(this.dgvCate);
-            this.panel2.Location = new System.Drawing.Point(381, 12);
+            this.panel2.Controls.Add(this.dgvCategory);
+            this.panel2.Location = new System.Drawing.Point(353, 12);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(779, 418);
+            this.panel2.Size = new System.Drawing.Size(576, 429);
             this.panel2.TabIndex = 2;
             // 
             // dgvCate
             // 
-            this.dgvCate.AllowUserToAddRows = false;
-            this.dgvCate.AllowUserToDeleteRows = false;
-            this.dgvCate.AllowUserToResizeRows = false;
-            this.dgvCate.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvCate.Location = new System.Drawing.Point(3, 22);
-            this.dgvCate.MultiSelect = false;
-            this.dgvCate.Name = "dgvCate";
-            this.dgvCate.ReadOnly = true;
-            this.dgvCate.Size = new System.Drawing.Size(746, 383);
-            this.dgvCate.TabIndex = 0;
-            this.dgvCate.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCate_RowEnter);
+            this.dgvCategory.AllowUserToAddRows = false;
+            this.dgvCategory.AllowUserToDeleteRows = false;
+            this.dgvCategory.AllowUserToResizeRows = false;
+            this.dgvCategory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvCategory.Location = new System.Drawing.Point(3, 6);
+            this.dgvCategory.MultiSelect = false;
+            this.dgvCategory.Name = "dgvCate";
+            this.dgvCategory.ReadOnly = true;
+            this.dgvCategory.RowHeadersWidth = 40;
+            this.dgvCategory.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvCategory.Size = new System.Drawing.Size(570, 399);
+            this.dgvCategory.TabIndex = 0;
+            this.dgvCategory.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvCate_RowEnter);
             // 
             // FormCategory
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1172, 445);
+            this.ClientSize = new System.Drawing.Size(939, 450);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panelControl);
             this.Controls.Add(this.panel1);
@@ -205,7 +207,7 @@ namespace ProjectWF
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.panel2.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.dgvCate)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvCategory)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -225,6 +227,6 @@ namespace ProjectWF
         private System.Windows.Forms.TextBox txtCateName;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.DataGridView dgvCate;
+        private System.Windows.Forms.DataGridView dgvCategory;
     }
 }
