@@ -42,8 +42,10 @@ namespace ProjectWF
         private void AddRow()
         {
             DataRow newRow = dataTable.NewRow();
+
             newRow["CategoryName"] = txtCateName.Text;
             newRow["Description"] = txtCateDesc.Text;
+
             dataTable.Rows.Add(newRow);
             sqlHelper.Update(dataTable);
             GetDataGridView();
@@ -54,8 +56,10 @@ namespace ProjectWF
         {
             int curRowIdx = dgvCategory.CurrentRow.Index;
             DataRow editRow = dataTable.Rows[curRowIdx];
+
             editRow["CategoryName"] = txtCateName.Text;
             editRow["Description"] = txtCateDesc.Text;
+
             sqlHelper.Update(dataTable);
         }
 
