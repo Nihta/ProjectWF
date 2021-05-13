@@ -112,19 +112,19 @@ namespace ProjectWF
 
         public bool IsInvalid()
         {
-            if (!MyValidation.CommonValidation(txtName.Text, 1, 50, "Tên sản phẩm"))
+            if (!NewValidation.IsTextInvalid(txtName.Text, 1, 50, "Tên sản phẩm"))
             {
                 txtName.Focus();
                 return false;
             }
 
-            if (!MyValidation.IsNumeric(txtPrice.Text, "Giá"))
+            if (!NewValidation.IsNumeric(txtPrice.Text, "Giá"))
             {
                 txtName.Focus();
                 return false;
             }
 
-            if (!MyValidation.CommonValidation(txtDesc.Text, 1, 50, "Mô tả"))
+            if (!NewValidation.IsTextInvalid(txtDesc.Text, 1, 50, "Mô tả"))
             {
                 txtDesc.Focus();
                 return false;
@@ -141,6 +141,7 @@ namespace ProjectWF
             control.AddBtnControls(btnAdd, btnEdit, btnDelete, btnSave, btnCancel);
             control.AddTextBoxs(txtName, txtPrice, txtDesc);
             control.AddComboBoxs(cbCate, cbSup);
+            control.AddDataGridView(dgvProduct);
 
             // Control mode
             control.SwitchMode(ControlHelper.ControlMode.None);
