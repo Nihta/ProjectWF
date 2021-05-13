@@ -120,7 +120,6 @@ namespace ProjectWF
 
                     DataTableHelpers.RemoveRow(dataTable, "CategoryID", idNeedDel);
 
-                    dataTable.Rows[curRowIdx].Delete();
                     sqlHelper.Update(dataTable);
                 }
             }

@@ -97,7 +97,7 @@ namespace ProjectWF
             // 
             this.sảnPhẩmToolStripMenuItem.Name = "sảnPhẩmToolStripMenuItem";
             this.sảnPhẩmToolStripMenuItem.Size = new System.Drawing.Size(189, 22);
-            this.sảnPhẩmToolStripMenuItem.Text = "Sản phẩm";
+            this.sảnPhẩmToolStripMenuItem.Text = "Mặt hàng";
             this.sảnPhẩmToolStripMenuItem.Click += new System.EventHandler(this.sảnPhẩmToolStripMenuItem_Click);
             // 
             // kháchHàngToolStripMenuItem
@@ -177,7 +177,7 @@ namespace ProjectWF
             // giớiThiệuToolStripMenuItem
             // 
             this.giớiThiệuToolStripMenuItem.Name = "giớiThiệuToolStripMenuItem";
-            this.giớiThiệuToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
+            this.giớiThiệuToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.giớiThiệuToolStripMenuItem.Text = "Giới thiệu";
             // 
             // label1

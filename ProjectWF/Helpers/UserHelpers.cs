@@ -225,5 +225,16 @@ namespace ProjectWF
 
             return reader.HasRows;
         }
+
+        public static DataTable DataGridViewHelper(SqlHelper sql, DataGridView dataGridView)
+        {
+            string query = "SELECT UserID, FullName, UserName, PassWord FROM TableUsers order by UserID";
+
+            DataTable dataTable = sql.ExecuteQuery(SqlHelper.defaultConnStr, query, CommandType.Text);
+
+            dataGridView.DataSource = dataTable;
+
+            return dataTable;
+        }
     }
 }

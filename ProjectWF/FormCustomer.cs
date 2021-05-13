@@ -149,7 +149,6 @@ namespace ProjectWF
 
                     DataTableHelpers.RemoveRow(dataTable, "CustomerID", idNeedDel);
 
-                    dataTable.Rows[curRowIdx].Delete();
                     sqlHelper.Update(dataTable);
                 }
             }

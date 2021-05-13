@@ -1,29 +1,38 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
-using ProjectWF.Helpers;
 
 namespace ProjectWF
 {
     public partial class FormUsers : Form
     {
         ControlHelper control;
-        SqlHelper sqlHelper = new SqlHelper();
+        SqlHelper sqlHelper;
         DataTable dataTableUser;
 
         public FormUsers()
         {
             InitializeComponent();
+
+            sqlHelper = new SqlHelper();
+            control = new ControlHelper();
+
+            ConfigDataGridView();
         }
 
         #region Methods
-        private void GetUsers()
+
+        private void ConfigDataGridView()
         {
-            string query = "SELECT * FROM TableUsers";
+            dgvUser.AutoGenerateColumns = false;
+            dgvUser.Columns.Add(MyUtils.CreateCol(30, "UserID", "ID"));
+            dgvUser.Columns.Add(MyUtils.CreateCol(200, "FullName", "Học và tên"));
+            dgvUser.Columns.Add(MyUtils.CreateCol(200, "UserName", "Tên đăng nhập"));
+        }
 
-            dataTableUser = sqlHelper.ExecuteQuery(SqlHelper.defaultConnStr, query, CommandType.Text);
-
-            dgvUser.DataSource = dataTableUser;
+        private void GetDataGridView()
+        {
+            dataTableUser = UsersHelpers.DataGridViewHelper(sqlHelper, dgvUser);
         }
 
         private void AddUser()
@@ -36,7 +45,7 @@ namespace ProjectWF
 
             dataTableUser.Rows.Add(newRow);
             sqlHelper.Update(dataTableUser);
-            GetUsers();
+            GetDataGridView();
         }
 
         private void EditUser()
@@ -51,20 +60,50 @@ namespace ProjectWF
 
             sqlHelper.Update(dataTableUser);
         }
+
+        public bool IsInvalid()
+        {
+            if (!UsersHelpers.IsFullNameInvalid(txtFullName.Text))
+            {
+                txtFullName.Focus();
+                return false;
+            }
+
+            if (!UsersHelpers.isUserNameInvalid(txtUserName.Text))
+            {
+                txtUserName.Focus();
+                return false;
+            }
+
+            if (!UsersHelpers.IsPassWordInvalid(txtPassWord.Text))
+            {
+                txtPassWord.Focus();
+                return false;
+            }
+
+            return true;
+        }
+
+        private void HandleRowEnter(int idx)
+        {
+            txtFullName.Text = dgvUser.Rows[idx].Cells["FullName"].Value.ToString().Trim();
+            txtUserName.Text = dgvUser.Rows[idx].Cells["UserName"].Value.ToString().Trim();
+        }
         #endregion
 
         #region Events
         private void FormUsers_Load(object sender, EventArgs e)
         {
             // Khởi tạo control helper
-            control = new ControlHelper();
             control.AddBtnControls(btnAdd, btnEdit, btnDelete, btnSave, btnCancel);
             control.AddTextBoxs(txtFullName, txtUserName, txtPassWord);
+            control.AddDataGridView(dgvUser);
+
             // Mode mặc định
             control.SwitchMode(ControlHelper.ControlMode.None);
+
             // Lấy thông tin các user và hiển thị lên dataGridView
-            dgvUser.AutoGenerateColumns = false;
-            GetUsers();
+            GetDataGridView();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -84,30 +123,23 @@ namespace ProjectWF
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (MyMessageBox.Question("Bạn có chắn xóa bản ghi đã chọn không?"))
+            if (dgvUser.CurrentRow != null)
             {
-                int curRowIdx = dgvUser.CurrentRow.Index;
-                dataTableUser.Rows[curRowIdx].Delete();
-                sqlHelper.Update(dataTableUser);
+                if (MyMessageBox.Question("Bạn có chắn xóa bản ghi đã chọn không?"))
+                {
+                    int curRowIdx = dgvUser.CurrentRow.Index;
+                    int idNeedDel = Convert.ToInt32(dgvUser.Rows[curRowIdx].Cells["UserID"].Value.ToString());
+
+                    DataTableHelpers.RemoveRow(dataTableUser, "UserID", idNeedDel);
+
+                    sqlHelper.Update(dataTableUser);
+                }
             }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            // Validation
-            if (!UsersHelpers.IsFullNameInvalid(txtFullName.Text))
-            {
-                txtFullName.Focus();
-            }
-            else if (!UsersHelpers.isUserNameInvalid(txtUserName.Text))
-            {
-                txtUserName.Focus();
-            }
-            else if (!UsersHelpers.IsPassWordInvalid(txtPassWord.Text))
-            {
-                txtPassWord.Focus();
-            }
-            else
+            if (IsInvalid())
             {
                 // Cập nhật data
                 switch (control.GetMode())
@@ -133,19 +165,19 @@ namespace ProjectWF
                 // Sau khi lưu
                 control.SwitchMode(ControlHelper.ControlMode.None);
             }
+
+
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
             control.SwitchMode(ControlHelper.ControlMode.None);
-            // this.ActiveControl = null;
         }
 
         private void dgvUser_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             int idx = e.RowIndex;
-            txtFullName.Text = dgvUser.Rows[idx].Cells["FullName"].Value.ToString().Trim();
-            txtUserName.Text = dgvUser.Rows[idx].Cells["UserName"].Value.ToString().Trim();
+            HandleRowEnter(idx);
         }
 
         private void btnExit_Click(object sender, EventArgs e)

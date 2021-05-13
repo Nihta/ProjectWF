@@ -46,9 +46,6 @@ namespace ProjectWF
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
-            this.UserID = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.FullName = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.UserName = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUser)).BeginInit();
@@ -134,10 +131,6 @@ namespace ProjectWF
             this.dgvUser.AllowUserToDeleteRows = false;
             this.dgvUser.AllowUserToResizeRows = false;
             this.dgvUser.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvUser.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.UserID,
-            this.FullName,
-            this.UserName});
             this.dgvUser.Location = new System.Drawing.Point(3, 22);
             this.dgvUser.MultiSelect = false;
             this.dgvUser.Name = "dgvUser";
@@ -219,30 +212,6 @@ namespace ProjectWF
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
-            // UserID
-            // 
-            this.UserID.DataPropertyName = "UserID";
-            this.UserID.HeaderText = "ID";
-            this.UserID.Name = "UserID";
-            this.UserID.ReadOnly = true;
-            this.UserID.Width = 30;
-            // 
-            // FullName
-            // 
-            this.FullName.DataPropertyName = "FullName";
-            this.FullName.HeaderText = "Họ và tên";
-            this.FullName.Name = "FullName";
-            this.FullName.ReadOnly = true;
-            this.FullName.Width = 200;
-            // 
-            // UserName
-            // 
-            this.UserName.DataPropertyName = "UserName";
-            this.UserName.HeaderText = "Tên đăng nhập";
-            this.UserName.Name = "UserName";
-            this.UserName.ReadOnly = true;
-            this.UserName.Width = 200;
-            // 
             // FormUsers
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -282,8 +251,5 @@ namespace ProjectWF
         private System.Windows.Forms.TextBox txtUserName;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.DataGridView dgvUser;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UserID;
-        private System.Windows.Forms.DataGridViewTextBoxColumn FullName;
-        private System.Windows.Forms.DataGridViewTextBoxColumn UserName;
     }
 }
