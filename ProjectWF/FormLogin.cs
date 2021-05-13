@@ -22,7 +22,8 @@ namespace ProjectWF
             {
                 FormMain formMain = new FormMain(curUserID);
                 this.Hide();
-                textBoxPassWord.Text = "";
+                // Xoá mật khẩu
+                textBoxPassWord.Clear();
                 formMain.ShowDialog();
                 this.Show();
                 textBoxPassWord.Focus();
@@ -37,16 +38,20 @@ namespace ProjectWF
             if (!UsersHelpers.isUserNameInvalid(userName))
             {
                 textBoxUserName.Focus();
+                return false;
             }
-            else if (!UsersHelpers.IsPassWordInvalid(passWord))
+
+            if (!UsersHelpers.IsPassWordInvalid(passWord))
             {
                 textBoxPassWord.Focus();
+                return false;
             }
 
             return true;
         }
         #endregion
 
+        #region Events
         private void FormLogin_Load(object sender, EventArgs e)
         {
             // ! Để cho quá trình __DEV__ nhanh hơn
@@ -86,5 +91,6 @@ namespace ProjectWF
         {
             Application.Exit();
         }
+        #endregion
     }
 }
