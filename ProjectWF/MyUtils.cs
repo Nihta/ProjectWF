@@ -20,6 +20,14 @@ namespace ProjectWF
             return hash.ToString();
         }
 
+        public static void ClearTextBox(params TextBox[] textBoxes)
+        {
+            foreach (TextBox tb in textBoxes)
+            {
+                tb.Clear();
+            }
+        }
+
         public static DataGridViewColumn CreateCol(int width, string name, string headerText = "", string dataPropertyName = "")
         {
             if (dataPropertyName == "")

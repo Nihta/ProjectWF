@@ -1,6 +1,4 @@
-﻿using ProjectWF.Helpers;
-
-using System;
+﻿using System;
 using System.Data.SqlClient;
 using System.Windows.Forms;
 
@@ -15,8 +13,11 @@ namespace ProjectWF
         {
             this.userId = userId;
             InitializeComponent();
+
+            txtCfmNewPassWord.Enabled = false;
         }
 
+        #region Methods
         private void GetUserData()
         {
             SqlDataReader reader = UsersHelpers.GetUserData(this.userId);
@@ -27,17 +28,12 @@ namespace ProjectWF
                 txtFullName.Text = reader["FullName"].ToString().Trim();
             }
         }
+        #endregion
 
+        #region Events
         private void FormAccountProfile_Load(object sender, EventArgs e)
         {
-            txtCfmNewPassWord.Enabled = false;
             GetUserData();
-        }
-
-
-        private void btnExit_Click(object sender, EventArgs e)
-        {
-            this.Close();
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -99,15 +95,18 @@ namespace ProjectWF
             string finalPass = newPassWord.Length == 0 ? oldPassWord : newPassWord;
             if (UsersHelpers.UpdateUser(this.userId, fullName, finalPass))
             {
-                txtOldPassWord.Text = "";
-                txtNewPassWord.Text = "";
-                txtCfmNewPassWord.Text = "";
                 MyMessageBox.Information("Cập nhật thông tin tài khoản thành công!");
+                MyUtils.ClearTextBox(txtOldPassWord, txtNewPassWord, txtCfmNewPassWord);
             }
             else
             {
                 MyMessageBox.Information("Cập nhật thông tin tài khoản thất bại!");
             }
+        }
+
+        private void btnExit_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
 
         private void txtNewPassWord_TextChanged(object sender, EventArgs e)
@@ -122,5 +121,6 @@ namespace ProjectWF
                 txtCfmNewPassWord.Enabled = true;
             }
         }
+        #endregion
     }
 }
