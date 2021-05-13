@@ -10,13 +10,7 @@ namespace ProjectWF
             InitializeComponent();
         }
 
-        private void FormLogin_Load(object sender, EventArgs e)
-        {
-            // ! Để cho quá trình __DEV__ nhanh hơn
-            textBoxUserName.Text = "nihta";
-            textBoxPassWord.Text = "123";
-        }
-
+        #region Methods
         private void HandleLogin(string userName, string passWord)
         {
             int curUserID = UsersHelpers.Login(userName, passWord);
@@ -35,7 +29,7 @@ namespace ProjectWF
             }
         }
 
-        private void buttonLogin_Click(object sender, EventArgs e)
+        public bool IsInputInvalid()
         {
             string userName = textBoxUserName.Text;
             string passWord = textBoxPassWord.Text;
@@ -48,9 +42,23 @@ namespace ProjectWF
             {
                 textBoxPassWord.Focus();
             }
-            else
+
+            return true;
+        }
+        #endregion
+
+        private void FormLogin_Load(object sender, EventArgs e)
+        {
+            // ! Để cho quá trình __DEV__ nhanh hơn
+            textBoxUserName.Text = "nihta";
+            textBoxPassWord.Text = "123";
+        }
+
+        private void buttonLogin_Click(object sender, EventArgs e)
+        {
+            if (IsInputInvalid())
             {
-                HandleLogin(userName, passWord);
+                HandleLogin(textBoxUserName.Text, textBoxPassWord.Text);
             }
         }
 

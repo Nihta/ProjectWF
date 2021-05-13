@@ -54,22 +54,12 @@ namespace ProjectWF
         /// </returns>
         public static bool IsPassWordInvalid(string passWord, string name = "Mật khẩu")
         {
-            if (MyValidation.IsEmpty(passWord))
+            if (!NewValidation.IsTextInvalid(passWord, 3, sizePassWordParam, name))
             {
-                MyMessageBox.Warning($"{name} không được để trống!");
                 return false;
             }
-            else if (passWord.Length < 3)
-            {
-                MyMessageBox.Warning($"{name} quá ngắn!");
-                return false;
-            }
-            else if (passWord.Length > sizePassWordParam)
-            {
-                MyMessageBox.Warning($"{name} quá dài!");
-                return false;
-            }
-            else if (!Regex.IsMatch(passWord, @"^[a-z0-9]*$"))
+
+            if (!Regex.IsMatch(passWord, @"^[a-z0-9]*$"))
             {
                 MyMessageBox.Warning($"{name} không hợp lệ!\nMật khẩu chỉ bao gồm các kí tự a->z, 0->9");
                 return false;
@@ -109,21 +99,11 @@ namespace ProjectWF
         /// </returns>
         public static bool IsFullNameInvalid(string fullName)
         {
-            if (MyValidation.IsEmpty(fullName))
+            if (!NewValidation.IsTextInvalid(fullName, 5, sizeFullNameParam, "Họ và tên"))
             {
-                MyMessageBox.Warning($"Họ và tên không được để trống!");
                 return false;
             }
-            else if (fullName.Length < 4)
-            {
-                MyMessageBox.Warning($"Họ và tên quá ngắn!");
-                return false;
-            }
-            else if (fullName.Length > sizeFullNameParam)
-            {
-                MyMessageBox.Warning($"Họ và tên quá dài!");
-                return false;
-            }
+
             return true;
         }
 
@@ -136,26 +116,17 @@ namespace ProjectWF
         /// </returns>
         public static bool isUserNameInvalid(string userName)
         {
-            if (MyValidation.IsEmpty(userName))
+            if (!(NewValidation.IsTextInvalid(userName, 5, sizeUserNameParam, "Tên đăng nhập")))
             {
-                MyMessageBox.Warning("Tên đăng nhập không được để trống!");
                 return false;
             }
-            if (userName.Length < 5)
-            {
-                MyMessageBox.Warning("Tên đăng nhập quá ngắn!");
-                return false;
-            }
-            if (userName.Length > sizeUserNameParam)
-            {
-                MyMessageBox.Warning("Tên đăng nhập quá dài!");
-                return false;
-            }
+
             if (!Regex.IsMatch(userName, @"^[a-z][a-z0-9]*$"))
             {
                 MyMessageBox.Warning("Tên đăng nhập không hợp lệ!\nTên đăng nhập chỉ bao gồm các kí tự a->z, 0->9");
                 return false;
             }
+
             return true;
         }
         #endregion
