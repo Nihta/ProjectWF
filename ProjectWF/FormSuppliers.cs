@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
-using ProjectWF.Helpers;
 
 namespace ProjectWF
 {
@@ -14,6 +13,11 @@ namespace ProjectWF
         public FormSuppliers()
         {
             InitializeComponent();
+
+            ConfigDataGridView();
+
+            control = new ControlHelper();
+            sqlHelper = new SqlHelper();
         }
 
         #region Methods
@@ -27,13 +31,9 @@ namespace ProjectWF
             dgvSupplier.Columns.Add(MyUtils.CreateCol(150, "Email"));
         }
 
-        private void GetSuppliers()
+        private void GetDataGridView()
         {
-            string query = "select SupplierID, SupplierName, Address, Phone, Email from TableSuppliers";
-
-            dataTable = sqlHelper.ExecuteQuery(SqlHelper.defaultConnStr, query, CommandType.Text);
-
-            dgvSupplier.DataSource = dataTable;
+            dataTable = SupplierHelpers.DataGridViewHelper(sqlHelper, dgvSupplier);
         }
 
         private void AddSup()
@@ -47,7 +47,7 @@ namespace ProjectWF
 
             dataTable.Rows.Add(newRow);
             sqlHelper.Update(dataTable);
-            GetSuppliers();
+            GetDataGridView();
         }
 
         private void EditSup()
@@ -92,27 +92,30 @@ namespace ProjectWF
 
             return true;
         }
+
+        private void HandleRowEnter(int idx)
+        {
+            txtSupName.Text = dgvSupplier.Rows[idx].Cells["SupplierName"].Value.ToString().Trim();
+            txtSupAddress.Text = dgvSupplier.Rows[idx].Cells["Address"].Value.ToString().Trim();
+            txtSupPhone.Text = dgvSupplier.Rows[idx].Cells["Phone"].Value.ToString().Trim();
+            txtSupEmail.Text = dgvSupplier.Rows[idx].Cells["Email"].Value.ToString().Trim();
+        }
         #endregion
 
 
         #region Events
         private void FormSuppliers_Load(object sender, EventArgs e)
         {
-            // Config dataGridView
-            ConfigDataGridView();
-
-            // Khởi tạo control helper
-            control = new ControlHelper();
             control.AddBtnControls(btnAdd, btnEdit, btnDelete, btnSave, btnCancel);
             control.AddTextBoxs(txtSupName, txtSupAddress, txtSupPhone, txtSupEmail);
+            control.AddDataGridView(dgvSupplier);
 
             // Mode mặc định
             control.SwitchMode(ControlHelper.ControlMode.None);
             txtSupName.Focus();
 
             // GetData
-            sqlHelper = new SqlHelper();
-            GetSuppliers();
+            GetDataGridView();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -129,11 +132,17 @@ namespace ProjectWF
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            if (MyMessageBox.Question("Bạn có chắn xóa bản ghi đã chọn không?"))
+            if (dgvSupplier.CurrentRow != null)
             {
-                int curRowIdx = dgvSupplier.CurrentRow.Index;
-                dataTable.Rows[curRowIdx].Delete();
-                sqlHelper.Update(dataTable);
+                if (MyMessageBox.Question("Bạn có chắn xóa bản ghi đã chọn không?"))
+                {
+                    int curRowIdx = dgvSupplier.CurrentRow.Index;
+                    int idNeedDel = Convert.ToInt32(dgvSupplier.Rows[curRowIdx].Cells["SupplierID"].Value.ToString());
+
+                    DataTableHelpers.RemoveRow(dataTable, "SupplierID", idNeedDel);
+
+                    sqlHelper.Update(dataTable);
+                }
             }
         }
 
@@ -174,10 +183,7 @@ namespace ProjectWF
         private void dgvSupplier_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
             int idx = e.RowIndex;
-            txtSupName.Text = dgvSupplier.Rows[idx].Cells["SupplierName"].Value.ToString().Trim();
-            txtSupAddress.Text = dgvSupplier.Rows[idx].Cells["Address"].Value.ToString().Trim();
-            txtSupPhone.Text = dgvSupplier.Rows[idx].Cells["Phone"].Value.ToString().Trim();
-            txtSupEmail.Text = dgvSupplier.Rows[idx].Cells["Email"].Value.ToString().Trim();
+            HandleRowEnter(idx);
         }
         #endregion
     }

@@ -240,7 +240,7 @@ namespace ProjectWF
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "FormSuppliers";
-            this.Text = "FormSuppliers";
+            this.Text = "Nhà cung cấp";
             this.Load += new System.EventHandler(this.FormSuppliers_Load);
             this.panelControl.ResumeLayout(false);
             this.panel2.ResumeLayout(false);

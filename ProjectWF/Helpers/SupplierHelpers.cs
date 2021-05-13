@@ -1,6 +1,7 @@
 ﻿using System.Data;
 using System.Data.SqlClient;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace ProjectWF
 {
@@ -127,5 +128,16 @@ namespace ProjectWF
             return true;
         }
         #endregion
+
+        public static DataTable DataGridViewHelper(SqlHelper sql, DataGridView dataGridView)
+        {
+            string query = "select SupplierID, SupplierName, Address, Phone, Email from TableSuppliers order by SupplierID desc";
+
+            DataTable dataTable = sql.ExecuteQuery(SqlHelper.defaultConnStr, query, CommandType.Text);
+
+            dataGridView.DataSource = dataTable;
+
+            return dataTable;
+        }
     }
 }

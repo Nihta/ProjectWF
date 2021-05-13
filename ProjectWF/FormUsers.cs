@@ -21,7 +21,6 @@ namespace ProjectWF
         }
 
         #region Methods
-
         private void ConfigDataGridView()
         {
             dgvUser.AutoGenerateColumns = false;
