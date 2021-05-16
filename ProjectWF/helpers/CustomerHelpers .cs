@@ -68,9 +68,9 @@ namespace ProjectWF
         }
         #endregion
 
-        public static DataTable DataGridViewHelper(SqlHelper sql, DataGridView dataGridView)
+        public static DataTable DataGridViewHelper(SqlHelper sql, DataGridView dataGridView, string whereQuery = "")
         {
-            string query = "select c.CustomerID, c.FirstName, c.LastName, c.Address, c.Phone, c.Email from TableCustomers c order by c.CustomerID desc";
+            string query = $"select c.CustomerID, c.FirstName, c.LastName, c.Address, c.Phone, c.Email from TableCustomers c {whereQuery} order by c.CustomerID desc";
 
             DataTable dataTable = sql.ExecuteQuery(SqlHelper.defaultConnStr, query, CommandType.Text);
 
@@ -78,5 +78,38 @@ namespace ProjectWF
 
             return dataTable;
         }
+
+        public static void ConfigSearch(ComboBox cbFields)
+        {
+            cbFields.Items.Add("Tên");
+            cbFields.Items.Add("Số điện thoại");
+            cbFields.Items.Add("Địa chỉ");
+            cbFields.Items.Add("Email");
+            cbFields.SelectedIndex = 0;
+        }
+
+        public static string GetWhereQuery(ComboBox cbFields, TextBox txtFieldValue)
+        {
+            string search = "";
+
+            switch (cbFields.Text)
+            {
+                case "Tên":
+                    search = $"LastName like N'%{txtFieldValue.Text}%'";
+                    break;
+                case "Số điện thoại":
+                    search = $"Phone like '%{txtFieldValue.Text}%'";
+                    break;
+                case "Địa chỉ":
+                    search = $"Address like N'%{txtFieldValue.Text}%'";
+                    break;
+                case "Email":
+                    search = $"Email like '%{txtFieldValue.Text}%'";
+                    break;
+            }
+
+            return $"where {search}";
+        }
     }
+
 }

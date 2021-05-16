@@ -16,6 +16,8 @@ namespace ProjectWF
 
             ConfigDataGridView();
             sqlHelper = new SqlHelper();
+            control = new ControlHelper();
+            CustomerHelpers.ConfigSearch(cbFields);
         }
 
         #region Methods
@@ -30,9 +32,9 @@ namespace ProjectWF
             dgvCustomer.Columns.Add(MyUtils.CreateCol(160, "Email", "Email"));
         }
 
-        private void GetDataGridView()
+        private void GetDataGridView(string whereQuery = "")
         {
-            dataTable = CustomerHelpers.DataGridViewHelper(sqlHelper, dgvCustomer);
+            dataTable = CustomerHelpers.DataGridViewHelper(sqlHelper, dgvCustomer, whereQuery);
         }
 
         private void HandleRowEnter(int idx)
@@ -112,17 +114,13 @@ namespace ProjectWF
         #region Events
         private void FormCustomer_Load(object sender, EventArgs e)
         {
-            // Control helper
-            control = new ControlHelper();
             control.AddBtnControls(btnAdd, btnEdit, btnDelete, btnSave, btnCancel);
             control.AddTextBoxs(txtFName, txtLName, txtAddress, txtPhone, txtEmail);
             control.AddDataGridView(dgvCustomer);
-            
-            // Control mode
+
             control.SwitchMode(ControlHelper.ControlMode.None);
             txtFName.Focus();
 
-            // DataGridView
             GetDataGridView();
         }
 
@@ -192,6 +190,17 @@ namespace ProjectWF
         {
             int idx = e.RowIndex;
             HandleRowEnter(idx);
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            string whereQuery = CustomerHelpers.GetWhereQuery(cbFields, txtFieldValue);
+            GetDataGridView(whereQuery);
+        }
+
+        private void cbFields_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtFieldValue.Clear();
         }
         #endregion
     }
