@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Data;
 using System.Windows.Forms;
-using ProjectWF.Helpers;
 
 namespace ProjectWF
 {
@@ -16,6 +15,9 @@ namespace ProjectWF
 
             control = new ControlHelper();
             ConfigDataGridView();
+
+
+            // Config search
         }
 
         #region Methods
@@ -23,11 +25,11 @@ namespace ProjectWF
         {
             dgvProduct.AutoGenerateColumns = false;
             dgvProduct.Columns.Add(MyUtils.CreateCol(30, "ProductID", "ID"));
-            dgvProduct.Columns.Add(MyUtils.CreateCol(100, "ProductName", "Tên sản phẩm"));
+            dgvProduct.Columns.Add(MyUtils.CreateCol(160, "ProductName", "Tên sản phẩm"));
             dgvProduct.Columns.Add(MyUtils.CreateCol(100, "Price", "Giá"));
             dgvProduct.Columns.Add(MyUtils.CreateCol(160, "Description", "Mô tả"));
             dgvProduct.Columns.Add(MyUtils.CreateCol(100, "CategoryName", "Danh mục"));
-            dgvProduct.Columns.Add(MyUtils.CreateCol(100, "SupplierName", "Nhà cung cấp"));
+            dgvProduct.Columns.Add(MyUtils.CreateCol(120, "SupplierName", "Nhà cung cấp"));
 
             dgvProduct.Columns.Add(MyUtils.CreateCol(100, "CategoryID", "Danh mục"));
             dgvProduct.Columns["CategoryID"].Visible = false;
@@ -35,9 +37,9 @@ namespace ProjectWF
             dgvProduct.Columns["SupplierID"].Visible = false;
         }
 
-        private void GetDataGridView()
+        private void GetDataGridView(string whereQuery = "")
         {
-            dataTable = ProductHelpers.GetDataTable();
+            dataTable = ProductHelpers.GetDataTable(whereQuery);
             dgvProduct.DataSource = dataTable;
         }
 
@@ -124,7 +126,7 @@ namespace ProjectWF
                 return false;
             }
 
-            if (!NewValidation.IsTextInvalid(txtDesc.Text, 1, 50, "Mô tả"))
+            if (!NewValidation.IsTextInvalid(txtDesc.Text, 1, 50, "Mô tả", false))
             {
                 txtDesc.Focus();
                 return false;
@@ -152,6 +154,9 @@ namespace ProjectWF
 
             MyUtils.FillComboBoxWithDataCategory(cbCate);
             MyUtils.FillComboBoxWithDataSupplier(cbSup);
+
+            MyUtils.FillComboBoxWithDataCategory(cbSearchCate);
+            MyUtils.FillComboBoxWithDataSupplier(cbSearchSup);
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -196,7 +201,7 @@ namespace ProjectWF
                 {
                     case ControlHelper.ControlMode.Add:
                         {
-                            // TODO: Trường hợp một sản phẩm thể có 2 nhà cung cấp
+                            // TODO: Xử lý trường hợp một sản phẩm thể có 2 nhà cung cấp
                             if (ProductHelpers.CheckProductNameExist(txtName.Text))
                             {
                                 MyMessageBox.Warning("Tên sản phẩm đã được sử dụng!");
@@ -238,6 +243,24 @@ namespace ProjectWF
         {
             int idx = e.RowIndex;
             HandleRowEnter(idx);
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            GetDataGridView();
+            txtSearchName.Clear();
+            cbSearchCate.SelectedIndex = 0;
+            cbSearchSup.SelectedIndex = 0;
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            int categoryID = Convert.ToInt32(cbSearchCate.SelectedValue.ToString());
+            int supplierID = Convert.ToInt32(cbSearchSup.SelectedValue.ToString());
+            string productName = txtSearchName.Text;
+            string whereQuery = ProductHelpers.GetWhereQuery(productName, categoryID, supplierID);
+
+            GetDataGridView(whereQuery);
         }
         #endregion
     }

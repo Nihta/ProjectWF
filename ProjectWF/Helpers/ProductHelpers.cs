@@ -60,7 +60,7 @@ namespace ProjectWF
         }
         #endregion
 
-        public static DataTable GetDataTable()
+        public static DataTable GetDataTable(string whereQuery = "")
         {
             string cmd = @"
                 select TP.ProductID,
@@ -73,7 +73,7 @@ namespace ProjectWF
                         TC.CategoryName
                 from TableProducts TP
                             join TableCategorys TC on TC.CategoryID = TP.CategoryID
-                            join TableSuppliers TS on TS.SupplierID = TP.SupplierID";
+                            join TableSuppliers TS on TS.SupplierID = TP.SupplierID " + whereQuery;
             SqlDataReader dataReader = SqlHelper.ExecuteReader(SqlHelper.defaultConnStr, cmd, CommandType.Text);
 
             DataTable dataTable = new DataTable();
@@ -199,6 +199,23 @@ namespace ProjectWF
             );
 
             return reader.HasRows;
+        }
+
+
+        public static string GetWhereQuery(string productName, int categoryID = -1, int supplierID = -1)
+        {
+            string search = "";
+
+            search += productName.Length != 0 ? $"  TP.ProductName like N'%{productName}%' " : " 1 = 1 ";
+
+            search += categoryID != -1 ? $" AND TP.CategoryID = {categoryID} " : " 1 = 1 ";
+
+            if (categoryID != -1)
+            {
+                search += $" AND  TP.SupplierID = {supplierID} ";
+            }
+
+            return search.Length != 0 ? $"where {search}" : " ";
         }
     }
 }

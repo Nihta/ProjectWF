@@ -49,10 +49,20 @@ namespace ProjectWF
             this.btnAdd = new System.Windows.Forms.Button();
             this.panelControl = new System.Windows.Forms.Panel();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.btnReset = new System.Windows.Forms.Button();
+            this.cbSearchSup = new System.Windows.Forms.ComboBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.cbSearchCate = new System.Windows.Forms.ComboBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtSearchName = new System.Windows.Forms.TextBox();
+            this.label6 = new System.Windows.Forms.Label();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProduct)).BeginInit();
             this.panelControl.SuspendLayout();
             this.panel1.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbSup
@@ -120,9 +130,9 @@ namespace ProjectWF
             // panel2
             // 
             this.panel2.Controls.Add(this.dgvProduct);
-            this.panel2.Location = new System.Drawing.Point(381, 12);
+            this.panel2.Location = new System.Drawing.Point(381, 118);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(658, 418);
+            this.panel2.Size = new System.Drawing.Size(702, 312);
             this.panel2.TabIndex = 10;
             // 
             // dgvProduct
@@ -131,11 +141,12 @@ namespace ProjectWF
             this.dgvProduct.AllowUserToDeleteRows = false;
             this.dgvProduct.AllowUserToResizeRows = false;
             this.dgvProduct.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProduct.Location = new System.Drawing.Point(0, 22);
+            this.dgvProduct.Location = new System.Drawing.Point(3, 3);
             this.dgvProduct.MultiSelect = false;
             this.dgvProduct.Name = "dgvProduct";
             this.dgvProduct.ReadOnly = true;
-            this.dgvProduct.Size = new System.Drawing.Size(632, 383);
+            this.dgvProduct.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvProduct.Size = new System.Drawing.Size(696, 296);
             this.dgvProduct.TabIndex = 0;
             this.dgvProduct.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProduct_RowEnter);
             // 
@@ -255,22 +266,115 @@ namespace ProjectWF
             this.panel1.Size = new System.Drawing.Size(363, 320);
             this.panel1.TabIndex = 8;
             // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.btnSearch);
+            this.groupBox1.Controls.Add(this.btnReset);
+            this.groupBox1.Controls.Add(this.cbSearchSup);
+            this.groupBox1.Controls.Add(this.label8);
+            this.groupBox1.Controls.Add(this.cbSearchCate);
+            this.groupBox1.Controls.Add(this.label7);
+            this.groupBox1.Controls.Add(this.txtSearchName);
+            this.groupBox1.Controls.Add(this.label6);
+            this.groupBox1.Location = new System.Drawing.Point(381, 12);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(702, 100);
+            this.groupBox1.TabIndex = 11;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Tìm kiếm";
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(580, 60);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.TabIndex = 6;
+            this.btnSearch.Text = "Tìm kiếm";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+            // 
+            // btnReset
+            // 
+            this.btnReset.Location = new System.Drawing.Point(459, 60);
+            this.btnReset.Name = "btnReset";
+            this.btnReset.Size = new System.Drawing.Size(75, 23);
+            this.btnReset.TabIndex = 6;
+            this.btnReset.Text = "Đặt lại";
+            this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
+            // 
+            // cbSearchSup
+            // 
+            this.cbSearchSup.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSearchSup.FormattingEnabled = true;
+            this.cbSearchSup.Location = new System.Drawing.Point(154, 63);
+            this.cbSearchSup.Name = "cbSearchSup";
+            this.cbSearchSup.Size = new System.Drawing.Size(196, 21);
+            this.cbSearchSup.TabIndex = 12;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(40, 66);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(91, 13);
+            this.label8.TabIndex = 11;
+            this.label8.Text = "Nhà cung cấp (*):";
+            // 
+            // cbSearchCate
+            // 
+            this.cbSearchCate.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbSearchCate.FormattingEnabled = true;
+            this.cbSearchCate.Location = new System.Drawing.Point(459, 25);
+            this.cbSearchCate.Name = "cbSearchCate";
+            this.cbSearchCate.Size = new System.Drawing.Size(196, 21);
+            this.cbSearchCate.TabIndex = 12;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(391, 28);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(43, 13);
+            this.label7.TabIndex = 11;
+            this.label7.Text = "Loại (*):";
+            // 
+            // txtSearchName
+            // 
+            this.txtSearchName.Location = new System.Drawing.Point(154, 25);
+            this.txtSearchName.MaxLength = 50;
+            this.txtSearchName.Name = "txtSearchName";
+            this.txtSearchName.Size = new System.Drawing.Size(196, 20);
+            this.txtSearchName.TabIndex = 12;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(40, 28);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(90, 13);
+            this.label6.TabIndex = 11;
+            this.label6.Text = "Tên hàng hoá (*):";
+            // 
             // FormProducts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1051, 444);
+            this.ClientSize = new System.Drawing.Size(1095, 441);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panelControl);
             this.Controls.Add(this.panel1);
             this.Name = "FormProducts";
-            this.Text = "FormProducts";
+            this.Text = "Quản lý mặt hàng";
             this.Load += new System.EventHandler(this.FormProducts_Load);
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvProduct)).EndInit();
             this.panelControl.ResumeLayout(false);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -297,5 +401,14 @@ namespace ProjectWF
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Panel panelControl;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.ComboBox cbSearchSup;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.ComboBox cbSearchCate;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtSearchName;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.Button btnReset;
     }
 }
