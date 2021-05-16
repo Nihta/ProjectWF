@@ -54,6 +54,7 @@ namespace ProjectWF
             this.txtFieldValue = new System.Windows.Forms.TextBox();
             this.cbFields = new System.Windows.Forms.ComboBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnSelect = new System.Windows.Forms.Button();
             this.panelControl.SuspendLayout();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -136,6 +137,7 @@ namespace ProjectWF
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnSelect);
             this.panel1.Controls.Add(this.txtEmail);
             this.panel1.Controls.Add(this.label5);
             this.panel1.Controls.Add(this.txtPhone);
@@ -308,6 +310,17 @@ namespace ProjectWF
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Tìm kiếm";
             // 
+            // btnSelect
+            // 
+            this.btnSelect.Location = new System.Drawing.Point(28, 263);
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.Size = new System.Drawing.Size(307, 23);
+            this.btnSelect.TabIndex = 11;
+            this.btnSelect.Text = "Chọn";
+            this.btnSelect.UseVisualStyleBackColor = true;
+            this.btnSelect.Visible = false;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
+            // 
             // FormCustomer
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -359,5 +372,6 @@ namespace ProjectWF
         private System.Windows.Forms.TextBox txtFieldValue;
         private System.Windows.Forms.ComboBox cbFields;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Button btnSelect;
     }
 }

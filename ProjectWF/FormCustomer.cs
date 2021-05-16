@@ -6,13 +6,31 @@ namespace ProjectWF
 {
     public partial class FormCustomer : Form
     {
+        private mode formMode;
+        public int ReturnCustumerID { get; set; }
+        public string ReturnCustumerName { get; set; }
+
+        public enum mode
+        {
+            nomal,
+            select,
+        };
+
         private ControlHelper control;
         DataTable dataTable;
         SqlHelper sqlHelper;
 
-        public FormCustomer()
+        public FormCustomer(mode mode = mode.nomal)
         {
             InitializeComponent();
+
+            this.formMode = mode;
+            if (formMode == mode.select)
+            {
+                ReturnCustumerID = -1;
+                ReturnCustumerName = "";
+                btnSelect.Show();
+            }
 
             ConfigDataGridView();
             sqlHelper = new SqlHelper();
@@ -201,6 +219,25 @@ namespace ProjectWF
         private void cbFields_SelectedIndexChanged(object sender, EventArgs e)
         {
             txtFieldValue.Clear();
+        }
+
+        private void btnSelect_Click(object sender, EventArgs e)
+        {
+            if (dgvCustomer.CurrentRow != null)
+            {
+                int curRowIdx = dgvCustomer.CurrentRow.Index;
+                int idCur = Convert.ToInt32(dgvCustomer.Rows[curRowIdx].Cells["CustomerID"].Value.ToString());
+                string fName = dgvCustomer.Rows[curRowIdx].Cells["FirstName"].Value.ToString();
+                string LName = dgvCustomer.Rows[curRowIdx].Cells["LastName"].Value.ToString();
+                
+                this.ReturnCustumerID = idCur;
+                this.ReturnCustumerName = $"{fName} {LName}";
+                this.Close();
+            }
+            else
+            {
+                MyMessageBox.Error("Không thể chọn!");
+            }
         }
         #endregion
     }

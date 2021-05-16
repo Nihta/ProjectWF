@@ -57,10 +57,11 @@ namespace ProjectWF
             this.cbProduct = new System.Windows.Forms.ComboBox();
             this.btnAddOrderItem = new System.Windows.Forms.Button();
             this.btnDelOrderItem = new System.Windows.Forms.Button();
-            this.cbCustomers = new System.Windows.Forms.ComboBox();
             this.btnAdd = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnSearchCustomer = new System.Windows.Forms.Button();
+            this.txtCustumerFullName = new System.Windows.Forms.TextBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
@@ -77,7 +78,7 @@ namespace ProjectWF
             this.trợGiúpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1170, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(980, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -203,12 +204,12 @@ namespace ProjectWF
             this.dgvOrderDetail.AllowUserToAddRows = false;
             this.dgvOrderDetail.AllowUserToDeleteRows = false;
             this.dgvOrderDetail.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvOrderDetail.Location = new System.Drawing.Point(290, 19);
+            this.dgvOrderDetail.Location = new System.Drawing.Point(441, 19);
             this.dgvOrderDetail.MultiSelect = false;
             this.dgvOrderDetail.Name = "dgvOrderDetail";
             this.dgvOrderDetail.ReadOnly = true;
             this.dgvOrderDetail.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dgvOrderDetail.Size = new System.Drawing.Size(403, 232);
+            this.dgvOrderDetail.Size = new System.Drawing.Size(501, 183);
             this.dgvOrderDetail.TabIndex = 5;
             // 
             // label3
@@ -283,7 +284,7 @@ namespace ProjectWF
             this.txtTotalOrder.Enabled = false;
             this.txtTotalOrder.Location = new System.Drawing.Point(139, 101);
             this.txtTotalOrder.Name = "txtTotalOrder";
-            this.txtTotalOrder.Size = new System.Drawing.Size(260, 20);
+            this.txtTotalOrder.Size = new System.Drawing.Size(151, 20);
             this.txtTotalOrder.TabIndex = 12;
             // 
             // dateTimePickerOrder
@@ -294,13 +295,14 @@ namespace ProjectWF
             this.dateTimePickerOrder.MaxDate = new System.DateTime(2100, 1, 1, 0, 0, 0, 0);
             this.dateTimePickerOrder.MinDate = new System.DateTime(2021, 1, 1, 0, 0, 0, 0);
             this.dateTimePickerOrder.Name = "dateTimePickerOrder";
-            this.dateTimePickerOrder.Size = new System.Drawing.Size(260, 20);
+            this.dateTimePickerOrder.Size = new System.Drawing.Size(151, 20);
             this.dateTimePickerOrder.TabIndex = 15;
             this.dateTimePickerOrder.Value = new System.DateTime(2021, 5, 12, 0, 0, 0, 0);
             // 
             // cbProduct
             // 
-            this.cbProduct.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbProduct.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbProduct.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbProduct.FormattingEnabled = true;
             this.cbProduct.Location = new System.Drawing.Point(104, 19);
             this.cbProduct.Name = "cbProduct";
@@ -309,7 +311,7 @@ namespace ProjectWF
             // 
             // btnAddOrderItem
             // 
-            this.btnAddOrderItem.Location = new System.Drawing.Point(23, 228);
+            this.btnAddOrderItem.Location = new System.Drawing.Point(23, 179);
             this.btnAddOrderItem.Name = "btnAddOrderItem";
             this.btnAddOrderItem.Size = new System.Drawing.Size(106, 23);
             this.btnAddOrderItem.TabIndex = 12;
@@ -319,7 +321,7 @@ namespace ProjectWF
             // 
             // btnDelOrderItem
             // 
-            this.btnDelOrderItem.Location = new System.Drawing.Point(156, 228);
+            this.btnDelOrderItem.Location = new System.Drawing.Point(156, 179);
             this.btnDelOrderItem.Name = "btnDelOrderItem";
             this.btnDelOrderItem.Size = new System.Drawing.Size(106, 23);
             this.btnDelOrderItem.TabIndex = 13;
@@ -327,20 +329,11 @@ namespace ProjectWF
             this.btnDelOrderItem.UseVisualStyleBackColor = true;
             this.btnDelOrderItem.Click += new System.EventHandler(this.btnDelOrderItem_Click);
             // 
-            // cbCustomers
-            // 
-            this.cbCustomers.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbCustomers.FormattingEnabled = true;
-            this.cbCustomers.Location = new System.Drawing.Point(141, 22);
-            this.cbCustomers.Name = "cbCustomers";
-            this.cbCustomers.Size = new System.Drawing.Size(258, 21);
-            this.cbCustomers.TabIndex = 16;
-            // 
             // btnAdd
             // 
-            this.btnAdd.Location = new System.Drawing.Point(31, 228);
+            this.btnAdd.Location = new System.Drawing.Point(31, 145);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(368, 23);
+            this.btnAdd.Size = new System.Drawing.Size(259, 23);
             this.btnAdd.TabIndex = 14;
             this.btnAdd.Text = "Thêm";
             this.btnAdd.UseVisualStyleBackColor = true;
@@ -359,32 +352,51 @@ namespace ProjectWF
             this.groupBox1.Controls.Add(this.txtNote);
             this.groupBox1.Location = new System.Drawing.Point(12, 33);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(710, 273);
+            this.groupBox1.Size = new System.Drawing.Size(961, 225);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Danh sách mua";
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.txtCustumerFullName);
+            this.groupBox2.Controls.Add(this.btnSearchCustomer);
             this.groupBox2.Controls.Add(this.btnAdd);
-            this.groupBox2.Controls.Add(this.cbCustomers);
             this.groupBox2.Controls.Add(this.label2);
             this.groupBox2.Controls.Add(this.dateTimePickerOrder);
             this.groupBox2.Controls.Add(this.label1);
             this.groupBox2.Controls.Add(this.txtTotalOrder);
             this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Location = new System.Drawing.Point(728, 33);
+            this.groupBox2.Location = new System.Drawing.Point(12, 264);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(430, 273);
+            this.groupBox2.Size = new System.Drawing.Size(432, 196);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thanh toán";
+            // 
+            // btnSearchCustomer
+            // 
+            this.btnSearchCustomer.Location = new System.Drawing.Point(328, 20);
+            this.btnSearchCustomer.Name = "btnSearchCustomer";
+            this.btnSearchCustomer.Size = new System.Drawing.Size(75, 23);
+            this.btnSearchCustomer.TabIndex = 17;
+            this.btnSearchCustomer.Text = "Tìm";
+            this.btnSearchCustomer.UseVisualStyleBackColor = true;
+            this.btnSearchCustomer.Click += new System.EventHandler(this.btnSearchCustomer_Click);
+            // 
+            // txtCustumerFullName
+            // 
+            this.txtCustumerFullName.Enabled = false;
+            this.txtCustumerFullName.Location = new System.Drawing.Point(139, 22);
+            this.txtCustumerFullName.Name = "txtCustumerFullName";
+            this.txtCustumerFullName.Size = new System.Drawing.Size(151, 20);
+            this.txtCustumerFullName.TabIndex = 18;
             // 
             // FormMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1170, 339);
+            this.ClientSize = new System.Drawing.Size(980, 472);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.menuStrip1);
@@ -433,11 +445,12 @@ namespace ProjectWF
         private System.Windows.Forms.ComboBox cbProduct;
         private System.Windows.Forms.Button btnAddOrderItem;
         private System.Windows.Forms.Button btnDelOrderItem;
-        private System.Windows.Forms.ComboBox cbCustomers;
         private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ToolStripMenuItem thốngKêToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lịchSửĐặtHàngToolStripMenuItem1;
+        private System.Windows.Forms.Button btnSearchCustomer;
+        private System.Windows.Forms.TextBox txtCustumerFullName;
     }
 }

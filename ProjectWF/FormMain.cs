@@ -10,6 +10,7 @@ namespace ProjectWF
         private int curUserId;
         DataTable dataTableOrderDetail;
         private int totalAmount = 0;
+        private int idCustumerSelected = -1;
 
         public FormMain()
         {
@@ -23,9 +24,9 @@ namespace ProjectWF
 
             dataTableOrderDetail = new DataTable();
 
-            ConfigDataGridViewOrderDetail();
             ConfigDataTableOrderDetail();
 
+            ConfigDataGridViewOrderDetail();
             dgvOrderDetail.DataSource = dataTableOrderDetail;
         }
 
@@ -56,7 +57,13 @@ namespace ProjectWF
         #region OrederHandles
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            int customerId = Convert.ToInt32(cbCustomers.SelectedValue.ToString());
+            if (this.idCustumerSelected < 1)
+            {
+                MyMessageBox.Warning("Chưa có thông tin người mua hàng!");
+                btnSearchCustomer.Focus();
+                return;
+            }
+
             string date = dateTimePickerOrder.Text;
 
             if (dataTableOrderDetail.Rows.Count == 0)
@@ -65,7 +72,7 @@ namespace ProjectWF
             }
             else
             {
-                OrderHelpers.Add(date, totalAmount, customerId);
+                OrderHelpers.Add(date, totalAmount, this.idCustumerSelected);
                 // Lấy id của order vừa tạo
                 int OrderID = OrderHelpers.GetLastOrderID();
 
@@ -136,8 +143,20 @@ namespace ProjectWF
         #region Events
         private void FormMain_Load(object sender, EventArgs e)
         {
-            MyUtils.FillComboBoxWithDataCustomer(cbCustomers);
             MyUtils.FillComboBoxWithDataProduct(cbProduct);
+        }
+
+        private void btnSearchCustomer_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            using (FormCustomer f = new FormCustomer(FormCustomer.mode.select))
+            {
+                f.ShowDialog();
+                txtCustumerFullName.Text = f.ReturnCustumerName;
+                this.idCustumerSelected = f.ReturnCustumerID;
+                Console.WriteLine(this.idCustumerSelected);
+            }
+            this.Show();
         }
         #endregion
 

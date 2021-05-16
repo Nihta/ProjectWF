@@ -32,6 +32,9 @@ namespace ProjectWF.Helpers
                 case Param.CustemerID:
                     parameter = new SqlParameter("@CustemerID", SqlDbType.Int);
                     break;
+                case Param.TotalAmount:
+                    parameter = new SqlParameter("@TotalAmount", SqlDbType.Int);
+                    break;
             }
 
             parameter.Value = value;

@@ -81,7 +81,7 @@ namespace ProjectWF
                 CreateParam(Param.Quantity, quantity),
                 CreateParam(Param.Note, note),
                 CreateParam(Param.ProductID, productID),
-                CreateParam(Param.ProductID, orderID)
+                CreateParam(Param.OrderID, orderID)
             );
 
             return numOfRowsAffected == 1;
