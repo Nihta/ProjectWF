@@ -210,10 +210,7 @@ namespace ProjectWF
 
             search += categoryID != -1 ? $" AND TP.CategoryID = {categoryID} " : " 1 = 1 ";
 
-            if (categoryID != -1)
-            {
-                search += $" AND  TP.SupplierID = {supplierID} ";
-            }
+            search += categoryID != -1 ? $" AND TP.SupplierID = {supplierID} " : " 1 = 1 ";
 
             return search.Length != 0 ? $"where {search}" : " ";
         }
