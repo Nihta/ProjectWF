@@ -31,7 +31,7 @@ UPDATE dbo.TableUsers
     WHERE UserID = @UserID
 go
 
-EXEC dbo.UpdateUser @UserID = 1, @FullName = "Thìn 2", @PassWord = "202cb962ac59075b964b07152d234b70"
+EXEC dbo.UpdateUser @UserID = 1, @FullName = "Thìn", @PassWord = "202cb962ac59075b964b07152d234b70"
 go
 
 Select UserID, UserName, [PassWord], FullName

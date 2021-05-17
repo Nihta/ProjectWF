@@ -83,7 +83,7 @@ namespace ProjectWF
             }
 
             // Kiểm tra mật khẩu hiện tại
-            if (UsersHelpers.Login(userName, oldPassWord) == -1)
+            if (UserLinq.Login(userName, oldPassWord) == -1)
             {
                 MyMessageBox.Warning("Mật khẩu không chính xác!");
                 txtOldPassWord.Focus();
@@ -93,7 +93,7 @@ namespace ProjectWF
             // Cập nhật thông tin tài khoản
             // Trường hợp không muốn đổi mật khẩu
             string finalPass = newPassWord.Length == 0 ? oldPassWord : newPassWord;
-            if (UsersHelpers.UpdateUser(this.userId, fullName, finalPass))
+            if (UserLinq.UpdateUser(this.userId, fullName, finalPass))
             {
                 MyMessageBox.Information("Cập nhật thông tin tài khoản thành công!");
                 MyUtils.ClearTextBox(txtOldPassWord, txtNewPassWord, txtCfmNewPassWord);
