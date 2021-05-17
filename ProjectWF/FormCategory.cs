@@ -7,16 +7,14 @@ namespace ProjectWF
     public partial class FormCategory : Form
     {
         private ControlHelper control;
-        DataTable dataTable;
-        SqlHelper sqlHelper;
 
         public FormCategory()
         {
             InitializeComponent();
 
-            sqlHelper = new SqlHelper();
-            control = new ControlHelper();
             ConfigDataGridView();
+
+            control = new ControlHelper();
         }
 
         #region Methods
@@ -28,9 +26,16 @@ namespace ProjectWF
             dgvCategory.Columns.Add(MyUtils.CreateCol(300, "Description", "Mô tả"));
         }
 
-        private void GetDataGridView()
+        private int GetCurrentItemID()
         {
-            dataTable = CategoryHelpers.DataGridViewHelper(sqlHelper, dgvCategory);
+            int curRowIdx = dgvCategory.CurrentRow.Index;
+            int id = Convert.ToInt32(dgvCategory.Rows[curRowIdx].Cells["CategoryID"].Value.ToString());
+            return id;
+        }
+
+        private void RenderDataGridView()
+        {
+            CategoryLinq.DataGridViewHelper(dgvCategory);
         }
 
         private void HandleRowEnter(int idx)
@@ -39,28 +44,15 @@ namespace ProjectWF
             txtCateDesc.Text = dgvCategory.Rows[idx].Cells["Description"].Value.ToString().Trim();
         }
 
-        private void AddRow()
+        private void Add()
         {
-            DataRow newRow = dataTable.NewRow();
-
-            newRow["CategoryName"] = txtCateName.Text;
-            newRow["Description"] = txtCateDesc.Text;
-
-            dataTable.Rows.Add(newRow);
-            sqlHelper.Update(dataTable);
-            GetDataGridView();
-            control.ClearTextBox();
+            CategoryLinq.Add(txtCateName.Text, txtCateDesc.Text);
         }
 
         private void EditRow()
         {
-            int curRowIdx = dgvCategory.CurrentRow.Index;
-            DataRow editRow = dataTable.Rows[curRowIdx];
-
-            editRow["CategoryName"] = txtCateName.Text;
-            editRow["Description"] = txtCateDesc.Text;
-
-            sqlHelper.Update(dataTable);
+            int idNeedEdit = GetCurrentItemID();
+            CategoryLinq.Edit(idNeedEdit, txtCateName.Text, txtCateDesc.Text);
         }
 
         public bool IsInvalid()
@@ -94,7 +86,7 @@ namespace ProjectWF
             txtCateName.Focus();
 
             // DataGridView
-            GetDataGridView();
+            RenderDataGridView();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -113,14 +105,11 @@ namespace ProjectWF
         {
             if (dgvCategory.CurrentRow != null)
             {
-                if (MyMessageBox.Question("Bạn có chắn xóa bản ghi đã chọn không?"))
+                if (MyMessageBox.Question("Bạn có chắn xóa danh mục đã chọn không?"))
                 {
-                    int curRowIdx = dgvCategory.CurrentRow.Index;
-                    int idNeedDel = Convert.ToInt32(dgvCategory.Rows[curRowIdx].Cells["CategoryID"].Value.ToString());
-
-                    DataTableHelpers.RemoveRow(dataTable, "CategoryID", idNeedDel);
-
-                    sqlHelper.Update(dataTable);
+                    int idNeedDel = GetCurrentItemID();
+                    CategoryLinq.Delete(idNeedDel);
+                    RenderDataGridView();
                 }
             }
         }
@@ -134,7 +123,7 @@ namespace ProjectWF
                 {
                     case ControlHelper.ControlMode.Add:
                         {
-                            AddRow();
+                            Add();
                         }
                         break;
                     case ControlHelper.ControlMode.Edit:
@@ -146,6 +135,7 @@ namespace ProjectWF
 
                 // Sau khi cập nhật dữ liệu thành công
                 control.SwitchMode(ControlHelper.ControlMode.None);
+                RenderDataGridView();
             }
         }
 
