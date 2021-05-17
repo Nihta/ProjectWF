@@ -1,0 +1,74 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="dbProject" Class="DataClassesDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.\sqlexpress;Initial Catalog=dbProject;Integrated Security=True;Pooling=False" SettingsObjectName="ProjectWF.Properties.Settings" SettingsPropertyName="dbProjectConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.TableUsers" Member="TableUsers">
+    <Type Name="TableUser">
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(30)" CanBeNull="true" />
+      <Column Name="UserName" Type="System.String" DbType="NChar(30)" CanBeNull="true" />
+      <Column Name="PassWord" Type="System.String" DbType="NChar(32)" CanBeNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TableCategorys" Member="TableCategories">
+    <Type Name="TableCategory">
+      <Column Name="CategoryID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="CategoryName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Association Name="TableCategory_TableProduct" Member="TableProducts" ThisKey="CategoryID" OtherKey="CategoryID" Type="TableProduct" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TableCustomers" Member="TableCustomers">
+    <Type Name="TableCustomer">
+      <Column Name="CustomerID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="FirstName" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="LastName" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(11) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(30)" CanBeNull="true" />
+      <Association Name="TableCustomer_TableOrder" Member="TableOrders" ThisKey="CustomerID" OtherKey="CustemerID" Type="TableOrder" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TableOrderDetails" Member="TableOrderDetails">
+    <Type Name="TableOrderDetail">
+      <Column Name="OrderDetailID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Quantity" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Note" Type="System.String" DbType="NVarChar(150)" CanBeNull="true" />
+      <Column Name="ProductID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="OrderID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="TableOrder_TableOrderDetail" Member="TableOrder" ThisKey="OrderID" OtherKey="OrderID" Type="TableOrder" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="TableProduct_TableOrderDetail" Member="TableProduct" ThisKey="ProductID" OtherKey="ProductID" Type="TableProduct" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TableOrders" Member="TableOrders">
+    <Type Name="TableOrder">
+      <Column Name="OrderID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="OrderDate" Type="System.String" DbType="NChar(10) NOT NULL" CanBeNull="false" />
+      <Column Name="TotalAmount" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CustemerID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="TableOrder_TableOrderDetail" Member="TableOrderDetails" ThisKey="OrderID" OtherKey="OrderID" Type="TableOrderDetail" />
+      <Association Name="TableCustomer_TableOrder" Member="TableCustomer" ThisKey="CustemerID" OtherKey="CustomerID" Type="TableCustomer" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TableProducts" Member="TableProducts">
+    <Type Name="TableProduct">
+      <Column Name="ProductID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ProductName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Price" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="CategoryID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="SupplierID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="TableProduct_TableOrderDetail" Member="TableOrderDetails" ThisKey="ProductID" OtherKey="ProductID" Type="TableOrderDetail" />
+      <Association Name="TableCategory_TableProduct" Member="TableCategory" ThisKey="CategoryID" OtherKey="CategoryID" Type="TableCategory" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+      <Association Name="TableSupplier_TableProduct" Member="TableSupplier" ThisKey="SupplierID" OtherKey="SupplierID" Type="TableSupplier" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TableSuppliers" Member="TableSuppliers">
+    <Type Name="TableSupplier">
+      <Column Name="SupplierID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="SupplierName" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Phone" Type="System.String" DbType="VarChar(11) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="VarChar(30) NOT NULL" CanBeNull="false" />
+      <Association Name="TableSupplier_TableProduct" Member="TableProducts" ThisKey="SupplierID" OtherKey="SupplierID" Type="TableProduct" />
+    </Type>
+  </Table>
+</Database>

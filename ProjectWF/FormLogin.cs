@@ -13,7 +13,7 @@ namespace ProjectWF
         #region Methods
         private void HandleLogin(string userName, string passWord)
         {
-            int curUserID = UsersHelpers.Login(userName, passWord);
+            int curUserID = UserLinq.Login(userName, passWord);
             if (curUserID == -1)
             {
                 MyMessageBox.Warning("Tên đăng nhập hoặc mật khẩu không chính xác!");
