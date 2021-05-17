@@ -195,6 +195,7 @@ namespace ProjectWF
             this.dgvSupplier.MultiSelect = false;
             this.dgvSupplier.Name = "dgvSupplier";
             this.dgvSupplier.ReadOnly = true;
+            this.dgvSupplier.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvSupplier.Size = new System.Drawing.Size(733, 379);
             this.dgvSupplier.TabIndex = 0;
             this.dgvSupplier.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvSupplier_RowEnter);
