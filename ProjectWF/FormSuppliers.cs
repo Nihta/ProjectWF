@@ -7,8 +7,6 @@ namespace ProjectWF
     public partial class FormSuppliers : Form
     {
         private ControlHelper control;
-        DataTable dataTable;
-        SqlHelper sqlHelper;
 
         public FormSuppliers()
         {
@@ -17,7 +15,6 @@ namespace ProjectWF
             ConfigDataGridView();
 
             control = new ControlHelper();
-            sqlHelper = new SqlHelper();
         }
 
         #region Methods
@@ -31,37 +28,27 @@ namespace ProjectWF
             dgvSupplier.Columns.Add(MyUtils.CreateCol(150, "Email"));
         }
 
-        private void GetDataGridView()
-        {
-            dataTable = SupplierHelpers.DataGridViewHelper(sqlHelper, dgvSupplier);
-        }
-
-        private void AddSup()
-        {
-            DataRow newRow = dataTable.NewRow();
-
-            newRow["SupplierName"] = txtSupName.Text;
-            newRow["Address"] = txtSupAddress.Text;
-            newRow["Phone"] = txtSupPhone.Text;
-            newRow["Email"] = txtSupEmail.Text;
-
-            dataTable.Rows.Add(newRow);
-            sqlHelper.Update(dataTable);
-            GetDataGridView();
-        }
-
-        private void EditSup()
+        private int GetCurrentItemID()
         {
             int curRowIdx = dgvSupplier.CurrentRow.Index;
+            int id = Convert.ToInt32(dgvSupplier.Rows[curRowIdx].Cells["SupplierID"].Value.ToString());
+            return id;
+        }
 
-            DataRow editRow = dataTable.Rows[curRowIdx];
+        private void RenderDataGridView()
+        {
+            SupplierLinq.DataGridViewHelper(dgvSupplier);
+        }
 
-            editRow["SupplierName"] = txtSupName.Text;
-            editRow["Address"] = txtSupAddress.Text;
-            editRow["Phone"] = txtSupPhone.Text;
-            editRow["Email"] = txtSupEmail.Text;
+        private void AddSupplier()
+        {
+            SupplierLinq.Add(txtSupName.Text, txtSupAddress.Text, txtSupPhone.Text, txtSupEmail.Text);
+        }
 
-            sqlHelper.Update(dataTable);
+        private void EditSupplier()
+        {
+            int idNeedDel = GetCurrentItemID();
+            SupplierLinq.Edit(idNeedDel, txtSupName.Text, txtSupAddress.Text, txtSupPhone.Text, txtSupEmail.Text);
         }
 
         public bool IsInvalid()
@@ -102,7 +89,6 @@ namespace ProjectWF
         }
         #endregion
 
-
         #region Events
         private void FormSuppliers_Load(object sender, EventArgs e)
         {
@@ -114,13 +100,13 @@ namespace ProjectWF
             control.SwitchMode(ControlHelper.ControlMode.None);
             txtSupName.Focus();
 
-            // GetData
-            GetDataGridView();
+            RenderDataGridView();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             control.HandledAddClick();
+            control.ClearTextBox();
             txtSupName.Focus();
         }
 
@@ -134,14 +120,11 @@ namespace ProjectWF
         {
             if (dgvSupplier.CurrentRow != null)
             {
-                if (MyMessageBox.Question("Bạn có chắn xóa bản ghi đã chọn không?"))
+                if (MyMessageBox.Question("Bạn có chắn xóa nhà cung cấp đã chọn không?"))
                 {
-                    int curRowIdx = dgvSupplier.CurrentRow.Index;
-                    int idNeedDel = Convert.ToInt32(dgvSupplier.Rows[curRowIdx].Cells["SupplierID"].Value.ToString());
-
-                    DataTableHelpers.RemoveRow(dataTable, "SupplierID", idNeedDel);
-
-                    sqlHelper.Update(dataTable);
+                    int idNeedDel = GetCurrentItemID();
+                    SupplierLinq.Delete(idNeedDel);
+                    RenderDataGridView();
                 }
             }
         }
@@ -155,18 +138,18 @@ namespace ProjectWF
                 {
                     case ControlHelper.ControlMode.Add:
                         {
-                            AddSup();
+                            AddSupplier();
                         }
                         break;
                     case ControlHelper.ControlMode.Edit:
                         {
-                            EditSup();
+                            EditSupplier();
                         }
                         break;
                 }
-
                 // Sau khi cập nhật dữ liệu thành công
                 control.SwitchMode(ControlHelper.ControlMode.None);
+                RenderDataGridView();
             }
         }
 
