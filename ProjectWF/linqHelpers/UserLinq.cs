@@ -5,7 +5,7 @@ namespace ProjectWF
     class UserLinq
     {
         /// <summary>
-        /// 
+        /// Đăng nhập
         /// </summary>
         /// <param name="userName"></param>
         /// <param name="passWord"></param>
@@ -19,8 +19,8 @@ namespace ProjectWF
             using (DataClassesDataContext db = new DataClassesDataContext())
             {
                 IQueryable<TableUser> query = from item in db.TableUsers
-                                where (item.UserName == userName) && (item.PassWord == passWordEndcode)
-                                select item;
+                                              where (item.UserName == userName) && (item.PassWord == passWordEndcode)
+                                              select item;
 
                 if (query.Count() != 0)
                 {
