@@ -1,6 +1,8 @@
 ﻿using System;
+using System.Data;
 using System.Diagnostics;
 using System.Linq;
+using System.Windows.Forms;
 
 namespace ProjectWF
 {
@@ -33,9 +35,60 @@ namespace ProjectWF
             return -1;
         }
 
+        public static void DataGridViewHelper(DataGridView dataGridView)
+        {
+            using (DataClassesDataContext db = new DataClassesDataContext())
+            {
+                var queryUsers = from item in db.TableUsers
+                                 orderby item.UserID descending
+                                 select new
+                                 {
+                                     UserID = item.UserID,
+                                     FullName = item.FullName,
+                                     UserName = item.UserName,
+                                     PassWord = item.PassWord,
+                                 };
+
+                dataGridView.DataSource = queryUsers;
+            }
+        }
+
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <param name="ignoreUserId"></param>
+        /// <returns>
+        /// Return true nếu đã được sử dụng
+        /// </returns>
+        public static bool CheckUserNameExist(string userName, int ignoreUserId = -1)
+        {
+            using (DataClassesDataContext db = new DataClassesDataContext())
+            {
+                int cnt = db.TableUsers.Count(user => user.UserName == userName && user.UserID != ignoreUserId);
+                return cnt > 0;
+            }
+        }
+
+        public static void Add(string fullName, string userName, string passWord)
+        {
+            using (DataClassesDataContext db = new DataClassesDataContext())
+            {
+                TableUser itemNewAdd = new TableUser();
+
+                string passWordEndcode = MyUtils.MD5Hash(passWord);
+                itemNewAdd.FullName = fullName;
+                itemNewAdd.UserName = userName;
+                itemNewAdd.PassWord = passWordEndcode;
+
+                db.TableUsers.InsertOnSubmit(itemNewAdd);
+                db.SubmitChanges();
+            }
+        }
+
         public static bool UpdateUser(int userID, string fullName, string passWord)
         {
-
             using (DataClassesDataContext db = new DataClassesDataContext())
             {
                 try
@@ -56,6 +109,32 @@ namespace ProjectWF
                     Debug.WriteLine(ex.Message);
                     return false;
                 }
+            }
+        }
+
+        public static void Edit(int userID, string fullName, string userName, string passWord)
+        {
+            using (DataClassesDataContext db = new DataClassesDataContext())
+            {
+                var itemNeedEdit = db.TableUsers.First(user => user.UserID == userID);
+
+                string passWordEndcode = MyUtils.MD5Hash(passWord);
+                itemNeedEdit.FullName = fullName;
+                itemNeedEdit.UserName = userName;
+                itemNeedEdit.PassWord = passWordEndcode;
+
+                db.SubmitChanges();
+            }
+        }
+
+        public static void Delete(int userID)
+        {
+            using (DataClassesDataContext db = new DataClassesDataContext())
+            {
+                var itemNeedDel = db.TableUsers.First(user => user.UserID == userID);
+
+                db.TableUsers.DeleteOnSubmit(itemNeedDel);
+                db.SubmitChanges();
             }
         }
     }

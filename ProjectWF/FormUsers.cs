@@ -7,14 +7,11 @@ namespace ProjectWF
     public partial class FormUsers : Form
     {
         ControlHelper control;
-        SqlHelper sqlHelper;
-        DataTable dataTableUser;
 
         public FormUsers()
         {
             InitializeComponent();
 
-            sqlHelper = new SqlHelper();
             control = new ControlHelper();
 
             ConfigDataGridView();
@@ -29,35 +26,27 @@ namespace ProjectWF
             dgvUser.Columns.Add(MyUtils.CreateCol(200, "UserName", "Tên đăng nhập"));
         }
 
-        private void GetDataGridView()
+        private void RenderDataGridView()
         {
-            dataTableUser = UsersHelpers.DataGridViewHelper(sqlHelper, dgvUser);
+            UserLinq.DataGridViewHelper(dgvUser);
+        }
+
+        private int GetCurrentItemID()
+        {
+            int curRowIdx = dgvUser.CurrentRow.Index;
+            int id = Convert.ToInt32(dgvUser.Rows[curRowIdx].Cells["UserID"].Value.ToString());
+            return id;
         }
 
         private void AddUser()
         {
-            DataRow newRow = dataTableUser.NewRow();
-
-            newRow["FullName"] = txtFullName.Text;
-            newRow["UserName"] = txtUserName.Text;
-            newRow["PassWord"] = MyUtils.MD5Hash(txtPassWord.Text);
-
-            dataTableUser.Rows.Add(newRow);
-            sqlHelper.Update(dataTableUser);
-            GetDataGridView();
+            UserLinq.Add(txtFullName.Text, txtUserName.Text, txtPassWord.Text);
         }
 
         private void EditUser()
         {
-            int curRowIdx = dgvUser.CurrentRow.Index;
-
-            DataRow editRow = dataTableUser.Rows[curRowIdx];
-
-            editRow["FullName"] = txtFullName.Text;
-            editRow["UserName"] = txtUserName.Text;
-            editRow["PassWord"] = MyUtils.MD5Hash(txtPassWord.Text);
-
-            sqlHelper.Update(dataTableUser);
+            int userIdNeedEdit = GetCurrentItemID();
+            UserLinq.Edit(userIdNeedEdit, txtFullName.Text, txtUserName.Text, txtPassWord.Text);
         }
 
         public bool IsInvalid()
@@ -101,8 +90,7 @@ namespace ProjectWF
             // Mode mặc định
             control.SwitchMode(ControlHelper.ControlMode.None);
 
-            // Lấy thông tin các user và hiển thị lên dataGridView
-            GetDataGridView();
+            RenderDataGridView();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -124,14 +112,11 @@ namespace ProjectWF
         {
             if (dgvUser.CurrentRow != null)
             {
-                if (MyMessageBox.Question("Bạn có chắn xóa bản ghi đã chọn không?"))
+                if (MyMessageBox.Question("Bạn có chắn xóa tài khoản đã chọn không?"))
                 {
-                    int curRowIdx = dgvUser.CurrentRow.Index;
-                    int idNeedDel = Convert.ToInt32(dgvUser.Rows[curRowIdx].Cells["UserID"].Value.ToString());
-
-                    DataTableHelpers.RemoveRow(dataTableUser, "UserID", idNeedDel);
-
-                    sqlHelper.Update(dataTableUser);
+                    int userIdNeedDel = GetCurrentItemID();
+                    UserLinq.Delete(userIdNeedDel);
+                    RenderDataGridView();
                 }
             }
         }
@@ -145,11 +130,11 @@ namespace ProjectWF
                 {
                     case ControlHelper.ControlMode.Add:
                         {
-                            if (UsersHelpers.CheckUserNameExist(txtUserName.Text))
+                            if (UserLinq.CheckUserNameExist(txtUserName.Text))
                             {
-                                MyMessageBox.Warning("Tên đăng nhập đã được sử dụng!");
+                                MyMessageBox.Warning("Tên đăng nhập đã được sử dụng!\nVui lòng chọn một tên tài khoản khác.");
+                                txtUserName.Focus();
                                 return;
-
                             }
                             AddUser();
                         }
@@ -160,12 +145,10 @@ namespace ProjectWF
                         }
                         break;
                 }
-
                 // Sau khi lưu
                 control.SwitchMode(ControlHelper.ControlMode.None);
+                RenderDataGridView();
             }
-
-
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
