@@ -134,6 +134,7 @@
     <Compile Include="helpers\ProductHelpers.cs" />
     <Compile Include="helpers\SupplierHelpers.cs" />
     <Compile Include="linq\CategoryLinq.cs" />
+    <Compile Include="linq\CustomerLinq.cs" />
     <Compile Include="linq\SupplierLinq.cs" />
     <Compile Include="linq\UserLinq.cs" />
     <Compile Include="MyMessageBox.cs" />

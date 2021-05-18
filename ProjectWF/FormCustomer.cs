@@ -24,6 +24,9 @@ namespace ProjectWF
         {
             InitializeComponent();
 
+            ConfigDataGridView();
+            CustomerHelpers.ConfigSearch(cbFields);
+
             this.formMode = mode;
             if (formMode == mode.select)
             {
@@ -32,10 +35,8 @@ namespace ProjectWF
                 btnSelect.Show();
             }
 
-            ConfigDataGridView();
             sqlHelper = new SqlHelper();
             control = new ControlHelper();
-            CustomerHelpers.ConfigSearch(cbFields);
         }
 
         #region Methods
@@ -49,8 +50,14 @@ namespace ProjectWF
             dgvCustomer.Columns.Add(MyUtils.CreateCol(100, "Phone", "Số điện thoại"));
             dgvCustomer.Columns.Add(MyUtils.CreateCol(160, "Email", "Email"));
         }
+        private int GetCurrentItemID()
+        {
+            int curRowIdx = dgvCustomer.CurrentRow.Index;
+            int id = Convert.ToInt32(dgvCustomer.Rows[curRowIdx].Cells["CustomerID"].Value.ToString());
+            return id;
+        }
 
-        private void GetDataGridView(string whereQuery = "")
+        private void RenderDataGridView(string whereQuery = "")
         {
             dataTable = CustomerHelpers.DataGridViewHelper(sqlHelper, dgvCustomer, whereQuery);
         }
@@ -64,33 +71,15 @@ namespace ProjectWF
             txtEmail.Text = dgvCustomer.Rows[idx].Cells["Email"].Value.ToString().Trim();
         }
 
-        private void AddSup()
+        private void AddCustomer()
         {
-            DataRow newRow = dataTable.NewRow();
-
-            newRow["FirstName"] = txtFName.Text;
-            newRow["LastName"] = txtLName.Text;
-            newRow["Address"] = txtAddress.Text;
-            newRow["Phone"] = txtPhone.Text;
-            newRow["Email"] = txtEmail.Text;
-
-            dataTable.Rows.Add(newRow);
-            sqlHelper.Update(dataTable);
-            GetDataGridView();
+            CustomerLinq.Add(txtFName.Text, txtLName.Text, txtAddress.Text, txtPhone.Text, txtEmail.Text);
         }
 
-        private void EditSup()
+        private void EditCustomer()
         {
-            int curRowIdx = dgvCustomer.CurrentRow.Index;
-            DataRow editRow = dataTable.Rows[curRowIdx];
-
-            editRow["FirstName"] = txtFName.Text;
-            editRow["LastName"] = txtLName.Text;
-            editRow["Address"] = txtAddress.Text;
-            editRow["Phone"] = txtPhone.Text;
-            editRow["Email"] = txtEmail.Text;
-
-            sqlHelper.Update(dataTable);
+            int idNeedEdit = GetCurrentItemID();
+            CustomerLinq.Edit(idNeedEdit, txtFName.Text, txtLName.Text, txtAddress.Text, txtPhone.Text, txtEmail.Text);
         }
 
         public bool IsInvalid()
@@ -139,12 +128,13 @@ namespace ProjectWF
             control.SwitchMode(ControlHelper.ControlMode.None);
             txtFName.Focus();
 
-            GetDataGridView();
+            RenderDataGridView();
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
             control.HandledAddClick();
+            control.ClearTextBox();
             txtFName.Focus();
         }
 
@@ -158,14 +148,11 @@ namespace ProjectWF
         {
             if (dgvCustomer.CurrentRow != null)
             {
-                if (MyMessageBox.Question("Bạn có chắn xóa bản ghi đã chọn không?"))
+                if (MyMessageBox.Question("Bạn có chắn xóa khách hàng đã chọn không?"))
                 {
-                    int curRowIdx = dgvCustomer.CurrentRow.Index;
-                    int idNeedDel = Convert.ToInt32(dgvCustomer.Rows[curRowIdx].Cells["CustomerID"].Value.ToString());
-
-                    DataTableHelpers.RemoveRow(dataTable, "CustomerID", idNeedDel);
-
-                    sqlHelper.Update(dataTable);
+                    int idNeedDel =GetCurrentItemID();
+                    CustomerLinq.Delete(idNeedDel);
+                    RenderDataGridView();
                 }
             }
         }
@@ -179,18 +166,18 @@ namespace ProjectWF
                 {
                     case ControlHelper.ControlMode.Add:
                         {
-                            AddSup();
+                            AddCustomer();
                         }
                         break;
                     case ControlHelper.ControlMode.Edit:
                         {
-                            EditSup();
+                            EditCustomer();
                         }
                         break;
                 }
-
                 // Sau khi cập nhật dữ liệu thành công
                 control.SwitchMode(ControlHelper.ControlMode.None);
+                RenderDataGridView();
             }
         }
 
@@ -213,7 +200,7 @@ namespace ProjectWF
         private void btnSearch_Click(object sender, EventArgs e)
         {
             string whereQuery = CustomerHelpers.GetWhereQuery(cbFields, txtFieldValue);
-            GetDataGridView(whereQuery);
+            RenderDataGridView(whereQuery);
         }
 
         private void cbFields_SelectedIndexChanged(object sender, EventArgs e)
@@ -226,12 +213,15 @@ namespace ProjectWF
             if (dgvCustomer.CurrentRow != null)
             {
                 int curRowIdx = dgvCustomer.CurrentRow.Index;
-                int idCur = Convert.ToInt32(dgvCustomer.Rows[curRowIdx].Cells["CustomerID"].Value.ToString());
+                int idSelected = GetCurrentItemID();
+
                 string fName = dgvCustomer.Rows[curRowIdx].Cells["FirstName"].Value.ToString();
                 string LName = dgvCustomer.Rows[curRowIdx].Cells["LastName"].Value.ToString();
+                string fullName = $"{fName} {LName}";
                 
-                this.ReturnCustumerID = idCur;
-                this.ReturnCustumerName = $"{fName} {LName}";
+                this.ReturnCustumerID = idSelected;
+                this.ReturnCustumerName = fullName;
+
                 this.Close();
             }
             else
