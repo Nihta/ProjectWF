@@ -6,10 +6,6 @@ namespace ProjectWF
 {
     public partial class FormCustomer : Form
     {
-        private mode formMode;
-        public int ReturnCustumerID { get; set; }
-        public string ReturnCustumerName { get; set; }
-
         public enum mode
         {
             nomal,
@@ -17,8 +13,9 @@ namespace ProjectWF
         };
 
         private ControlHelper control;
-        DataTable dataTable;
-        SqlHelper sqlHelper;
+        private mode formMode;
+        public int ReturnCustumerID { get; set; }
+        public string ReturnCustumerName { get; set; }
 
         public FormCustomer(mode mode = mode.nomal)
         {
@@ -35,7 +32,6 @@ namespace ProjectWF
                 btnSelect.Show();
             }
 
-            sqlHelper = new SqlHelper();
             control = new ControlHelper();
         }
 
@@ -57,9 +53,9 @@ namespace ProjectWF
             return id;
         }
 
-        private void RenderDataGridView(string whereQuery = "")
+        private void RenderDataGridView(string field = "", string value = "")
         {
-            dataTable = CustomerHelpers.DataGridViewHelper(sqlHelper, dgvCustomer, whereQuery);
+            CustomerLinq.DataGridViewHelper(dgvCustomer, field, value);
         }
 
         private void HandleRowEnter(int idx)
@@ -150,7 +146,7 @@ namespace ProjectWF
             {
                 if (MyMessageBox.Question("Bạn có chắn xóa khách hàng đã chọn không?"))
                 {
-                    int idNeedDel =GetCurrentItemID();
+                    int idNeedDel = GetCurrentItemID();
                     CustomerLinq.Delete(idNeedDel);
                     RenderDataGridView();
                 }
@@ -199,8 +195,7 @@ namespace ProjectWF
 
         private void btnSearch_Click(object sender, EventArgs e)
         {
-            string whereQuery = CustomerHelpers.GetWhereQuery(cbFields, txtFieldValue);
-            RenderDataGridView(whereQuery);
+            RenderDataGridView(cbFields.Text, txtFieldValue.Text);
         }
 
         private void cbFields_SelectedIndexChanged(object sender, EventArgs e)
@@ -218,7 +213,7 @@ namespace ProjectWF
                 string fName = dgvCustomer.Rows[curRowIdx].Cells["FirstName"].Value.ToString();
                 string LName = dgvCustomer.Rows[curRowIdx].Cells["LastName"].Value.ToString();
                 string fullName = $"{fName} {LName}";
-                
+
                 this.ReturnCustumerID = idSelected;
                 this.ReturnCustumerName = fullName;
 
