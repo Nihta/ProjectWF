@@ -8,15 +8,33 @@ namespace ProjectWF
     {
         private ControlHelper control;
         DataTable dataTable;
+        private mode formMode;
 
-        public FormProducts()
+        public enum mode
         {
-            InitializeComponent();
+            nomal,
+            select,
+        };
 
-            control = new ControlHelper();
+        public int ReturnProductID { get; set; }
+        public string ReturnProductName { get; set; }
+
+        public FormProducts(mode mode = mode.nomal)
+        {
+            this.formMode = mode;
+
+            InitializeComponent();
             ConfigDataGridView();
 
+            // Chế độ chọn mặt hàng
+            if (formMode == mode.select)
+            {
+                ReturnProductID = -1;
+                ReturnProductName = "";
+                btnSelect.Show();
+            }
 
+            control = new ControlHelper();
             // Config search
         }
 
@@ -31,13 +49,20 @@ namespace ProjectWF
             dgvProduct.Columns.Add(MyUtils.CreateCol(100, "CategoryName", "Danh mục"));
             dgvProduct.Columns.Add(MyUtils.CreateCol(120, "SupplierName", "Nhà cung cấp"));
 
-            dgvProduct.Columns.Add(MyUtils.CreateCol(100, "CategoryID", "Danh mục"));
+            dgvProduct.Columns.Add(MyUtils.CreateCol(0, "CategoryID", "Danh mục"));
             dgvProduct.Columns["CategoryID"].Visible = false;
-            dgvProduct.Columns.Add(MyUtils.CreateCol(100, "SupplierID", "Nhà cung cấp"));
+            dgvProduct.Columns.Add(MyUtils.CreateCol(0, "SupplierID", "Nhà cung cấp"));
             dgvProduct.Columns["SupplierID"].Visible = false;
         }
 
-        private void GetDataGridView(string whereQuery = "")
+        private int GetCurrentProductID()
+        {
+            int curRowIdx = dgvProduct.CurrentRow.Index;
+            int id = Convert.ToInt32(dgvProduct.Rows[curRowIdx].Cells["ProductID"].Value.ToString());
+            return id;
+        }
+
+        private void RenderDataGridView(string whereQuery = "")
         {
             dataTable = ProductHelpers.GetDataTable(whereQuery);
             dgvProduct.DataSource = dataTable;
@@ -58,58 +83,18 @@ namespace ProjectWF
             int supplierID = Convert.ToInt32(cbSup.SelectedValue.ToString());
             int price = Convert.ToInt32(txtPrice.Text);
 
-            bool isSuccess = ProductHelpers.AddProduct(
-                txtName.Text,
-                price,
-                txtDesc.Text,
-                categoryID,
-                supplierID
-            );
-
-            if (isSuccess)
-            {
-                // TODO: Cập nhập lại dataGripView mà không cần GetDataGridView() lại
-                GetDataGridView();
-            }
-            else
-            {
-                MyMessageBox.Error("Thêm bản ghi thất bại!");
-            }
+            ProductLinq.Add(txtName.Text, price, txtDesc.Text, categoryID, supplierID);
         }
 
         private void EditProduct()
         {
-            int rowIdxNeedEdit = dgvProduct.CurrentRow.Index;
-            int productIDNeedEdit = Convert.ToInt32(dgvProduct.Rows[rowIdxNeedEdit].Cells["ProductID"].Value.ToString().Trim());
+            int idNeedEdit = GetCurrentProductID();
 
             int categoryID = Convert.ToInt32(cbCate.SelectedValue.ToString());
             int supplierID = Convert.ToInt32(cbSup.SelectedValue.ToString());
             int price = Convert.ToInt32(txtPrice.Text);
 
-            bool isSuccess = ProductHelpers.EditProduct(
-                    productIDNeedEdit,
-                    txtName.Text,
-                    price,
-                    txtDesc.Text,
-                    categoryID,
-                    supplierID
-                );
-
-            if (isSuccess)
-            {
-                DataRow editRow = dataTable.Rows[rowIdxNeedEdit];
-                editRow["ProductName"] = txtName.Text;
-                editRow["Price"] = price;
-                editRow["Description"] = txtDesc.Text;
-                editRow["CategoryID"] = categoryID;
-                editRow["SupplierID"] = supplierID;
-                editRow["CategoryName"] = cbCate.Text;
-                editRow["SupplierName"] = cbSup.Text;
-            }
-            else
-            {
-                MyMessageBox.Error("Sửa bản ghi thất bại!");
-            }
+            ProductLinq.Edit(idNeedEdit, txtName.Text, price, txtDesc.Text, categoryID, supplierID);
         }
 
         public bool IsInvalid()
@@ -149,8 +134,7 @@ namespace ProjectWF
             control.SwitchMode(ControlHelper.ControlMode.None);
             txtName.Focus();
 
-            // DataGridView
-            GetDataGridView();
+            RenderDataGridView();
 
             MyUtils.FillComboBoxWithDataCategory(cbCate);
             MyUtils.FillComboBoxWithDataSupplier(cbSup);
@@ -173,19 +157,13 @@ namespace ProjectWF
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            int rowIdxNeedDel = dgvProduct.CurrentRow.Index;
-            int idNeedDel = Convert.ToInt32(dgvProduct.Rows[rowIdxNeedDel].Cells["ProductID"].Value.ToString());
-
-            if (MyMessageBox.Question("Bạn có chắn xóa bản ghi đã chọn không?"))
+            if (dgvProduct.CurrentRow != null)
             {
-                bool isSuccess = ProductHelpers.Delete(idNeedDel);
-                if (isSuccess)
+                if (MyMessageBox.Question("Bạn có chắn xóa bản ghi đã chọn không?"))
                 {
-                    dataTable.Rows[rowIdxNeedDel].Delete();
-                }
-                else
-                {
-                    MyMessageBox.Error("Xoá bản ghi thất bại!");
+                    int idNeedDel = GetCurrentProductID();
+                    ProductLinq.Delete(idNeedDel);
+                    RenderDataGridView();
                 }
             }
         }
@@ -226,6 +204,7 @@ namespace ProjectWF
                 }
                 // Sau khi cập nhật dữ liệu thành công
                 control.SwitchMode(ControlHelper.ControlMode.None);
+                RenderDataGridView();
             }
         }
 
@@ -247,7 +226,7 @@ namespace ProjectWF
 
         private void btnReset_Click(object sender, EventArgs e)
         {
-            GetDataGridView();
+            RenderDataGridView();
             txtSearchName.Clear();
             cbSearchCate.SelectedIndex = 0;
             cbSearchSup.SelectedIndex = 0;
@@ -260,8 +239,28 @@ namespace ProjectWF
             string productName = txtSearchName.Text;
             string whereQuery = ProductHelpers.GetWhereQuery(productName, categoryID, supplierID);
 
-            GetDataGridView(whereQuery);
+            RenderDataGridView(whereQuery);
+        }
+        private void btnSelect_Click(object sender, EventArgs e)
+        {
+            if (dgvProduct.CurrentRow != null)
+            {
+                int curRowIdx = dgvProduct.CurrentRow.Index;
+                int idSelected = GetCurrentProductID();
+
+                string productName = dgvProduct.Rows[curRowIdx].Cells["ProductName"].Value.ToString();
+
+                this.ReturnProductID = idSelected;
+                this.ReturnProductName = productName;
+
+                this.Close();
+            }
+            else
+            {
+                MyMessageBox.Error("Không thể chọn!");
+            }
         }
         #endregion
+
     }
 }

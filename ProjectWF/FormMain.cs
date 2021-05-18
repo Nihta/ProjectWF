@@ -154,7 +154,18 @@ namespace ProjectWF
                 f.ShowDialog();
                 txtCustumerFullName.Text = f.ReturnCustumerName;
                 this.idCustumerSelected = f.ReturnCustumerID;
-                Console.WriteLine(this.idCustumerSelected);
+            }
+            this.Show();
+        }
+
+        private void btnSearchProduct_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            using (FormProducts f = new FormProducts(FormProducts.mode.select))
+            {
+                f.ShowDialog();
+                txtCustumerFullName.Text = f.ReturnProductName;
+                this.idCustumerSelected = f.ReturnProductID;
             }
             this.Show();
         }
@@ -220,5 +231,7 @@ namespace ProjectWF
             this.Show();
         }
         #endregion
+
+ 
     }
 }

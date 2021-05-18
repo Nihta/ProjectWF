@@ -60,8 +60,9 @@ namespace ProjectWF
             this.btnAdd = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnSearchCustomer = new System.Windows.Forms.Button();
             this.txtCustumerFullName = new System.Windows.Forms.TextBox();
+            this.btnSearchCustomer = new System.Windows.Forms.Button();
+            this.btnSearchProduct = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
@@ -140,7 +141,7 @@ namespace ProjectWF
             // lịchSửĐặtHàngToolStripMenuItem1
             // 
             this.lịchSửĐặtHàngToolStripMenuItem1.Name = "lịchSửĐặtHàngToolStripMenuItem1";
-            this.lịchSửĐặtHàngToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.lịchSửĐặtHàngToolStripMenuItem1.Size = new System.Drawing.Size(168, 22);
             this.lịchSửĐặtHàngToolStripMenuItem1.Text = "Lịch sử mua hàng";
             this.lịchSửĐặtHàngToolStripMenuItem1.Click += new System.EventHandler(this.lịchSửĐặtHàngToolStripMenuItem1_Click);
             // 
@@ -156,14 +157,14 @@ namespace ProjectWF
             // thôngTinToolStripMenuItem
             // 
             this.thôngTinToolStripMenuItem.Name = "thôngTinToolStripMenuItem";
-            this.thôngTinToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.thôngTinToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.thôngTinToolStripMenuItem.Text = "Thông tin cá nhân";
             this.thôngTinToolStripMenuItem.Click += new System.EventHandler(this.thôngTinToolStripMenuItem_Click);
             // 
             // logoutToolStripMenuItem
             // 
             this.logoutToolStripMenuItem.Name = "logoutToolStripMenuItem";
-            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.logoutToolStripMenuItem.Size = new System.Drawing.Size(170, 22);
             this.logoutToolStripMenuItem.Text = "Đăng xuất";
             this.logoutToolStripMenuItem.Click += new System.EventHandler(this.logoutToolStripMenuItem_Click);
             // 
@@ -178,7 +179,7 @@ namespace ProjectWF
             // giớiThiệuToolStripMenuItem
             // 
             this.giớiThiệuToolStripMenuItem.Name = "giớiThiệuToolStripMenuItem";
-            this.giớiThiệuToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.giớiThiệuToolStripMenuItem.Size = new System.Drawing.Size(125, 22);
             this.giớiThiệuToolStripMenuItem.Text = "Giới thiệu";
             // 
             // label1
@@ -224,7 +225,7 @@ namespace ProjectWF
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(20, 98);
+            this.label4.Location = new System.Drawing.Point(28, 98);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(47, 13);
             this.label4.TabIndex = 8;
@@ -233,7 +234,7 @@ namespace ProjectWF
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(20, 22);
+            this.label5.Location = new System.Drawing.Point(28, 24);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(76, 13);
             this.label5.TabIndex = 6;
@@ -242,7 +243,7 @@ namespace ProjectWF
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(20, 59);
+            this.label6.Location = new System.Drawing.Point(28, 59);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(52, 13);
             this.label6.TabIndex = 7;
@@ -250,28 +251,23 @@ namespace ProjectWF
             // 
             // txtNote
             // 
-            this.txtNote.Location = new System.Drawing.Point(104, 98);
+            this.txtNote.Location = new System.Drawing.Point(139, 98);
             this.txtNote.MaxLength = 150;
             this.txtNote.Multiline = true;
             this.txtNote.Name = "txtNote";
-            this.txtNote.Size = new System.Drawing.Size(158, 54);
+            this.txtNote.Size = new System.Drawing.Size(151, 54);
             this.txtNote.TabIndex = 9;
             // 
             // numericUpDownQuantity
             // 
-            this.numericUpDownQuantity.Location = new System.Drawing.Point(104, 59);
-            this.numericUpDownQuantity.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
+            this.numericUpDownQuantity.Location = new System.Drawing.Point(139, 59);
             this.numericUpDownQuantity.Minimum = new decimal(new int[] {
             1,
             0,
             0,
             0});
             this.numericUpDownQuantity.Name = "numericUpDownQuantity";
-            this.numericUpDownQuantity.Size = new System.Drawing.Size(158, 20);
+            this.numericUpDownQuantity.Size = new System.Drawing.Size(151, 20);
             this.numericUpDownQuantity.TabIndex = 10;
             this.numericUpDownQuantity.Value = new decimal(new int[] {
             1,
@@ -304,9 +300,9 @@ namespace ProjectWF
             this.cbProduct.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbProduct.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
             this.cbProduct.FormattingEnabled = true;
-            this.cbProduct.Location = new System.Drawing.Point(104, 19);
+            this.cbProduct.Location = new System.Drawing.Point(139, 19);
             this.cbProduct.Name = "cbProduct";
-            this.cbProduct.Size = new System.Drawing.Size(158, 21);
+            this.cbProduct.Size = new System.Drawing.Size(151, 21);
             this.cbProduct.TabIndex = 11;
             // 
             // btnAddOrderItem
@@ -341,6 +337,7 @@ namespace ProjectWF
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnSearchProduct);
             this.groupBox1.Controls.Add(this.btnDelOrderItem);
             this.groupBox1.Controls.Add(this.dgvOrderDetail);
             this.groupBox1.Controls.Add(this.btnAddOrderItem);
@@ -374,6 +371,14 @@ namespace ProjectWF
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thanh toán";
             // 
+            // txtCustumerFullName
+            // 
+            this.txtCustumerFullName.Enabled = false;
+            this.txtCustumerFullName.Location = new System.Drawing.Point(139, 22);
+            this.txtCustumerFullName.Name = "txtCustumerFullName";
+            this.txtCustumerFullName.Size = new System.Drawing.Size(151, 20);
+            this.txtCustumerFullName.TabIndex = 18;
+            // 
             // btnSearchCustomer
             // 
             this.btnSearchCustomer.Location = new System.Drawing.Point(328, 20);
@@ -384,13 +389,15 @@ namespace ProjectWF
             this.btnSearchCustomer.UseVisualStyleBackColor = true;
             this.btnSearchCustomer.Click += new System.EventHandler(this.btnSearchCustomer_Click);
             // 
-            // txtCustumerFullName
+            // btnSearchProduct
             // 
-            this.txtCustumerFullName.Enabled = false;
-            this.txtCustumerFullName.Location = new System.Drawing.Point(139, 22);
-            this.txtCustumerFullName.Name = "txtCustumerFullName";
-            this.txtCustumerFullName.Size = new System.Drawing.Size(151, 20);
-            this.txtCustumerFullName.TabIndex = 18;
+            this.btnSearchProduct.Location = new System.Drawing.Point(328, 19);
+            this.btnSearchProduct.Name = "btnSearchProduct";
+            this.btnSearchProduct.Size = new System.Drawing.Size(75, 23);
+            this.btnSearchProduct.TabIndex = 19;
+            this.btnSearchProduct.Text = "Tìm";
+            this.btnSearchProduct.UseVisualStyleBackColor = true;
+            this.btnSearchProduct.Click += new System.EventHandler(this.btnSearchProduct_Click);
             // 
             // FormMain
             // 
@@ -452,5 +459,6 @@ namespace ProjectWF
         private System.Windows.Forms.ToolStripMenuItem lịchSửĐặtHàngToolStripMenuItem1;
         private System.Windows.Forms.Button btnSearchCustomer;
         private System.Windows.Forms.TextBox txtCustumerFullName;
+        private System.Windows.Forms.Button btnSearchProduct;
     }
 }

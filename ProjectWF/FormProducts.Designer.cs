@@ -58,6 +58,7 @@ namespace ProjectWF
             this.label7 = new System.Windows.Forms.Label();
             this.txtSearchName = new System.Windows.Forms.TextBox();
             this.label6 = new System.Windows.Forms.Label();
+            this.btnSelect = new System.Windows.Forms.Button();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProduct)).BeginInit();
             this.panelControl.SuspendLayout();
@@ -251,6 +252,7 @@ namespace ProjectWF
             // 
             // panel1
             // 
+            this.panel1.Controls.Add(this.btnSelect);
             this.panel1.Controls.Add(this.cbSup);
             this.panel1.Controls.Add(this.cbCate);
             this.panel1.Controls.Add(this.label5);
@@ -356,6 +358,17 @@ namespace ProjectWF
             this.label6.TabIndex = 11;
             this.label6.Text = "Tên hàng hoá (*):";
             // 
+            // btnSelect
+            // 
+            this.btnSelect.Location = new System.Drawing.Point(28, 279);
+            this.btnSelect.Name = "btnSelect";
+            this.btnSelect.Size = new System.Drawing.Size(307, 23);
+            this.btnSelect.TabIndex = 11;
+            this.btnSelect.Text = "Chọn";
+            this.btnSelect.UseVisualStyleBackColor = true;
+            this.btnSelect.Visible = false;
+            this.btnSelect.Click += new System.EventHandler(this.btnSelect_Click);
+            // 
             // FormProducts
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -410,5 +423,6 @@ namespace ProjectWF
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.Button btnSelect;
     }
 }
