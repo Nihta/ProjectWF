@@ -34,11 +34,13 @@ namespace ProjectWF
             this.dgvOrder = new System.Windows.Forms.DataGridView();
             this.btnFilter = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnAll = new System.Windows.Forms.Button();
+            this.btnMonth = new System.Windows.Forms.Button();
+            this.btnWeek = new System.Windows.Forms.Button();
+            this.btnDay = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnExit = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrder)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -84,63 +86,67 @@ namespace ProjectWF
             // 
             // btnFilter
             // 
-            this.btnFilter.Location = new System.Drawing.Point(32, 219);
+            this.btnFilter.Location = new System.Drawing.Point(20, 77);
             this.btnFilter.Name = "btnFilter";
             this.btnFilter.Size = new System.Drawing.Size(372, 23);
             this.btnFilter.TabIndex = 22;
-            this.btnFilter.Text = "Lọc";
+            this.btnFilter.Text = "Lọc phạm vi";
             this.btnFilter.UseVisualStyleBackColor = true;
+            this.btnFilter.Click += new System.EventHandler(this.btnFilter_Click);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.button4);
-            this.groupBox1.Controls.Add(this.button3);
-            this.groupBox1.Controls.Add(this.button2);
-            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.btnAll);
+            this.groupBox1.Controls.Add(this.btnMonth);
+            this.groupBox1.Controls.Add(this.btnFilter);
+            this.groupBox1.Controls.Add(this.btnWeek);
+            this.groupBox1.Controls.Add(this.btnDay);
             this.groupBox1.Controls.Add(this.dateTimePickerStart);
             this.groupBox1.Controls.Add(this.dateTimePickerEnd);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(422, 112);
+            this.groupBox1.Size = new System.Drawing.Size(422, 169);
             this.groupBox1.TabIndex = 24;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Phạm vi";
             // 
-            // button1
+            // btnAll
             // 
-            this.button1.Location = new System.Drawing.Point(20, 68);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 25;
-            this.button1.Text = "Hôm nay";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAll.Location = new System.Drawing.Point(317, 125);
+            this.btnAll.Name = "btnAll";
+            this.btnAll.Size = new System.Drawing.Size(75, 23);
+            this.btnAll.TabIndex = 28;
+            this.btnAll.Text = "Tất cả";
+            this.btnAll.UseVisualStyleBackColor = true;
+            this.btnAll.Click += new System.EventHandler(this.btnAll_Click);
             // 
-            // button2
+            // btnMonth
             // 
-            this.button2.Location = new System.Drawing.Point(112, 68);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(75, 23);
-            this.button2.TabIndex = 26;
-            this.button2.Text = "Tuần";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnMonth.Location = new System.Drawing.Point(230, 125);
+            this.btnMonth.Name = "btnMonth";
+            this.btnMonth.Size = new System.Drawing.Size(75, 23);
+            this.btnMonth.TabIndex = 27;
+            this.btnMonth.Text = "Tháng";
+            this.btnMonth.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btnWeek
             // 
-            this.button3.Location = new System.Drawing.Point(228, 68);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(75, 23);
-            this.button3.TabIndex = 27;
-            this.button3.Text = "Tháng";
-            this.button3.UseVisualStyleBackColor = true;
+            this.btnWeek.Location = new System.Drawing.Point(112, 125);
+            this.btnWeek.Name = "btnWeek";
+            this.btnWeek.Size = new System.Drawing.Size(75, 23);
+            this.btnWeek.TabIndex = 26;
+            this.btnWeek.Text = "Tuần";
+            this.btnWeek.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // btnDay
             // 
-            this.button4.Location = new System.Drawing.Point(317, 68);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(75, 23);
-            this.button4.TabIndex = 28;
-            this.button4.Text = "Tất cả";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnDay.Location = new System.Drawing.Point(20, 125);
+            this.btnDay.Name = "btnDay";
+            this.btnDay.Size = new System.Drawing.Size(75, 23);
+            this.btnDay.TabIndex = 25;
+            this.btnDay.Text = "Hôm nay";
+            this.btnDay.UseVisualStyleBackColor = true;
+            this.btnDay.Click += new System.EventHandler(this.btnDay_Click);
             // 
             // groupBox2
             // 
@@ -152,14 +158,35 @@ namespace ProjectWF
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Hoá đơn";
             // 
+            // btnExit
+            // 
+            this.btnExit.Location = new System.Drawing.Point(32, 399);
+            this.btnExit.Name = "btnExit";
+            this.btnExit.Size = new System.Drawing.Size(75, 23);
+            this.btnExit.TabIndex = 29;
+            this.btnExit.Text = "Thoát";
+            this.btnExit.UseVisualStyleBackColor = true;
+            this.btnExit.Click += new System.EventHandler(this.btnExit_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(339, 259);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 30;
+            this.button1.Text = "Xem chi tiết";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // FormStatistic
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1046, 450);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnExit);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.btnFilter);
             this.Name = "FormStatistic";
             this.Text = "Thống kê";
             this.Load += new System.EventHandler(this.FormStatistic_Load);
@@ -177,10 +204,12 @@ namespace ProjectWF
         private System.Windows.Forms.DataGridView dgvOrder;
         private System.Windows.Forms.Button btnFilter;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnDay;
+        private System.Windows.Forms.Button btnWeek;
+        private System.Windows.Forms.Button btnMonth;
+        private System.Windows.Forms.Button btnAll;
         private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Button btnExit;
+        private System.Windows.Forms.Button button1;
     }
 }
