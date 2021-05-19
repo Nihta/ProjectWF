@@ -7,27 +7,25 @@ namespace ProjectWF
 {
     public partial class FormMain : Form
     {
+        /// <summary>
+        /// ID của người quản lý
+        /// </summary>
         private int curUserId;
-        DataTable dataTableOrderDetail;
+        /// <summary>
+        /// Tổng tiền
+        /// </summary>
         private int totalAmount = 0;
-        private int idCustumerSelected = -1;
-
-        public FormMain()
-        {
-            InitializeComponent();
-        }
+        DataTable dataTableOrderDetail;
 
         public FormMain(int userId)
         {
-            InitializeComponent();
             this.curUserId = userId;
-
             dataTableOrderDetail = new DataTable();
 
-            ConfigDataTableOrderDetail();
+            InitializeComponent();
 
+            ConfigDataTableOrderDetail();
             ConfigDataGridViewOrderDetail();
-            dgvOrderDetail.DataSource = dataTableOrderDetail;
         }
 
         private void ConfigDataGridViewOrderDetail()
@@ -55,61 +53,64 @@ namespace ProjectWF
         }
 
         #region OrederHandles
+        // Thêm hoá đơn
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (this.idCustumerSelected < 1)
+            int custumerIDSelected = Convert.ToInt32(cbCustomer.SelectedValue.ToString());
+
+            if (custumerIDSelected < 1)
             {
                 MyMessageBox.Warning("Chưa có thông tin người mua hàng!");
                 btnSearchCustomer.Focus();
                 return;
             }
 
-            string date = dateTimePickerOrder.Text;
-
             if (dataTableOrderDetail.Rows.Count == 0)
             {
                 MyMessageBox.Warning("Chưa có dữ liệu hàng hoá khách mua!");
+                cbProduct.Focus();
+                return;
             }
-            else
+
+            string date = dateTimePickerOrder.Text;
+            OrderHelpers.Add(date, totalAmount, custumerIDSelected);
+            // Lấy id của order vừa tạo
+            int OrderID = OrderHelpers.GetLastOrderID();
+
+            foreach (DataRow dataRow in dataTableOrderDetail.Rows)
             {
-                OrderHelpers.Add(date, totalAmount, this.idCustumerSelected);
-                // Lấy id của order vừa tạo
-                int OrderID = OrderHelpers.GetLastOrderID();
-
-                foreach (DataRow dataRow in dataTableOrderDetail.Rows)
-                {
-                    OrderDetailHelpers.Add(
-                        Convert.ToInt32(dataRow["Quantity"].ToString()),
-                        dataRow["Note"].ToString(),
-                        Convert.ToInt32(dataRow["ProductID"].ToString()),
-                        OrderID
-                     );
-                }
-
-                MyMessageBox.Information("Thành công!");
-                dataTableOrderDetail.Clear();
+                OrderDetailHelpers.Add(
+                    Convert.ToInt32(dataRow["Quantity"].ToString()),
+                    dataRow["Note"].ToString(),
+                    Convert.ToInt32(dataRow["ProductID"].ToString()),
+                    OrderID
+                 );
             }
+
+            MyMessageBox.Information("Thành công!");
+            dataTableOrderDetail.Clear();
+
         }
         #endregion
 
         #region OrderDetailHandles
+        // Thêm một hàng hoá vào hoá đơn
         private void OrderDetailAdd(int productId, string productName, int quantity, string note)
         {
             int price = ProductHelpers.GetPrice(productId) * quantity;
 
-            DataRow row = dataTableOrderDetail.NewRow();
+            DataRow newRow = dataTableOrderDetail.NewRow();
 
-            row["ProductName"] = productName;
-            row["Quantity"] = quantity;
-            row["Note"] = note;
-            row["Price"] = price;
-            row["ProductID"] = productId;
+            newRow["ProductName"] = productName;
+            newRow["Quantity"] = quantity;
+            newRow["Note"] = note;
+            newRow["Price"] = price;
+            newRow["ProductID"] = productId;
 
+            dataTableOrderDetail.Rows.Add(newRow);
 
             totalAmount += price;
             txtTotalOrder.Text = totalAmount.ToString();
-
-            dataTableOrderDetail.Rows.Add(row);
         }
 
         private void btnAddOrderItem_Click(object sender, EventArgs e)
@@ -143,29 +144,31 @@ namespace ProjectWF
         #region Events
         private void FormMain_Load(object sender, EventArgs e)
         {
+            dgvOrderDetail.DataSource = dataTableOrderDetail;
             MyUtils.FillComboBoxWithDataProduct(cbProduct);
+            MyUtils.FillComboBoxWithDataCustomer(cbCustomer);
         }
 
+        // Chọn khách hàng
         private void btnSearchCustomer_Click(object sender, EventArgs e)
         {
             this.Hide();
             using (FormCustomer f = new FormCustomer(FormCustomer.mode.select))
             {
                 f.ShowDialog();
-                txtCustumerFullName.Text = f.ReturnCustumerName;
-                this.idCustumerSelected = f.ReturnCustumerID;
+                cbCustomer.SelectedValue = f.ReturnCustumerID;
             }
             this.Show();
         }
 
+        // Chọn mặt hàng
         private void btnSearchProduct_Click(object sender, EventArgs e)
         {
             this.Hide();
             using (FormProducts f = new FormProducts(FormProducts.mode.select))
             {
                 f.ShowDialog();
-                txtCustumerFullName.Text = f.ReturnProductName;
-                this.idCustumerSelected = f.ReturnProductID;
+                cbProduct.SelectedValue = f.ReturnProductID;
             }
             this.Show();
         }
@@ -231,7 +234,5 @@ namespace ProjectWF
             this.Show();
         }
         #endregion
-
- 
     }
 }

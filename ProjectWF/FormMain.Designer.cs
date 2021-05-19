@@ -59,10 +59,10 @@ namespace ProjectWF
             this.btnDelOrderItem = new System.Windows.Forms.Button();
             this.btnAdd = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.txtCustumerFullName = new System.Windows.Forms.TextBox();
-            this.btnSearchCustomer = new System.Windows.Forms.Button();
             this.btnSearchProduct = new System.Windows.Forms.Button();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.btnSearchCustomer = new System.Windows.Forms.Button();
+            this.cbCustomer = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
@@ -354,9 +354,19 @@ namespace ProjectWF
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Danh sách mua";
             // 
+            // btnSearchProduct
+            // 
+            this.btnSearchProduct.Location = new System.Drawing.Point(328, 19);
+            this.btnSearchProduct.Name = "btnSearchProduct";
+            this.btnSearchProduct.Size = new System.Drawing.Size(75, 23);
+            this.btnSearchProduct.TabIndex = 19;
+            this.btnSearchProduct.Text = "Tìm";
+            this.btnSearchProduct.UseVisualStyleBackColor = true;
+            this.btnSearchProduct.Click += new System.EventHandler(this.btnSearchProduct_Click);
+            // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.txtCustumerFullName);
+            this.groupBox2.Controls.Add(this.cbCustomer);
             this.groupBox2.Controls.Add(this.btnSearchCustomer);
             this.groupBox2.Controls.Add(this.btnAdd);
             this.groupBox2.Controls.Add(this.label2);
@@ -366,18 +376,10 @@ namespace ProjectWF
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Location = new System.Drawing.Point(12, 264);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(432, 196);
+            this.groupBox2.Size = new System.Drawing.Size(437, 196);
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thanh toán";
-            // 
-            // txtCustumerFullName
-            // 
-            this.txtCustumerFullName.Enabled = false;
-            this.txtCustumerFullName.Location = new System.Drawing.Point(139, 22);
-            this.txtCustumerFullName.Name = "txtCustumerFullName";
-            this.txtCustumerFullName.Size = new System.Drawing.Size(151, 20);
-            this.txtCustumerFullName.TabIndex = 18;
             // 
             // btnSearchCustomer
             // 
@@ -389,15 +391,15 @@ namespace ProjectWF
             this.btnSearchCustomer.UseVisualStyleBackColor = true;
             this.btnSearchCustomer.Click += new System.EventHandler(this.btnSearchCustomer_Click);
             // 
-            // btnSearchProduct
+            // cbCustomer
             // 
-            this.btnSearchProduct.Location = new System.Drawing.Point(328, 19);
-            this.btnSearchProduct.Name = "btnSearchProduct";
-            this.btnSearchProduct.Size = new System.Drawing.Size(75, 23);
-            this.btnSearchProduct.TabIndex = 19;
-            this.btnSearchProduct.Text = "Tìm";
-            this.btnSearchProduct.UseVisualStyleBackColor = true;
-            this.btnSearchProduct.Click += new System.EventHandler(this.btnSearchProduct_Click);
+            this.cbCustomer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbCustomer.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbCustomer.FormattingEnabled = true;
+            this.cbCustomer.Location = new System.Drawing.Point(139, 22);
+            this.cbCustomer.Name = "cbCustomer";
+            this.cbCustomer.Size = new System.Drawing.Size(151, 21);
+            this.cbCustomer.TabIndex = 20;
             // 
             // FormMain
             // 
@@ -458,7 +460,7 @@ namespace ProjectWF
         private System.Windows.Forms.ToolStripMenuItem thốngKêToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem lịchSửĐặtHàngToolStripMenuItem1;
         private System.Windows.Forms.Button btnSearchCustomer;
-        private System.Windows.Forms.TextBox txtCustumerFullName;
         private System.Windows.Forms.Button btnSearchProduct;
+        private System.Windows.Forms.ComboBox cbCustomer;
     }
 }
