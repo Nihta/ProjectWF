@@ -147,6 +147,8 @@ namespace ProjectWF
             dgvOrderDetail.DataSource = dataTableOrderDetail;
             MyUtils.FillComboBoxWithDataProduct(cbProduct);
             MyUtils.FillComboBoxWithDataCustomer(cbCustomer);
+
+            dateTimePickerOrder.Value = DateTime.Now;
         }
 
         // Chọn khách hàng
@@ -242,5 +244,13 @@ namespace ProjectWF
             this.Show();
         }
         #endregion
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            FormPrint f = new FormPrint(dataTableOrderDetail, dateTimePickerOrder.Text, totalAmount, cbCustomer.SelectedValue.ToString());
+            this.Hide();
+            f.ShowDialog();
+            this.Show();
+        }
     }
 }

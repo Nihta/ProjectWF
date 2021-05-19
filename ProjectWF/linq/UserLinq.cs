@@ -71,6 +71,16 @@ namespace ProjectWF
             }
         }
 
+        public static TableUser GetUserById(int userID)
+        {
+            using (DataClassesDataContext db = new DataClassesDataContext())
+            {
+                TableUser query = db.TableUsers.First(user => user.UserID == userID);
+
+                return query;
+            }
+        }
+
         public static void Add(string fullName, string userName, string passWord)
         {
             using (DataClassesDataContext db = new DataClassesDataContext())

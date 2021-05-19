@@ -37,6 +37,7 @@ namespace ProjectWF
             this.tàiKhoảnToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.nhàCungCấpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thốngKêToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.thốngKêToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.lịchSửĐặtHàngToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.tàiKhoảnToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.thôngTinToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -61,9 +62,9 @@ namespace ProjectWF
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnSearchProduct = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.cbCustomer = new System.Windows.Forms.ComboBox();
             this.btnSearchCustomer = new System.Windows.Forms.Button();
-            this.thốngKêToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
@@ -140,10 +141,17 @@ namespace ProjectWF
             this.thốngKêToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
             this.thốngKêToolStripMenuItem.Text = "Thống kê";
             // 
+            // thốngKêToolStripMenuItem1
+            // 
+            this.thốngKêToolStripMenuItem1.Name = "thốngKêToolStripMenuItem1";
+            this.thốngKêToolStripMenuItem1.Size = new System.Drawing.Size(168, 22);
+            this.thốngKêToolStripMenuItem1.Text = "Thống kê";
+            this.thốngKêToolStripMenuItem1.Click += new System.EventHandler(this.thốngKêToolStripMenuItem1_Click);
+            // 
             // lịchSửĐặtHàngToolStripMenuItem1
             // 
             this.lịchSửĐặtHàngToolStripMenuItem1.Name = "lịchSửĐặtHàngToolStripMenuItem1";
-            this.lịchSửĐặtHàngToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.lịchSửĐặtHàngToolStripMenuItem1.Size = new System.Drawing.Size(168, 22);
             this.lịchSửĐặtHàngToolStripMenuItem1.Text = "Lịch sử mua hàng";
             this.lịchSửĐặtHàngToolStripMenuItem1.Click += new System.EventHandler(this.lịchSửĐặtHàngToolStripMenuItem1_Click);
             // 
@@ -295,7 +303,7 @@ namespace ProjectWF
             this.dateTimePickerOrder.Name = "dateTimePickerOrder";
             this.dateTimePickerOrder.Size = new System.Drawing.Size(151, 20);
             this.dateTimePickerOrder.TabIndex = 15;
-            this.dateTimePickerOrder.Value = new System.DateTime(2021, 5, 12, 0, 0, 0, 0);
+            this.dateTimePickerOrder.Value = new System.DateTime(2021, 5, 19, 0, 0, 0, 0);
             // 
             // cbProduct
             // 
@@ -368,6 +376,7 @@ namespace ProjectWF
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.button1);
             this.groupBox2.Controls.Add(this.cbCustomer);
             this.groupBox2.Controls.Add(this.btnSearchCustomer);
             this.groupBox2.Controls.Add(this.btnAdd);
@@ -382,6 +391,16 @@ namespace ProjectWF
             this.groupBox2.TabIndex = 5;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thanh toán";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(328, 145);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 21;
+            this.button1.Text = "In hoá đơn";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // cbCustomer
             // 
@@ -402,13 +421,6 @@ namespace ProjectWF
             this.btnSearchCustomer.Text = "Tìm";
             this.btnSearchCustomer.UseVisualStyleBackColor = true;
             this.btnSearchCustomer.Click += new System.EventHandler(this.btnSearchCustomer_Click);
-            // 
-            // thốngKêToolStripMenuItem1
-            // 
-            this.thốngKêToolStripMenuItem1.Name = "thốngKêToolStripMenuItem1";
-            this.thốngKêToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.thốngKêToolStripMenuItem1.Text = "Thống kê";
-            this.thốngKêToolStripMenuItem1.Click += new System.EventHandler(this.thốngKêToolStripMenuItem1_Click);
             // 
             // FormMain
             // 
@@ -472,5 +484,6 @@ namespace ProjectWF
         private System.Windows.Forms.Button btnSearchProduct;
         private System.Windows.Forms.ComboBox cbCustomer;
         private System.Windows.Forms.ToolStripMenuItem thốngKêToolStripMenuItem1;
+        private System.Windows.Forms.Button button1;
     }
 }

@@ -45,7 +45,15 @@ namespace ProjectWF
             }
         }
 
+        public static TableCustomer GetCustomerById(int customerID)
+        {
+            using (DataClassesDataContext db = new DataClassesDataContext())
+            {
+                TableCustomer query = db.TableCustomers.First(user => user.CustomerID == customerID);
 
+                return query;
+            }
+        }
 
         public static void Add(string firstName, string lastName, string address, string phone, string email)
         {

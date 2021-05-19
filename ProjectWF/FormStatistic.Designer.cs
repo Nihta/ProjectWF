@@ -54,7 +54,7 @@ namespace ProjectWF
             this.dateTimePickerStart.Name = "dateTimePickerStart";
             this.dateTimePickerStart.Size = new System.Drawing.Size(167, 20);
             this.dateTimePickerStart.TabIndex = 18;
-            this.dateTimePickerStart.Value = new System.DateTime(2021, 5, 12, 0, 0, 0, 0);
+            this.dateTimePickerStart.Value = new System.DateTime(2021, 5, 19, 0, 0, 0, 0);
             // 
             // dateTimePickerEnd
             // 
@@ -66,7 +66,7 @@ namespace ProjectWF
             this.dateTimePickerEnd.Name = "dateTimePickerEnd";
             this.dateTimePickerEnd.Size = new System.Drawing.Size(162, 20);
             this.dateTimePickerEnd.TabIndex = 20;
-            this.dateTimePickerEnd.Value = new System.DateTime(2021, 5, 12, 0, 0, 0, 0);
+            this.dateTimePickerEnd.Value = new System.DateTime(2021, 5, 19, 0, 0, 0, 0);
             // 
             // dgvOrder
             // 
