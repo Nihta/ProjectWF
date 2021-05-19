@@ -35,7 +35,6 @@ namespace ProjectWF
             }
 
             control = new ControlHelper();
-            // Config search
         }
 
         #region Methods
@@ -62,10 +61,9 @@ namespace ProjectWF
             return id;
         }
 
-        private void RenderDataGridView(string whereQuery = "")
+        private void RenderDataGridView(string productName = "", int categoryID = -1, int supplierID = -1)
         {
-            dataTable = ProductHelpers.GetDataTable(whereQuery);
-            dgvProduct.DataSource = dataTable;
+            ProductLinq.DataGridViewHelper(dgvProduct, productName, categoryID, supplierID);
         }
 
         private void HandleRowEnter(int idx)
@@ -237,9 +235,8 @@ namespace ProjectWF
             int categoryID = Convert.ToInt32(cbSearchCate.SelectedValue.ToString());
             int supplierID = Convert.ToInt32(cbSearchSup.SelectedValue.ToString());
             string productName = txtSearchName.Text;
-            string whereQuery = ProductHelpers.GetWhereQuery(productName, categoryID, supplierID);
 
-            RenderDataGridView(whereQuery);
+            RenderDataGridView(productName, categoryID, supplierID);
         }
         private void btnSelect_Click(object sender, EventArgs e)
         {
@@ -257,10 +254,9 @@ namespace ProjectWF
             }
             else
             {
-                MyMessageBox.Error("Không thể chọn!");
+                MyMessageBox.Warning("Không thể chọn!");
             }
         }
         #endregion
-
     }
 }
