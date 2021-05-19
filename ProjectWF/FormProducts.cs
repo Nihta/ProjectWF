@@ -7,7 +7,6 @@ namespace ProjectWF
     public partial class FormProducts : Form
     {
         private ControlHelper control;
-        DataTable dataTable;
         private mode formMode;
 
         public enum mode
