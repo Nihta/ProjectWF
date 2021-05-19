@@ -233,6 +233,14 @@ namespace ProjectWF
             f.ShowDialog();
             this.Show();
         }
+
+        private void thốngKêToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            FormStatistic f = new FormStatistic();
+            this.Hide();
+            f.ShowDialog();
+            this.Show();
+        }
         #endregion
     }
 }

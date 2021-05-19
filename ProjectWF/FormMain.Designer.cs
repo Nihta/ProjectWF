@@ -61,8 +61,9 @@ namespace ProjectWF
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnSearchProduct = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.btnSearchCustomer = new System.Windows.Forms.Button();
             this.cbCustomer = new System.Windows.Forms.ComboBox();
+            this.btnSearchCustomer = new System.Windows.Forms.Button();
+            this.thốngKêToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvOrderDetail)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownQuantity)).BeginInit();
@@ -133,6 +134,7 @@ namespace ProjectWF
             // thốngKêToolStripMenuItem
             // 
             this.thốngKêToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.thốngKêToolStripMenuItem1,
             this.lịchSửĐặtHàngToolStripMenuItem1});
             this.thốngKêToolStripMenuItem.Name = "thốngKêToolStripMenuItem";
             this.thốngKêToolStripMenuItem.Size = new System.Drawing.Size(68, 20);
@@ -141,7 +143,7 @@ namespace ProjectWF
             // lịchSửĐặtHàngToolStripMenuItem1
             // 
             this.lịchSửĐặtHàngToolStripMenuItem1.Name = "lịchSửĐặtHàngToolStripMenuItem1";
-            this.lịchSửĐặtHàngToolStripMenuItem1.Size = new System.Drawing.Size(168, 22);
+            this.lịchSửĐặtHàngToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.lịchSửĐặtHàngToolStripMenuItem1.Text = "Lịch sử mua hàng";
             this.lịchSửĐặtHàngToolStripMenuItem1.Click += new System.EventHandler(this.lịchSửĐặtHàngToolStripMenuItem1_Click);
             // 
@@ -381,6 +383,16 @@ namespace ProjectWF
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Thanh toán";
             // 
+            // cbCustomer
+            // 
+            this.cbCustomer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.cbCustomer.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbCustomer.FormattingEnabled = true;
+            this.cbCustomer.Location = new System.Drawing.Point(139, 22);
+            this.cbCustomer.Name = "cbCustomer";
+            this.cbCustomer.Size = new System.Drawing.Size(151, 21);
+            this.cbCustomer.TabIndex = 20;
+            // 
             // btnSearchCustomer
             // 
             this.btnSearchCustomer.Location = new System.Drawing.Point(328, 20);
@@ -391,15 +403,12 @@ namespace ProjectWF
             this.btnSearchCustomer.UseVisualStyleBackColor = true;
             this.btnSearchCustomer.Click += new System.EventHandler(this.btnSearchCustomer_Click);
             // 
-            // cbCustomer
+            // thốngKêToolStripMenuItem1
             // 
-            this.cbCustomer.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
-            this.cbCustomer.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
-            this.cbCustomer.FormattingEnabled = true;
-            this.cbCustomer.Location = new System.Drawing.Point(139, 22);
-            this.cbCustomer.Name = "cbCustomer";
-            this.cbCustomer.Size = new System.Drawing.Size(151, 21);
-            this.cbCustomer.TabIndex = 20;
+            this.thốngKêToolStripMenuItem1.Name = "thốngKêToolStripMenuItem1";
+            this.thốngKêToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.thốngKêToolStripMenuItem1.Text = "Thống kê";
+            this.thốngKêToolStripMenuItem1.Click += new System.EventHandler(this.thốngKêToolStripMenuItem1_Click);
             // 
             // FormMain
             // 
@@ -462,5 +471,6 @@ namespace ProjectWF
         private System.Windows.Forms.Button btnSearchCustomer;
         private System.Windows.Forms.Button btnSearchProduct;
         private System.Windows.Forms.ComboBox cbCustomer;
+        private System.Windows.Forms.ToolStripMenuItem thốngKêToolStripMenuItem1;
     }
 }

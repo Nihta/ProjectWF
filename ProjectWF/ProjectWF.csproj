@@ -89,6 +89,12 @@
     <Compile Include="FormProducts.Designer.cs">
       <DependentUpon>FormProducts.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormStatistic.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormStatistic.Designer.cs">
+      <DependentUpon>FormStatistic.cs</DependentUpon>
+    </Compile>
     <Compile Include="FormSuppliers.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -135,6 +141,7 @@
     <Compile Include="helpers\SupplierHelpers.cs" />
     <Compile Include="linq\CategoryLinq.cs" />
     <Compile Include="linq\CustomerLinq.cs" />
+    <Compile Include="linq\OrderLinq.cs" />
     <Compile Include="linq\ProductLinq.cs" />
     <Compile Include="linq\SupplierLinq.cs" />
     <Compile Include="linq\UserLinq.cs" />
@@ -163,6 +170,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="FormProducts.resx">
       <DependentUpon>FormProducts.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FormStatistic.resx">
+      <DependentUpon>FormStatistic.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="FormSuppliers.resx">
       <DependentUpon>FormSuppliers.cs</DependentUpon>
